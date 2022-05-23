@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
+import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { OperationType } from '../assignment/assignment.page';
@@ -15,16 +16,14 @@ import { SubmitStatusComponent } from './submit-status/submit-status.component';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  public test = [1, 2, 3, 4];
-  public date = new Date();
-
   public assignedTaskDetails: TaskDetail[] = [];
 
   constructor(
     public datepipe: DatePipe,
     public modalController: ModalController,
     public assignmentService: AssignmentService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public accountServices: AccountService
   ) {}
 
   ngOnInit() {}
@@ -56,6 +55,7 @@ export class HomePage implements OnInit {
   public getAssignedTask() {
     const operationtype = new OperationType();
     operationtype.operationtype = 'HOME';
+    operationtype.p_user = this.accountServices.USER_ID;
     this.assignmentService
       .getTaskDetails(operationtype)
       .then((result: ReturnResult<TaskDetail[]>) => {

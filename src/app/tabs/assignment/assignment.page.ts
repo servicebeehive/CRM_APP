@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
+import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
@@ -11,6 +12,8 @@ import { TaskDetail } from '../task/task.page';
 export class OperationType {
   operationtype: string;
   taskid?: number;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  p_user: number;
 }
 
 export class TaskAssignmnetModel {
@@ -18,7 +21,7 @@ export class TaskAssignmnetModel {
   taskid: number;
   taskstatus: string;
   remark: string;
-  taskassignee: string;
+  taskassignee: number;
 }
 
 interface User {
@@ -46,7 +49,8 @@ export class AssignmentPage {
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
     public fb: FormBuilder,
-    public loginService: LoginService
+    public loginService: LoginService,
+    public accountServices: AccountService
   ) {}
 
   get formControl() {
@@ -62,6 +66,7 @@ export class AssignmentPage {
   public getTaskDetails() {
     const operationtype = new OperationType();
     operationtype.operationtype = 'ASSIGN';
+    operationtype.p_user = this.accountServices.USER_ID;
     this.assignmentService
       .getTaskDetails(operationtype)
       .then((result: ReturnResult<TaskDetail[]>) => {

@@ -15,7 +15,7 @@
     <ion-card-content *ngFor="let item of assignedTaskDetails; let i = index">
       <p>Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
       <p>Status : <span>{{item.status}}</span></p>
-      <p>Assignee : <span>{{item.assignedto}}</span></p>
+      <p>Assignee : <span>{{item.fullname}}</span></p>
       <p>Remark : <span>{{item.remarks}}</span></p>
     </ion-card-content>
     <ion-footer>

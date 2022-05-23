@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
+import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { TaskAssignmnetModel } from '../../assignment/assignment.page';
@@ -53,7 +54,8 @@ export class SubmitStatusComponent implements OnInit {
     public navParams: NavParams,
     public fb: FormBuilder,
     public assignmentService: AssignmentService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public accountServices: AccountService
   ) {}
 
   ngOnInit() {}
@@ -64,7 +66,7 @@ export class SubmitStatusComponent implements OnInit {
     taskAssign.taskstatus = this.addStatusDetail.value.status;
     taskAssign.operationtype = 'STSUPD';
     taskAssign.remark = this.addStatusDetail.value.remark;
-    taskAssign.taskassignee = this.taskDetails.fullname;
+    taskAssign.taskassignee = this.accountServices.USER_ID;
 
     this.assignmentService
       .updateTaskDetails(taskAssign)

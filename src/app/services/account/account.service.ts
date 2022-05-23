@@ -9,6 +9,8 @@ import { UserDetail } from 'src/app/models/userdetail.model';
 export class AccountService {
   public ACCESS_TOKEN?: string;
   public USER_NAME?: string;
+  public USER_ID?: number;
+  public USER_TYPE?: string;
 
   constructor(public storage: Storage) {
     this.storage.create();

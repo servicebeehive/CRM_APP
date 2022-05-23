@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
+import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { OperationType } from '../../assignment/assignment.page';
@@ -19,7 +20,8 @@ export class DisplayStatusComponent implements OnInit {
     public modalController: ModalController,
     public navParams: NavParams,
     public assignmentService: AssignmentService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public accountServices: AccountService
   ) {}
 
   public async ionViewDidEnter() {
@@ -32,6 +34,7 @@ export class DisplayStatusComponent implements OnInit {
     const operationtype = new OperationType();
     operationtype.operationtype = 'GETLOG';
     operationtype.taskid = this.taskDetails.taskid;
+    operationtype.p_user = this.accountServices.USER_ID;
     this.assignmentService
       .getTaskDetails(operationtype)
       .then((result: ReturnResult<TaskDetail[]>) => {

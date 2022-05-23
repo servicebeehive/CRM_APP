@@ -42,6 +42,8 @@ export class LoginPage implements OnInit {
         if (result.success) {
           this.accountServices.setAccessToken(result.data);
           this.accountServices.USER_NAME = result.data.username;
+          this.accountServices.USER_ID = result.data.userid;
+          this.accountServices.USER_TYPE = result.data.usertype;
           this.router.navigate(['tabs/home']);
         } else {
           this.notificationService.showToast<UserDetail>(result);

@@ -30,10 +30,4 @@ export class TaskService extends BaseService {
       taskDetailData
     );
   }
-
-  // public async getAdminData(): Promise<ReturnResult<AdminSettingData>> {
-  //   return this.Get<ReturnResult<AdminSettingData>>(
-  //     this.controllers.getadminsettingdata
-  //   );
-  // }
 }

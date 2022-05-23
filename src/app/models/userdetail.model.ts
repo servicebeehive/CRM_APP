@@ -7,7 +7,7 @@ export class UserDetail {
   pwd: string;
   active: string;
   operationtype: string;
-
+  usertype: string;
   constructor() {
     this.userid = 0;
     this.username = '';
@@ -17,5 +17,6 @@ export class UserDetail {
     this.pwd = '';
     this.active = '';
     this.operationtype = '';
+    this.usertype = '';
   }
 }
