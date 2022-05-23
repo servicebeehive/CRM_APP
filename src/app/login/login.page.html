@@ -1,0 +1,21 @@
+<ion-content>
+  <form [formGroup]="addloginDetail" (ngSubmit)="onSignin()">
+    <ion-grid>
+      <h3 class="ion-text-center text-white">Login</h3>
+      <ion-grid>
+        <ion-row class="ion-padding-start ion-padding-end ion-justify-content-center">
+          <ion-col size="12">
+            <ion-input type="text" formControlName="username" placeholder="Username"></ion-input>
+          </ion-col>
+          <ion-col size="12" class="ion-margin-bottom">
+            <ion-input type="Password" formControlName="password" placeholder="Password"></ion-input>
+          </ion-col>
+          <ion-col size="12">
+            <ion-button type="submit" expand="block" [disabled]="addloginDetail.invalid" color="tertiary">Sign in
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-grid>
+  </form>
+</ion-content>

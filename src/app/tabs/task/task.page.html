@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Task Details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="addTaskDetail">
+    <ion-card>
+      <ion-card-content>
+        <ion-item>
+          <ion-label position="floating">Customer Name</ion-label>
+          <ion-input formControlName="customerName"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Phone Number</ion-label>
+          <ion-input appIntegerInputDirective inputmode="numeric" type="text" maxlength="10"
+            formControlName="phoneNumber" placeholder="Phone Number *">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Location</ion-label>
+          <ion-input formControlName="location"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Remark</ion-label>
+          <ion-textarea formControlName="remark"></ion-textarea>
+        </ion-item>
+      </ion-card-content>
+      <ion-footer>
+        <ion-row no-padding>
+          <ion-col center text-center>
+            <ion-button expand="block" fill="outline" [disabled]="addTaskDetail.invalid" (click)="onTaskAdd()">Submit
+            </ion-button>
+          </ion-col>
+          <ion-col center text-center>
+            <ion-button expand="block" fill="outline" (click)="onClearForm()">Cancel</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-footer>
+    </ion-card>
+  </form>
+</ion-content>

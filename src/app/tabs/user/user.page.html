@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Users Detail</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of users;let i = index">
+    <ion-card-header>
+      User # {{i+1}}
+    </ion-card-header>
+    <ion-card-content>
+      <p>Name : <span>{{item.fullname}}</span></p>
+      <p>User Name : <span>{{item.username}}</span></p>
+      <p>Enable : <span></span></p>
+
+    </ion-card-content>
+    <ion-footer>
+      <ion-row no-padding>
+        <ion-col center text-center>
+          <ion-button expand="block" disabled (click)="onClickOpenModal()" fill="outline">Edit </ion-button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </ion-card>
+
+</ion-content>

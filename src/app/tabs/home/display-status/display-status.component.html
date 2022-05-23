@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon slot="end" (click)="dismiss()" name="close-outline"></ion-icon>
+    <p>
+      Display status of Task {{taskDetails.taskid}}
+    </p>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      Task # {{taskDetails.taskid}}
+    </ion-card-header>
+    <ion-card-content *ngFor="let item of assignedTaskDetails; let i = index">
+      <p>Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
+      <p>Status : <span>{{item.status}}</span></p>
+      <p>Assignee : <span>{{item.assignedto}}</span></p>
+      <p>Remark : <span>{{item.remarks}}</span></p>
+    </ion-card-content>
+    <ion-footer>
+      <ion-row no-padding>
+        <ion-col center text-center>
+          <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </ion-card>
+</ion-content>

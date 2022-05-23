@@ -1,0 +1,46 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-icon slot="end" (click)="dismiss()" name="close-outline"></ion-icon>
+    <p>
+      Submit status of Task {{taskDetails.taskid}}
+    </p>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="addStatusDetail">
+    <ion-card>
+      <ion-card-header>
+        Task # {{taskDetails.taskid}}
+      </ion-card-header>
+      <ion-card-content>
+        <p>Date : <span>{{taskDetails.createdon | date:'mediumDate'}}</span></p>
+        <p>Customer Name : <span>{{taskDetails.customername}}</span></p>
+        <p>Location : <span>{{taskDetails.location}}</span></p>
+        <p>Assignee : <span>{{taskDetails.fullname}}</span></p>
+
+        <ion-item>
+          <ion-label>Status</ion-label>
+          <ion-select formControlName="status">
+            <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Remark</ion-label>
+          <ion-textarea formControlName="remark"></ion-textarea>
+        </ion-item>
+
+      </ion-card-content>
+      <ion-row no-padding>
+        <ion-col center text-center>
+          <ion-button expand="block" [disabled]="addStatusDetail.invalid" (click)="onSubmitTaskStatus()" fill="outline">
+            Submit</ion-button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </form>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let item of assignedTaskDetails;let i = index">
+    <ion-card-header>
+      Task # {{item.taskid}}
+    </ion-card-header>
+    <ion-card-content>
+      <p>Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
+      <p>Customer Name : <span>{{item.customername}}</span></p>
+      <p>Location : <span>{{item.location}}</span></p>
+      <p>Status : <span>{{item.status}}</span></p>
+      <p>Full Name : <span>{{item.fullname}}</span></p>
+    </ion-card-content>
+    <ion-footer>
+      <ion-row no-padding>
+        <ion-col center text-center>
+          <ion-button expand="block" fill="outline" (click)="onClickSubmitStatus(item)">Submit Status</ion-button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-button expand="block" fill="outline" (click)="onClickDisplayStatus(item)">Dispaly Status</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-footer>
+  </ion-card>
+  <p class="error" *ngIf="assignedTaskDetails.length === 0">No task to be assigned.</p>
+
+</ion-content>
