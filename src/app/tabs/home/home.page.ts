@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
     public modalController: ModalController,
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
-    public accountServices: AccountService
+    public accountServices: AccountService,
+    public router: Router
   ) {}
 
   ngOnInit() {}
@@ -65,5 +67,10 @@ export class HomePage implements OnInit {
           this.notificationService.showToast<TaskDetail[]>(result);
         }
       });
+  }
+
+  public onClickLogout() {
+    this.accountServices.removeToken();
+    this.router.navigate(['/']);
   }
 }

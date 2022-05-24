@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
+import { AccountService } from 'src/app/services/account/account.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { UserDetailComponent } from './user-detail/user-detail.component';
@@ -19,7 +21,9 @@ export class UserPage implements OnInit {
   constructor(
     public modalController: ModalController,
     public loginService: LoginService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public accountService: AccountService,
+    public router: Router
   ) {}
 
   ngOnInit() {}
@@ -52,5 +56,10 @@ export class UserPage implements OnInit {
           this.notificationService.showToast<UserDetail[]>(result);
         }
       });
+  }
+
+  public onClickLogout() {
+    this.accountService.removeToken();
+    this.router.navigate(['/']);
   }
 }

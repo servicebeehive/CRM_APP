@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ReturnResult } from 'src/app/models/return-result';
+import { AccountService } from 'src/app/services/account/account.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { TaskService } from 'src/app/services/task/task.service';
 
@@ -32,7 +34,9 @@ export class TaskPage implements OnInit {
   constructor(
     public fb: FormBuilder,
     public taskService: TaskService,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public accountService: AccountService,
+    public router: Router
   ) {}
 
   ngOnInit() {}
@@ -57,5 +61,10 @@ export class TaskPage implements OnInit {
 
   public onClearForm() {
     this.addTaskDetail.reset();
+  }
+
+  public onClickLogout() {
+    this.accountService.removeToken();
+    this.router.navigate(['/']);
   }
 }

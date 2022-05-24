@@ -31,6 +31,10 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {}
 
+  public ionViewDidEnter() {
+    this.addloginDetail.reset();
+  }
+
   onSignin() {
     const loginDetailData = new LoginDetail();
     loginDetailData.usercode = this.addloginDetail.value.username.trim();
@@ -44,6 +48,7 @@ export class LoginPage implements OnInit {
           this.accountServices.USER_NAME = result.data.username;
           this.accountServices.USER_ID = result.data.userid;
           this.accountServices.USER_TYPE = result.data.usertype;
+          this.addloginDetail.reset();
           this.router.navigate(['tabs/home']);
         } else {
           this.notificationService.showToast<UserDetail>(result);

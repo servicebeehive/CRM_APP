@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -50,7 +51,8 @@ export class AssignmentPage {
     public notificationService: NotificationService,
     public fb: FormBuilder,
     public loginService: LoginService,
-    public accountServices: AccountService
+    public accountServices: AccountService,
+    public router: Router
   ) {}
 
   get formControl() {
@@ -132,5 +134,10 @@ export class AssignmentPage {
           this.notificationService.showToast<any>(result);
         }
       });
+  }
+
+  public onClickLogout() {
+    this.accountServices.removeToken();
+    this.router.navigate(['/']);
   }
 }
