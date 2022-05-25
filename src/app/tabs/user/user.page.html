@@ -10,7 +10,7 @@
 <ion-content>
   <ion-card *ngFor="let item of users;let i = index">
     <ion-card-header>
-      User # {{i+1}}
+      User # {{item.userid}}
     </ion-card-header>
     <ion-card-content>
       <p>Name : <span>{{item.fullname}}</span></p>

@@ -17,7 +17,7 @@ export class UserDetailComponent implements OnInit {
     lastName: ['', Validators.required],
     userName: ['', Validators.required],
     password: ['', Validators.required],
-    enable: [false],
+    enable: [true],
   });
 
   constructor(
@@ -44,6 +44,7 @@ export class UserDetailComponent implements OnInit {
       this.addUserDetail.value.lastName.trim();
     userDetail.username = this.addUserDetail.value.userName.trim();
     userDetail.pwd = this.addUserDetail.value.password.trim();
+    userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
     userDetail.operationtype = 'INSERT';
     this.loginService
       .getUsers(userDetail)
