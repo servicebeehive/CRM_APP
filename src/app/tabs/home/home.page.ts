@@ -41,6 +41,11 @@ export class HomePage implements OnInit {
         value: item,
       },
     });
+    model.onDidDismiss().then((res) => {
+      if (res.data.loaddata) {
+        this.getAssignedTask();
+      }
+    });
     await model.present();
   }
 

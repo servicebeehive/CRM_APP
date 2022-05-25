@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
 import { AccountService } from 'src/app/services/account/account.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
@@ -36,7 +37,8 @@ export class TaskPage implements OnInit {
     public taskService: TaskService,
     public notificationService: NotificationService,
     public accountService: AccountService,
-    public router: Router
+    public router: Router,
+    public alertCtrl: AlertController
   ) {}
 
   ngOnInit() {}
@@ -47,15 +49,36 @@ export class TaskPage implements OnInit {
     taskDetail.location = this.addTaskDetail.value.location;
     taskDetail.phone = this.addTaskDetail.value.phoneNumber;
     taskDetail.remarks = this.addTaskDetail.value.remark;
-    this.taskService
-      .postTaskDetail(taskDetail)
-      .then((result: ReturnResult<string>) => {
-        if (result.success) {
-          this.notificationService.showToast<string>(result);
-          this.addTaskDetail.reset();
-        } else {
-          this.notificationService.showToast<string>(result);
-        }
+
+    this.alertCtrl
+      .create({
+        header: 'Confirm Alert',
+        subHeader: 'Are you sure you want to submit?',
+        message:
+          'After Submit, Task is displayed in Admin Panel to assign Engineer.',
+        buttons: [
+          {
+            text: 'Cancel',
+          },
+          {
+            text: 'Ok',
+            handler: () => {
+              this.taskService
+                .postTaskDetail(taskDetail)
+                .then((result: ReturnResult<string>) => {
+                  if (result.success) {
+                    this.notificationService.showToast<string>(result);
+                    this.addTaskDetail.reset();
+                  } else {
+                    this.notificationService.showToast<string>(result);
+                  }
+                });
+            },
+          },
+        ],
+      })
+      .then((res) => {
+        res.present();
       });
   }
 

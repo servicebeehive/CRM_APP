@@ -16,8 +16,8 @@ import { NotificationService } from '../services/notification/notification.servi
 })
 export class LoginPage implements OnInit {
   addloginDetail = this.fb.group({
-    username: ['chittaranjan', [Validators.required]],
-    password: ['cd', Validators.required],
+    username: ['', [Validators.required]],
+    password: ['', Validators.required],
   });
 
   constructor(
@@ -30,10 +30,6 @@ export class LoginPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-
-  public ionViewDidEnter() {
-    this.addloginDetail.reset();
-  }
 
   onSignin() {
     const loginDetailData = new LoginDetail();

@@ -21,28 +21,7 @@ interface Status {
 export class SubmitStatusComponent implements OnInit {
   public taskDetails: TaskDetail = this.navParams.get('value');
 
-  status: Status[] = [
-    {
-      key: 'Open',
-      value: 'open',
-    },
-    {
-      key: 'In Progress',
-      value: 'in progress',
-    },
-    {
-      key: 'Resolved',
-      value: 'resolved',
-    },
-    {
-      key: 'Close',
-      value: 'close',
-    },
-    {
-      key: 'Customer Pending',
-      value: 'customer pending',
-    },
-  ];
+  status: Status[] = [];
 
   addStatusDetail = this.fb.group({
     status: ['', Validators.required],
@@ -58,7 +37,43 @@ export class SubmitStatusComponent implements OnInit {
     public accountServices: AccountService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.accountServices.USER_TYPE === 'admin') {
+      this.status = [
+        {
+          key: 'In Progress',
+          value: 'in progress',
+        },
+        {
+          key: 'Customer Pending',
+          value: 'customer pending',
+        },
+        {
+          key: 'Resolved',
+          value: 'resolved',
+        },
+        {
+          key: 'Close',
+          value: 'close',
+        },
+      ];
+    } else {
+      this.status = [
+        {
+          key: 'In Progress',
+          value: 'in progress',
+        },
+        {
+          key: 'Customer Pending',
+          value: 'customer pending',
+        },
+        {
+          key: 'Resolved',
+          value: 'resolved',
+        },
+      ];
+    }
+  }
 
   public onSubmitTaskStatus() {
     const taskAssign = new TaskAssignmnetModel();
@@ -72,6 +87,10 @@ export class SubmitStatusComponent implements OnInit {
       .updateTaskDetails(taskAssign)
       .then((result: ReturnResult<any>) => {
         if (result.success) {
+          this.modalController.dismiss({
+            dismissed: true,
+            loaddata: true,
+          });
           this.notificationService.showToast<any>(result);
         } else {
           this.notificationService.showToast<any>(result);
