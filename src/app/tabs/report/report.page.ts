@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/services/account/account.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-report',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    public accountServices: AccountService,
+    public router: Router
+  ) { }
 
   ngOnInit() {
+  }
+  public onClickLogout() {
+    this.accountServices.removeToken();
+    this.router.navigate(['/']);
   }
 
 }

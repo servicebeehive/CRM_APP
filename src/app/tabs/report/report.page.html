@@ -1,9 +1,74 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Report</ion-title>
+    <ion-button (click)="onClickLogout()" slot="end" fill="clear" color="tertiary">
+      <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
+    </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="addReport">
+    <ion-item>
+      <ion-label>Select Date Range:</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>From :</ion-label>
+      <ion-input type="date" placeholder="Choose Date"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>To :</ion-label>
+      <ion-input type="date" placeholder="Choose Date"></ion-input>
+    </ion-item>
+    <ion-footer>
+      <ion-row no-padding>
+         <ion-col center text-center>
+            <ion-button expand="block" fill="outline">Show Status</ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-footer>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          Task Created
+          <ion-item>
+            <ion-label></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          Open Status Task
+          <ion-item>
+            <ion-label></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          Task In Progress
+          <ion-item>
+            <ion-label></ion-label>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          Task Resolved
+          <ion-item>
+            <ion-label></ion-label>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item>
+      <ion-label>Assignee</ion-label>
+      <ion-select>
+        <ion-select-option>
+          Engineer1
+        </ion-select-option>
+        <ion-select-option>
+          Engineer2
+        </ion-select-option>
+        <ion-select-option>
+          Engineer3
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  </form>
 </ion-content>
+

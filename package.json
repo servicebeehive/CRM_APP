@@ -77,5 +77,14 @@
     "platforms": [
       "android"
     ]
+  },
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayagupta05/CRM_APP-1.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jayagupta05/CRM_APP-1/issues"
   }
 }
