@@ -10,7 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./report.page.scss'],
 })
 export class ReportPage implements OnInit {
-
+  public Test:string='Report'
   constructor(
     public accountServices: AccountService,
     public _http: HttpClient,
@@ -34,9 +34,4 @@ export class ReportPage implements OnInit {
   }
   ngOnInit() {
   }
-  public onClickLogout() {
-    this.accountServices.removeToken();
-    this.router.navigate(['/']);
-  }
-
 }

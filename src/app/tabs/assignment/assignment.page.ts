@@ -44,7 +44,7 @@ export class AssignmentPage {
   public assignmentForm = this.fb.group({
     assignTaskForm: this.fb.array([]),
   });
-
+  public Test:string='Assignment'
   constructor(
     public datepipe: DatePipe,
     public assignmentService: AssignmentService,
@@ -134,10 +134,5 @@ export class AssignmentPage {
           this.notificationService.showToast<any>(result);
         }
       });
-  }
-
-  public onClickLogout() {
-    this.accountServices.removeToken();
-    this.router.navigate(['/']);
   }
 }

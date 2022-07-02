@@ -1,13 +1,9 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Report</ion-title>
-    <ion-button (click)="onClickLogout()" slot="end" fill="clear" color="tertiary">
-      <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+  <app-header [header]="Test"></app-header>
 </ion-header>
 
 <ion-content>
+  <ion-card>
   <form [formGroup]="addReport">
   <div class="form-group">
     <ion-item>
@@ -76,5 +72,6 @@
       </ion-select>
     </ion-item>
   </form>
+</ion-card>
 </ion-content>
 
