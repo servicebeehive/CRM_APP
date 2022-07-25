@@ -12,65 +12,68 @@
     <ion-item>
       <ion-label for="fromdate">From :</ion-label>
       <ion-input type="date" formControlName="fromdate" id="fromdate" class="form-control" ></ion-input>
-      <div *ngIf="fromdate.errors['required']">Start Date is Required.</div>
     </ion-item>
   </div>
   <div class="form-group">
     <ion-item>
       <ion-label for="todate">To :</ion-label>
-      <ion-input type="date" formControlName="todate" id="todate" class="form-control" ></ion-input>
-      <div *ngIf="todate.errors['required']">End Date is Required.</div>
+      <ion-input type="date" size="fixed" formControlName="todate" id="todate" class="form-control" ></ion-input>
     </ion-item> 
   </div>
-    <ion-footer>
-      <ion-row no-padding>
-         <ion-col center text-center>
-            <ion-button [disabled]="addReport.valid" class="btn btn-primary" type="submit" expand="block" fill="outline">Show Status</ion-button>
-          </ion-col>
-      </ion-row>
-    </ion-footer>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          Task Created
-          <ion-item>
-            <ion-label></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          Open Status Task
-          <ion-item>
-            <ion-label></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          Task In Progress
-          <ion-item>
-            <ion-label></ion-label>
-          </ion-item>
-        </ion-col>
-        <ion-col>
-          Task Resolved
-          <ion-item>
-            <ion-label></ion-label>
-          </ion-item>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
     <ion-item>
       <ion-label>Assignee</ion-label>
       <ion-select>
-        <ion-select-option>
-          Engineer1
-        </ion-select-option>
-        <ion-select-option>
-          Engineer2
-        </ion-select-option>
-        <ion-select-option>
-          Engineer3
+        <ion-select-option *ngFor="let item of users;let i = index">{{item.fullname}}
         </ion-select-option>
       </ion-select>
     </ion-item>
+    <ion-item>
+      <ion-label>Status</ion-label>
+      <ion-select>
+        <ion-select-option>
+          Open
+        </ion-select-option>
+        <ion-select-option>
+          Customer Pending
+        </ion-select-option>
+        <ion-select-option>
+          In Progress
+        </ion-select-option>
+        <ion-select-option>
+          Engineer Assigned
+        </ion-select-option>
+        <ion-select-option>
+          Resolved
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Report Type</ion-label>
+      <ion-select>
+        <ion-select-option>
+          Open
+        </ion-select-option>
+        <ion-select-option>
+          Customer Pending
+        </ion-select-option>
+        <ion-select-option>
+          In Progress
+        </ion-select-option>
+        <ion-select-option>
+          Engineer Assigned
+        </ion-select-option>
+        <ion-select-option>
+          Resolved
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-footer>
+      <ion-row no-padding>
+         <ion-col center text-center>
+            <ion-button [disabled]="addReport.invalid" class="btn btn-primary" type="submit" expand="block" fill="outline">Show Report</ion-button>
+          </ion-col>
+      </ion-row>
+    </ion-footer>
   </form>
 </ion-card>
 </ion-content>

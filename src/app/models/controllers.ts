@@ -7,4 +7,6 @@ export class Controllers {
   public readonly gettaskdetails = `/api/v1/gettaskdetails`;
   public readonly updatetaskdetails = `/api/v1/updatetaskdetails`;
   public readonly getuserdetails = `/api/v1/getuserdetails`;
+  public readonly getreporttype = `api/v1/getreporttype`;
+  public readonly getreportdata = `api/v1/getreportdata`;
 }
