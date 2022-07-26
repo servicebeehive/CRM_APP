@@ -50,20 +50,7 @@
     <ion-item>
       <ion-label>Report Type</ion-label>
       <ion-select>
-        <ion-select-option>
-          Open
-        </ion-select-option>
-        <ion-select-option>
-          Customer Pending
-        </ion-select-option>
-        <ion-select-option>
-          In Progress
-        </ion-select-option>
-        <ion-select-option>
-          Engineer Assigned
-        </ion-select-option>
-        <ion-select-option>
-          Resolved
+        <ion-select-option *ngFor="let item of report;let i = index">{{item.reporttypecode}}
         </ion-select-option>
       </ion-select>
     </ion-item>

@@ -8,6 +8,9 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ReturnResult } from 'src/app/models/return-result';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
+import { ReportData } from 'src/app/models/reportdata';
+import { ReportService } from 'src/app/services/report/report.service';
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.page.html',
@@ -17,13 +20,16 @@ export class ReportPage implements OnInit {
 
   public Test:string='Report'
   public users: UserDetail[] = [];
+  public report: ReportData[] = [];
+
   constructor(
     public accountServices: AccountService,
     public _http: HttpClient,
     public loginService: LoginService,
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
-    public router: Router
+    public router: Router,
+    public reportService: ReportService
   ) { }
 
   addReport = new FormGroup({
@@ -40,6 +46,7 @@ export class ReportPage implements OnInit {
 
   public async ionViewDidEnter() {
     await this.getUsers();
+    await this.getReportType();
   }
 
   public getUsers() {
@@ -52,6 +59,20 @@ export class ReportPage implements OnInit {
           this.users = result.data;
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
+        }
+      });
+  }
+
+  public getReportType(){
+    const reportData = new ReportData();
+    reportData.reporttypecode = 'GETREPORTTYPE';
+    this.reportService
+      .getReportType(reportData)
+      .then((result: ReturnResult<ReportData[]>) => {
+        if(result.success) {
+          this.report = result.data;
+        } else {
+          this.notificationService.showToast<ReportData[]>(result);
         }
       });
   }

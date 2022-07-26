@@ -6,7 +6,6 @@ import { ConfigService } from '../config/config.service';
 import { IConfig } from 'src/app/models/iconfig';
 import { ReportData } from 'src/app/models/reportdata';
 import { ReturnResult } from 'src/app/models/return-result';
-import { LoginDetail } from 'src/app/models/logindetail.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +21,11 @@ export class ReportService extends BaseService {
   }
 
   public async getReportData(
-    loginDetailData: LoginDetail
-  ): Promise<ReturnResult<ReportData>> {
-    return this.PostReturn<LoginDetail, ReturnResult<ReportData>>(
-      this.controllers.login,
-      loginDetailData
+    reportDetailData: ReportData
+  ): Promise<ReturnResult<string>> {
+    return this.PostReturn<ReportData, ReturnResult<string>>(
+      this.controllers.getreportdata,
+      reportDetailData
     );
   }
 
