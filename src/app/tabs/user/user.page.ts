@@ -17,7 +17,7 @@ export class UserPage implements OnInit {
   public test = [1, 2, 3, 4];
 
   public users: UserDetail[] = [];
-
+  public Test:string='Users Detail'
   constructor(
     public modalController: ModalController,
     public loginService: LoginService,
@@ -56,10 +56,5 @@ export class UserPage implements OnInit {
           this.notificationService.showToast<UserDetail[]>(result);
         }
       });
-  }
-
-  public onClickLogout() {
-    this.accountService.removeToken();
-    this.router.navigate(['/']);
   }
 }

@@ -44,7 +44,7 @@ export class AssignmentPage {
   public assignmentForm = this.fb.group({
     assignTaskForm: this.fb.array([]),
   });
-
+  public Test:string='Assignment'
   constructor(
     public datepipe: DatePipe,
     public assignmentService: AssignmentService,
@@ -135,9 +135,7 @@ export class AssignmentPage {
         }
       });
   }
-
-  public onClickLogout() {
-    this.accountServices.removeToken();
-    this.router.navigate(['/']);
-  }
+  countrycode : string = "91";
+  whatsappnumber : string = "8817546511";
+  url : string = "https://wa.me/"+this.countrycode+this.whatsappnumber+"?text=Hi <name>, You have been assigned to task Id - <no>. Please check in CRM app for more details. Regards, CRM Admin";
 }

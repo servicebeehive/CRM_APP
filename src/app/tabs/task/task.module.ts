@@ -8,6 +8,7 @@ import { TaskPageRoutingModule } from './task-routing.module';
 import { TaskPage } from './task.page';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IntegerInputDirectiveModule } from 'src/app/directives/integer-input-directive/integer-input-directive.module';
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { IntegerInputDirectiveModule } from 'src/app/directives/integer-input-di
     FormsModule,
     ReactiveFormsModule,
     IntegerInputDirectiveModule,
+    SharedmoduleModule
   ],
   declarations: [TaskPage],
 })

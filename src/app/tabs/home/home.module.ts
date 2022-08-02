@@ -9,6 +9,7 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { HomePage } from './home.page';
 import { SubmitStatusComponent } from './submit-status/submit-status.component';
 import { DisplayStatusComponent } from './display-status/display-status.component';
+import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { DisplayStatusComponent } from './display-status/display-status.componen
     IonicModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
+    SharedmoduleModule
   ],
   declarations: [HomePage, SubmitStatusComponent, DisplayStatusComponent],
   providers: [DatePipe],
