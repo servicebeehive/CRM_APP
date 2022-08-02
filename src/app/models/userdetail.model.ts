@@ -8,6 +8,8 @@ export class UserDetail {
   active: string;
   operationtype: string;
   usertype: string;
+  phone: number;
+  email: string;
   constructor() {
     this.userid = 0;
     this.username = '';
@@ -18,5 +20,7 @@ export class UserDetail {
     this.active = '';
     this.operationtype = '';
     this.usertype = '';
+    this.phone = 0;
+    this.email ='';
   }
 }

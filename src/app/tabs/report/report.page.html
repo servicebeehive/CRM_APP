@@ -17,50 +17,49 @@
   <div class="form-group">
     <ion-item>
       <ion-label for="todate">To :</ion-label>
-      <ion-input type="date" size="fixed" formControlName="todate" id="todate" class="form-control" ></ion-input>
+      <ion-input type="date" size="fixed" formControlName="todate" id="todate" class="form-control"></ion-input>
     </ion-item> 
   </div>
     <ion-item>
       <ion-label>Assignee</ion-label>
-      <ion-select>
+      <ion-select formControlName="taskassignee">
         <ion-select-option *ngFor="let item of users;let i = index">{{item.fullname}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Status</ion-label>
-      <ion-select>
-        <ion-select-option>
-          Open
-        </ion-select-option>
-        <ion-select-option>
-          Customer Pending
-        </ion-select-option>
-        <ion-select-option>
-          In Progress
-        </ion-select-option>
-        <ion-select-option>
-          Engineer Assigned
-        </ion-select-option>
-        <ion-select-option>
-          Resolved
+      <ion-select formControlName="status">
+        <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-item>
       <ion-label>Report Type</ion-label>
-      <ion-select>
-        <ion-select-option *ngFor="let item of report;let i = index">{{item.reporttypecode}}
+      <ion-select formControlName="reporttypecode">
+        <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">{{itm.reporttypename}}
         </ion-select-option>
       </ion-select>
     </ion-item>
     <ion-footer>
       <ion-row no-padding>
          <ion-col center text-center>
-            <ion-button [disabled]="addReport.invalid" class="btn btn-primary" type="submit" expand="block" fill="outline">Show Report</ion-button>
+            <ion-button [disabled]="addReport.invalid" class="btn btn-primary" type="submit" expand="block" fill="outline" (click)="onReportData()">Show Report</ion-button>
           </ion-col>
       </ion-row>
     </ion-footer>
+      <ion-card *ngFor="let item of reportData; let i = index">
+        <!-- <ion-card-header>
+          Task # {{item.taskid}}
+        </ion-card-header> -->
+        <ion-card-content>
+          <!-- <p>Task Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
+          <p>Customer Name : <span>{{item.customername}}</span></p> -->
+          <p>Location : <span>{{item.location}}</span></p>
+          <p>Phone : <span>{{item.phone}}</span></p>
+          <p>Status : <span>{{item.status}}</span></p>
+        </ion-card-content>
+      </ion-card>
   </form>
 </ion-card>
 </ion-content>

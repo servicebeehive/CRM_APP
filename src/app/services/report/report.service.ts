@@ -6,6 +6,7 @@ import { ConfigService } from '../config/config.service';
 import { IConfig } from 'src/app/models/iconfig';
 import { ReportData } from 'src/app/models/reportdata';
 import { ReturnResult } from 'src/app/models/return-result';
+import { ReportType } from 'src/app/models/reporttype';
 
 @Injectable({
   providedIn: 'root'
@@ -22,19 +23,19 @@ export class ReportService extends BaseService {
 
   public async getReportData(
     reportDetailData: ReportData
-  ): Promise<ReturnResult<string>> {
-    return this.PostReturn<ReportData, ReturnResult<string>>(
+  ): Promise<ReturnResult<ReportData[]>> {
+    return this.PostReturn<ReportData, ReturnResult<ReportData[]>>(
       this.controllers.getreportdata,
       reportDetailData
     );
   }
 
   public async getReportType(
-    reportDetailData: ReportData
-  ): Promise<ReturnResult<ReportData[]>> {
-    return this.PostReturn<ReportData, ReturnResult<ReportData[]>>(
+    reportTypeData: ReportType
+  ): Promise<ReturnResult<ReportType[]>> {
+    return this.PostReturn<ReportType, ReturnResult<ReportType[]>>(
       this.controllers.getreporttype,
-      reportDetailData
+      reportTypeData
     );
   }
 }

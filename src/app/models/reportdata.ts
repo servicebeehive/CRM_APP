@@ -3,14 +3,14 @@ export class ReportData {
  startdate : Date;
  enddate : Date;
  status : string;
- taskassignee : number;
+ taskassignee : string;
  reporttypecode : string;
  constructor() {
      this.userid = 0;
      this.startdate = new Date('');
      this.enddate = new Date('');
      this.status = '';
-     this.taskassignee = 0;
+     this.taskassignee = '';
      this.reporttypecode = '';
     }  
 }
