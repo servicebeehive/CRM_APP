@@ -49,12 +49,12 @@
       </ion-row>
     </ion-footer>
       <ion-card *ngFor="let item of reportData; let i = index">
-        <!-- <ion-card-header>
+        <ion-card-header>
           Task # {{item.taskid}}
-        </ion-card-header> -->
+        </ion-card-header>
         <ion-card-content>
-          <!-- <p>Task Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
-          <p>Customer Name : <span>{{item.customername}}</span></p> -->
+          <p>Task Date : <span>{{item.taskdate | date:'mediumDate'}}</span></p>
+          <p>Customer Name : <span>{{item.customername}}</span></p>
           <p>Location : <span>{{item.location}}</span></p>
           <p>Phone : <span>{{item.phone}}</span></p>
           <p>Status : <span>{{item.status}}</span></p>

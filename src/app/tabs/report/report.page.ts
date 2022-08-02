@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
@@ -11,8 +11,6 @@ import { AssignmentService } from 'src/app/services/assignment/assignment.servic
 import { ReportData } from 'src/app/models/reportdata';
 import { ReportType } from 'src/app/models/reporttype';
 import { ReportService } from 'src/app/services/report/report.service';
-import { TaskDetail } from '../task/task.page';
-import { OperationType } from '../assignment/assignment.page';
 
 interface Status {
   key: string;
@@ -28,6 +26,15 @@ export class ReportModel{
   reporttypecode : string;
 }
 
+export class ReportTask{
+  taskid: number;
+  taskdate: Date;
+  customername: string;
+  location: string;
+  phone: number;
+  status: string;
+}
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.page.html',
@@ -39,8 +46,8 @@ export class ReportPage implements OnInit {
   public Test:string='Report'
   public users: UserDetail[] = [];
   public report: ReportType[] = [];
-  public reportdata: ReportData[] = [];
-  public reportData:any[]
+  public reportData: any[];
+ // public reportData: ReportTask[] = [];
   status: Status[] = [];
 
   constructor(
