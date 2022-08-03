@@ -11,6 +11,7 @@ import { AssignmentService } from 'src/app/services/assignment/assignment.servic
 import { ReportData } from 'src/app/models/reportdata';
 import { ReportType } from 'src/app/models/reporttype';
 import { ReportService } from 'src/app/services/report/report.service';
+import { AlertController } from '@ionic/angular';
 
 interface Status {
   key: string;
@@ -57,7 +58,8 @@ export class ReportPage implements OnInit {
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
     public router: Router,
-    public reportService: ReportService
+    public reportService: ReportService,
+    public alertCtrl: AlertController
   ) { }
 
   addReport = new FormGroup({
@@ -155,7 +157,25 @@ export class ReportPage implements OnInit {
    this.reportService
    .getReportData(reportModel)
    .then((result: ReturnResult<ReportData[]>) => {
-    if(result.success) {
+    console.log(reportModel.startdate && reportModel.enddate);
+    if(reportModel.startdate > reportModel.enddate){
+      this.alertCtrl
+      .create({
+        message:
+          'End Date must be greater than Start Date',
+          buttons: [
+            {
+              text: 'Ok',
+              handler: () => {
+               this.addReport.reset();
+              },
+            },
+          ],
+      }).then((res) => {
+        res.present();
+      });
+    }
+    else if(result.success) {
       this.reportData = result.data;
     } else{
       this.notificationService.showToast<ReportData[]>(result);
