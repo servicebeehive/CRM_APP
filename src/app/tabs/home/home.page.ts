@@ -19,6 +19,8 @@ import { SubmitStatusComponent } from './submit-status/submit-status.component';
 export class HomePage implements OnInit {
   public assignedTaskDetails: TaskDetail[] = [];
 
+  public Test:string='Home'
+
   constructor(
     public datepipe: DatePipe,
     public modalController: ModalController,
@@ -72,10 +74,5 @@ export class HomePage implements OnInit {
           this.notificationService.showToast<TaskDetail[]>(result);
         }
       });
-  }
-
-  public onClickLogout() {
-    this.accountServices.removeToken();
-    this.router.navigate(['/']);
   }
 }

@@ -1,10 +1,5 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Users Detail</ion-title>
-    <ion-button (click)="onClickLogout()" slot="end" fill="clear" color="tertiary">
-      <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+  <app-header [header]="Test"></app-header>
 </ion-header>
 
 <ion-content>
@@ -16,6 +11,8 @@
       <p>Name : <span>{{item.fullname}}</span></p>
       <p>User Name : <span>{{item.username}}</span></p>
       <p>Enable : <span></span></p>
+      <p>Phone : <span>{{item.phone}}</span></p>
+      <p>Email : <span>{{item.email}}</span></p>
 
     </ion-card-content>
     <ion-footer>

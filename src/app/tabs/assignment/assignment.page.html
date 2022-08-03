@@ -1,10 +1,5 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Assignment</ion-title>
-    <ion-button (click)="onClickLogout()" slot="end" fill="clear" color="tertiary">
-      <ion-icon slot="icon-only" name="log-out-outline"></ion-icon>
-    </ion-button>
-  </ion-toolbar>
+  <app-header [header]="Test"></app-header>
 </ion-header>
 
 <ion-content>
@@ -34,7 +29,7 @@
           <ion-footer>
             <ion-row no-padding>
               <ion-col center text-center>
-                <ion-button expand="block" fill="outline" (click)="onAssignUser(item.value.index)">Assign</ion-button>
+                <ion-button href={{url}} expand="block" fill="outline" (click)="onAssignUser(item.value.index)">Assign</ion-button>
               </ion-col>
             </ion-row>
           </ion-footer>
