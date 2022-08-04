@@ -23,7 +23,7 @@
     <ion-item>
       <ion-label>Assignee</ion-label>
       <ion-select formControlName="taskassignee">
-        <ion-select-option *ngFor="let item of users;let i = index">{{item.fullname}}
+        <ion-select-option *ngFor="let item of users;let i = index" [value]="item.userid">{{item.fullname}}
         </ion-select-option>
       </ion-select>
     </ion-item>
