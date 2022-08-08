@@ -31,7 +31,7 @@ export class TaskPage implements OnInit {
     remark: [''],
     phoneNumber: ['', [Validators.minLength(10)]],
   });
-  public Test:string='Task Details'
+
   constructor(
     public fb: FormBuilder,
     public taskService: TaskService,

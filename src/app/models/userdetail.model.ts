@@ -10,6 +10,7 @@ export class UserDetail {
   usertype: string;
   phone: number;
   email: string;
+  enabled: string;
   constructor() {
     this.userid = 0;
     this.username = '';
@@ -22,5 +23,6 @@ export class UserDetail {
     this.usertype = '';
     this.phone = 0;
     this.email ='';
+    this.enabled = '';
   }
 }

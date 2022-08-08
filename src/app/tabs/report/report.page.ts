@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DatePipe, formatDate } from '@angular/common';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -25,15 +26,11 @@ export class ReportModel{
   status : string;
   taskassignee : string;
   reporttypecode : string;
-}
-
-export class ReportTask{
-  taskid: number;
-  taskdate: Date;
-  customername: string;
-  location: string;
-  phone: number;
-  status: string;
+  taskid : number;
+  taskdate : Date;
+  customername : string;
+  location : string;
+  phone : number;
 }
 
 @Component({
@@ -44,15 +41,14 @@ export class ReportTask{
 
 export class ReportPage implements OnInit {
 
-  public Test:string='Report'
   public users: UserDetail[] = [];
   public report: ReportType[] = [];
-  public reportData: any[];
- // public reportData: ReportTask[] = [];
+  public reportData: ReportData[] = [];
   status: Status[] = [];
 
   constructor(
     public accountServices: AccountService,
+    public datepipe: DatePipe,
     public _http: HttpClient,
     public loginService: LoginService,
     public assignmentService: AssignmentService,
@@ -67,7 +63,7 @@ export class ReportPage implements OnInit {
     todate: new FormControl('',Validators.required),
     status: new FormControl(''),
     taskassignee: new FormControl(''),
-    reporttypecode: new FormControl('')
+    reporttypecode: new FormControl('',Validators.required)
   });
 
   get fromdate(){
@@ -116,6 +112,8 @@ export class ReportPage implements OnInit {
   }
 
   public async ionViewDidEnter() {
+    this.addReport.reset();
+    this.reportData=[];
     await this.getUsers();
     await this.getReportType();
   }
@@ -168,6 +166,7 @@ export class ReportPage implements OnInit {
               text: 'Ok',
               handler: () => {
                this.addReport.reset();
+               this.reportData=[];
               },
             },
           ],

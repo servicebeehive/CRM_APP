@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -19,6 +19,7 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
     ReportPageRoutingModule,
     SharedmoduleModule
   ],
-  declarations: [ReportPage]
+  declarations: [ReportPage],
+  providers: [DatePipe]
 })
 export class ReportPageModule {}
