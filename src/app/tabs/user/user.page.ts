@@ -17,7 +17,7 @@ export class UserPage implements OnInit {
   public test = [1, 2, 3, 4];
 
   public users: UserDetail[] = [];
-  public Test:string='Users Detail'
+
   constructor(
     public modalController: ModalController,
     public loginService: LoginService,

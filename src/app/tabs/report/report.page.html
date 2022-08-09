@@ -1,5 +1,5 @@
 <ion-header>
-  <app-header [header]="Test"></app-header>
+  <app-header header="Report"></app-header>
 </ion-header>
 
 <ion-content>
@@ -11,7 +11,7 @@
     </ion-item>
     <ion-item>
       <ion-label for="fromdate">From :</ion-label>
-      <ion-input type="date" formControlName="fromdate" id="fromdate" class="form-control" ></ion-input>
+      <ion-input type="date" formControlName="fromdate" id="fromdate" class="form-control" *ngFor="let item of reportData;let i = index">{{item.startdate | date:'mediumDate'}}</ion-input>
     </ion-item>
   </div>
   <div class="form-group">
@@ -23,7 +23,7 @@
     <ion-item>
       <ion-label>Assignee</ion-label>
       <ion-select formControlName="taskassignee">
-        <ion-select-option *ngFor="let item of users;let i = index">{{item.fullname}}
+        <ion-select-option *ngFor="let item of users;let i = index" [value]="item.userid">{{item.fullname}}
         </ion-select-option>
       </ion-select>
     </ion-item>

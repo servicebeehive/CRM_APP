@@ -19,8 +19,6 @@ import { SubmitStatusComponent } from './submit-status/submit-status.component';
 export class HomePage implements OnInit {
   public assignedTaskDetails: TaskDetail[] = [];
 
-  public Test:string='Home'
-
   constructor(
     public datepipe: DatePipe,
     public modalController: ModalController,
