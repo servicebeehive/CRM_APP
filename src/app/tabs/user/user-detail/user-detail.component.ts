@@ -12,11 +12,16 @@ import { NotificationService } from 'src/app/services/notification/notification.
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
+
+  public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
+
   addUserDetail = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     userName: ['', Validators.required],
     password: ['', Validators.required],
+    phone: ['', Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)],
+    email: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true],
   });
 

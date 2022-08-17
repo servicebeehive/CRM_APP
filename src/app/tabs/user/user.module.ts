@@ -9,6 +9,7 @@ import { UserPageRoutingModule } from './user-routing.module';
 import { UserPage } from './user.page';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
+import { IntegerInputDirectiveModule } from 'src/app/directives/integer-input/integer-input-directive.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
     FormsModule,
     IonicModule,
     UserPageRoutingModule,
+    IntegerInputDirectiveModule,
     ReactiveFormsModule,
     SharedmoduleModule
   ],
