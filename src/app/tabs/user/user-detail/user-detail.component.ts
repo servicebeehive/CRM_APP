@@ -20,8 +20,8 @@ export class UserDetailComponent implements OnInit {
     lastName: ['', Validators.required],
     userName: ['', Validators.required],
     password: ['', Validators.required],
-    phone: ['', Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)],
-    email: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
+    phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
+    emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true],
   });
 
@@ -50,6 +50,8 @@ export class UserDetailComponent implements OnInit {
     userDetail.username = this.addUserDetail.value.userName.trim();
     userDetail.pwd = this.addUserDetail.value.password.trim();
     userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
+    userDetail.email = this.addUserDetail.value.emailid;
+    userDetail.phone = this.addUserDetail.value.phoneno;
     userDetail.operationtype = 'INSERT';
     this.loginService
       .getUsers(userDetail)
