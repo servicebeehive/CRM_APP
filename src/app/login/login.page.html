@@ -1,7 +1,7 @@
 <ion-content>
   <form [formGroup]="addloginDetail" (ngSubmit)="onSignin()">
     <ion-grid>
-      <h3 class="ion-text-center text-white">Login</h3>
+      <h3 class="ion-text-center text-white">Login Now</h3>
       <ion-grid>
         <ion-row class="ion-padding-start ion-padding-end ion-justify-content-center">
           <ion-col size="12">
@@ -14,7 +14,7 @@
             <ion-input type="text"></ion-input>
           </ion-col> -->
           <ion-col size="12">
-            <ion-button type="submit" expand="block" [disabled]="addloginDetail.invalid" color="tertiary">Sign in
+            <ion-button type="submit" expand="block" [disabled]="addloginDetail.invalid" color="primary">Sign in
             </ion-button>
           </ion-col>
         </ion-row>

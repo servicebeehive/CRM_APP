@@ -7,16 +7,22 @@
     <div formArrayName="assignTaskForm">
       <ion-card *ngFor="let item of formControl.controls; let i = index">
         <div [formGroupName]="i">
-          <ion-card-header>
-            Task # {{item.value.taskid}}
-          </ion-card-header>
+       
+            <ion-card-header class="d-flex justifiy-between  align-item-start">
+              <ion-card-title class="ion-text-start d-flex align-item-center"><ion-icon
+                name="ellipse"  [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'"></ion-icon> Task # {{item.value.taskid}}</ion-card-title>
+             
+              </ion-card-header>
+           
+         
           <ion-card-content>
-            <p>Date : <span>{{item.value.createdon | date:'mediumDate'}}</span></p>
-            <p>Customer Name : <span>{{item.value.customername}}</span></p>
-            <p>Location : <span>{{item.value.location}}</span></p>
-            <p>Remark : <span>{{item.value.remark}}</span></p>
-            <p>Engineer : <span>{{item.value.fullname}}</span></p>
-            <p>Status : <span>{{item.value.status}}</span></p>
+            <p><ion-icon name="calendar-outline"></ion-icon> Date : <span>{{item.value.createdon | date:'mediumDate'}}</span></p>
+            <p><ion-icon name="person-outline"></ion-icon>Customer Name : <span>{{item.value.customername}}</span></p>
+            <p><ion-icon name="location-outline"></ion-icon>Location : <span>{{item.value.location}}</span></p>
+            <p><ion-icon name="bookmark-outline"></ion-icon>Remark : <span>{{item.value.remark}}</span></p>
+            <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.value.fullname}}</span></p>
+            <p><ion-icon
+              name="ellipse"  [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'"></ion-icon> Status : <span>{{item.value.status}}</span></p>
             <ion-item>
               <ion-label>Assignee</ion-label>
               <ion-select formControlName="assigneeUser">
@@ -26,16 +32,16 @@
             </ion-item>
 
           </ion-card-content>
-          <ion-footer>
+          <ion-footer class="no-shadow">
             <ion-row no-padding>
               <ion-col center text-center>
-                <ion-button href={{url}} expand="block" fill="outline" (click)="onAssignUser(item.value.index)">Assign</ion-button>
+                <ion-button href={{url}} size="small" expand="block" fill="outline" (click)="onAssignUser(item.value.index)">Assign</ion-button>
               </ion-col>
             </ion-row>
           </ion-footer>
         </div>
       </ion-card>
-      <p class="error" *ngIf="assignedTaskDetails.length === 0">No task to be assigned.</p>
+      <p class="error ion-padding" *ngIf="assignedTaskDetails.length === 0">No task to be assigned.</p>
     </div>
   </form>
 </ion-content>

@@ -1,23 +1,23 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-icon slot="end" (click)="dismiss()" name="close-outline"></ion-icon>
-    <p>
-      Display status of Task {{taskDetails.taskid}}
-    </p>
+    <ion-title>  Display status of Task {{taskDetails.taskid}}</ion-title>
+    <ion-icon class="ion-padding" slot="end" (click)="dismiss()" name="close-outline"></ion-icon>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
-    <ion-card-header>
-      Task # {{taskDetails.taskid}}
-    </ion-card-header>
-    <ion-card-content *ngFor="let item of assignedTaskDetails; let i = index">
-      <p>Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
-      <p>Status : <span>{{item.status}}</span></p>
-      <p>Engineer : <span>{{item.fullname}}</span></p>
-      <p>Remark : <span>{{item.remarks}}</span></p>
+  <!-- <h4>Task # {{taskDetails.taskid}}</h4> -->
+  <ion-card *ngFor="let item of assignedTaskDetails; let i = index">
+    <ion-card-content >
+      <p><ion-icon name="calendar-outline"></ion-icon> Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
+      <p><ion-icon
+        name="ellipse"  [color]="item.status=='in progress'?'warning':item.status=='open'||item.status=='Open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'"></ion-icon> Status : <span>{{item.status}}</span></p>
+      <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.fullname}}</span></p>
+      <p><ion-icon name="bookmark-outline"></ion-icon> Remark : <span>{{item.remarks}}</span></p>
+     
     </ion-card-content>
+  </ion-card>
     <ion-footer>
       <ion-row no-padding>
         <ion-col center text-center>
@@ -25,5 +25,5 @@
         </ion-col>
       </ion-row>
     </ion-footer>
-  </ion-card>
+ 
 </ion-content>

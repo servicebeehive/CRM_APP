@@ -17,6 +17,7 @@ export class TaskDetail {
   fullname: string;
   createdon: string;
   assignedto: string;
+  color:string;
 }
 
 @Component({
