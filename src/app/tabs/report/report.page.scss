@@ -19,3 +19,10 @@ p{
   ion-select {
     max-width: 80% !important;
   }
+
+  .required-asterisk::after{
+    color: red;
+    content:"*";
+    font-weight: bold;
+    margin-left: 2px;
+  }

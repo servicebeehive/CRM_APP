@@ -3,6 +3,9 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>
+  </ion-card>
   <ion-card *ngFor="let item of users;let i = index">
     <ion-card-header>
       User # {{item.userid}}
@@ -16,15 +19,7 @@
 
     </ion-card-content>
     <ion-footer>
-      <ion-row no-padding>
-        <ion-col center text-center>
-          <ion-button expand="block" disabled (click)="onClickOpenModal()" fill="outline">Edit </ion-button>
-        </ion-col>
-        <ion-col center text-center>
-          <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>
-        </ion-col>
-      </ion-row>
+      <ion-button expand="block" disabled (click)="onClickOpenModal()" fill="outline">Edit </ion-button>
     </ion-footer>
   </ion-card>
-
 </ion-content>

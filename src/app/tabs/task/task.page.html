@@ -7,19 +7,19 @@
     <ion-card>
       <ion-card-content>
         <ion-item>
-          <ion-label position="floating">Customer Name</ion-label>
+          <ion-label class="required-asterisk" position="floating">Customer Name</ion-label>
           <ion-input formControlName="customerName"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Phone Number</ion-label>
+          <ion-label class="required-asterisk" position="floating">Phone Number</ion-label>
           <ion-input appIntegerInputDirective inputmode="numeric" type="text" maxlength="10"
             formControlName="phoneNumber" placeholder="Phone Number *">
           </ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-label position="floating">Location</ion-label>
+          <ion-label class="required-asterisk" position="floating">Location</ion-label>
           <ion-input formControlName="location"></ion-input>
         </ion-item>
 
@@ -27,6 +27,20 @@
           <ion-label position="floating">Remark</ion-label>
           <ion-textarea formControlName="remark"></ion-textarea>
         </ion-item>
+
+        <ion-item>
+          <ion-label>Service Type</ion-label>
+          <ion-select formControlName="service_type">
+            <ion-select-option>Sales</ion-select-option>
+            <ion-select-option>Service</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Product Type</ion-label>
+          <ion-textarea formControlName="product_type"></ion-textarea>
+        </ion-item>
+
       </ion-card-content>
       <ion-footer>
         <ion-row no-padding>

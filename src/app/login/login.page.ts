@@ -18,6 +18,7 @@ export class LoginPage implements OnInit {
   addloginDetail = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', Validators.required],
+    clientcode: ['', Validators.required]
   });
 
   constructor(
@@ -35,7 +36,7 @@ export class LoginPage implements OnInit {
     const loginDetailData = new LoginDetail();
     loginDetailData.usercode = this.addloginDetail.value.username.trim();
     loginDetailData.pwd = this.addloginDetail.value.password;
-    loginDetailData.logintype = '';
+    loginDetailData.clientcode = this.addloginDetail.value.clientcode;
     this.loginService
       .getUserDetails(loginDetailData)
       .then((result: ReturnResult<UserDetail>) => {
@@ -44,6 +45,7 @@ export class LoginPage implements OnInit {
           this.accountServices.USER_NAME = result.data.username;
           this.accountServices.USER_ID = result.data.userid;
           this.accountServices.USER_TYPE = result.data.usertype;
+          this.accountServices.CLIENT_CODE = this.addloginDetail.value.clientcode;
           this.addloginDetail.reset();
           this.router.navigate(['tabs/home']);
         } else {
