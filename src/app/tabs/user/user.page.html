@@ -3,23 +3,31 @@
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!-- <ion-card>
     <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>
-  </ion-card>
+  </ion-card> -->
   <ion-card *ngFor="let item of users;let i = index">
     <ion-card-header>
-      User # {{item.userid}}
+      <ion-card-title class="ion-text-start d-flex align-item-center">User # {{item.userid}}</ion-card-title>  
     </ion-card-header>
     <ion-card-content>
-      <p>Name : <span>{{item.fullname}}</span></p>
-      <p>User Name : <span>{{item.username}}</span></p>
-      <p>Enable : <span>{{item.enabled}}</span></p>
-      <p>Phone : <span>{{item.phone}}</span></p>
-      <p>Email : <span>{{item.email}}</span></p>
+    
+      <p><ion-icon name="person-outline"></ion-icon> Name : <span>{{item.fullname}}</span></p>
+      <p><ion-icon name="person-outline"></ion-icon> User Name : <span>{{item.username}}</span></p>
+      <p><ion-icon name="ellipse" color="success"></ion-icon> Enable : <span>{{item.enabled}}</span></p>
+      <p><ion-icon name="call-outline"></ion-icon>Phone : <span>{{item.phone}}</span></p>
+      <p><ion-icon name="mail-outline"></ion-icon> Email : <span>{{item.email}}</span></p>
 
     </ion-card-content>
-    <ion-footer>
-      <ion-button expand="block" disabled (click)="onClickOpenModal()" fill="outline">Edit </ion-button>
+    <ion-footer class="no-shadow">
+      <ion-row no-padding>
+        <ion-col center text-center>
+          <ion-button expand="block" size="small" disabled (click)="onClickOpenModal()" fill="outline">Edit </ion-button>
+        </ion-col>
+        <ion-col center text-center>
+          <ion-button expand="block" size="small" class="secondary" (click)="onClickOpenModal()">New User</ion-button>
+        </ion-col>
+      </ion-row>
     </ion-footer>
   </ion-card>
 </ion-content>

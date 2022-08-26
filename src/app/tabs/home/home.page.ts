@@ -68,6 +68,8 @@ export class HomePage implements OnInit {
       .then((result: ReturnResult<TaskDetail[]>) => {
         if (result.success) {
           this.assignedTaskDetails = result.data;
+       
+        
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
         }

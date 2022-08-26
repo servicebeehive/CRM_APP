@@ -32,8 +32,8 @@ export class TaskPage implements OnInit {
     location: ['', Validators.required],
     remark: [''],
     phoneNumber: ['', [Validators.minLength(10)]],
-    service_type: [''],
-    product_type: ['']
+    servicetype: [''],
+    producttype: ['']
   });
 
   constructor(
@@ -53,8 +53,8 @@ export class TaskPage implements OnInit {
     taskDetail.location = this.addTaskDetail.value.location;
     taskDetail.phone = this.addTaskDetail.value.phoneNumber;
     taskDetail.remarks = this.addTaskDetail.value.remark;
-    taskDetail.servicetype = this.addTaskDetail.value.service_type;
-    taskDetail.producttype = this.addTaskDetail.value.product_type;
+    taskDetail.servicetype = this.addTaskDetail.value.servicetype;
+    taskDetail.producttype = this.addTaskDetail.value.producttype;
 
     this.alertCtrl
       .create({

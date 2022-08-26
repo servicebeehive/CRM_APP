@@ -4,24 +4,26 @@
 
 <ion-content>
   <ion-card *ngFor="let item of assignedTaskDetails;let i = index">
-    <ion-card-header>
-      Task # {{item.taskid}}
-    </ion-card-header>
+    <ion-card-header class="d-flex justifiy-between  align-item-start">
+      <ion-card-title class="ion-text-start d-flex align-item-center"><ion-icon
+         name="ellipse"  [color]="item.status=='in progress'?'warning':item.status=='open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'"></ion-icon> Task # {{item.taskid}} </ion-card-title>
+      <ion-card-subtitle  class="ion-text-end">Status:{{item.status}}</ion-card-subtitle>
+      </ion-card-header>
     <ion-card-content>
-      <p>Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
-      <p>Customer Name : <span>{{item.customername}}</span></p>
-      <p>Location : <span>{{item.location}}</span></p>
-      <p>Phone Number : <span>{{item.phone}}</span></p>
-      <p>Status : <span>{{item.status}}</span></p>
-      <p>Engineer : <span>{{item.fullname}}</span></p>
+      <p><ion-icon name="calendar-outline"></ion-icon> Date: <span>{{item.createdon | date:'mediumDate'}}</span></p>
+      <p><ion-icon name="person-outline"></ion-icon> Customer Name: <span>{{item.customername}}</span></p>
+      <p><ion-icon name="location-outline"></ion-icon> Location: <span>{{item.location}}</span></p>
+      <p><ion-icon name="call-outline"></ion-icon> Phone Number: <span>{{item.phone}}</span></p>
+      
+      <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.fullname}}</span></p>
     </ion-card-content>
-    <ion-footer>
+    <ion-footer class="no-shadow">
       <ion-row no-padding>
         <ion-col center text-center>
-          <ion-button expand="block" fill="outline" (click)="onClickSubmitStatus(item)">Submit Status</ion-button>
+          <ion-button size="small" expand="block" fill="outline" (click)="onClickSubmitStatus(item)">Submit Status</ion-button>
         </ion-col>
         <ion-col center text-center>
-          <ion-button expand="block" fill="outline" (click)="onClickDisplayStatus(item)">Dispaly Status</ion-button>
+          <ion-button size="small" expand="block" color="secondary" fill="outline" (click)="onClickDisplayStatus(item)">View Status</ion-button>
         </ion-col>
       </ion-row>
     </ion-footer>

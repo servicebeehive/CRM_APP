@@ -38,3 +38,30 @@ ion-icon {
     --background: #42ba96;
     --color: #070707;
 }
+.d-flex{ display: flex;}
+.justifiy-between{ justify-content: space-between;}
+.align-item-center{ align-items:center;}
+.align-item-start{align-items: flex-start;}
+.align-item-end{align-items: flex-end;}
+.no-shadow{box-shadow: none;}
+.no-shadow::before{ display: none;}
+.ion-color-white {
+    --ion-color-base: var(--ion-color-white);
+    --ion-color-base-rgb: var(--ion-color-white-rgb);
+    --ion-color-contrast: var(--ion-color-white-contrast);
+    --ion-color-contrast-rgb: var(--ion-color-white-contrast-rgb);
+    --ion-color-shade: var(--ion-color-white-shade);
+    --ion-color-tint: var(--ion-color-white-tint);
+  }
+  .required-asterisk::after{
+    color: red;
+    content:"*";
+    font-weight: bold;
+    margin-left: 2px;
+  }
+  .border{
+    border-radius: 4px !important;
+    border: 1px solid;
+    border-color: #041e37;
+    --padding-start: 10px;
+  }

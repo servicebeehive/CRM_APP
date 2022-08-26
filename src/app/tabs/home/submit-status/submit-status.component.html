@@ -1,23 +1,25 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-icon slot="end" (click)="dismiss()" name="close-outline"></ion-icon>
-    <p>
-      Submit status of Task {{taskDetails.taskid}}
-    </p>
-  </ion-toolbar>
+    <ion-title>  Submit status of Task {{taskDetails.taskid}}</ion-title>
+   <ion-icon slot="end" class="ion-padding" (click)="dismiss()" name="close-outline"></ion-icon>
+   </ion-toolbar>
 </ion-header>
 <ion-content>
   <form [formGroup]="addStatusDetail">
-    <ion-card>
-      <ion-card-header>
-        Task # {{taskDetails.taskid}}
-      </ion-card-header>
+    <ion-card class="no-shadow">
+      <ion-card-header class="d-flex justifiy-between  align-item-start">
+        <ion-card-title class="ion-text-start d-flex align-item-center"><ion-icon
+           name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Task # {{taskDetails.taskid}} </ion-card-title>
+      
+        </ion-card-header>
+    
       <ion-card-content>
-        <p>Date : <span>{{taskDetails.createdon | date:'mediumDate'}}</span></p>
-        <p>Customer Name : <span>{{taskDetails.customername}}</span></p>
-        <p>Location : <span>{{taskDetails.location}}</span></p>
-        <p>Engineer : <span>{{taskDetails.fullname}}</span></p>
-        <p>Current Status : <span>{{taskDetails.status}}</span></p>
+        <p><ion-icon name="calendar-outline"></ion-icon> Date : <span>{{taskDetails.createdon | date:'mediumDate'}}</span></p>
+        <p><ion-icon name="person-outline"></ion-icon> Customer Name : <span>{{taskDetails.customername}}</span></p>
+        <p><ion-icon name="location-outline"> </ion-icon>Location : <span>{{taskDetails.location}}</span></p>
+        <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{taskDetails.fullname}}</span></p>
+        <p><ion-icon
+          name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Current Status : <span>{{taskDetails.status}}</span></p>
 
         <ion-item>
           <ion-label>Status</ion-label>
@@ -30,6 +32,7 @@
         <ion-item>
           <ion-label position="floating">Remark</ion-label>
           <ion-textarea formControlName="remark"></ion-textarea>
+          <ion-icon name="bookmark-outline" slot="end"></ion-icon>
         </ion-item>
 
       </ion-card-content>
