@@ -36,6 +36,7 @@ export class HttpIntercertor implements HttpInterceptor {
       const tokendata = {
         'x-access-token': this.accountSrvices.getToken(),
         uname: this.accountSrvices.USER_NAME,
+        clientcode: this.accountSrvices.CLIENT_CODE
       };
       const body = {
         ...reqData,

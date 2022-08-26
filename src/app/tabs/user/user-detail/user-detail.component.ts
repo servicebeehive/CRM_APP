@@ -12,11 +12,16 @@ import { NotificationService } from 'src/app/services/notification/notification.
   styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit {
+
+  public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
+
   addUserDetail = this.fb.group({
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     userName: ['', Validators.required],
     password: ['', Validators.required],
+    phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
+    emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true],
   });
 
@@ -45,6 +50,8 @@ export class UserDetailComponent implements OnInit {
     userDetail.username = this.addUserDetail.value.userName.trim();
     userDetail.pwd = this.addUserDetail.value.password.trim();
     userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
+    userDetail.email = this.addUserDetail.value.emailid;
+    userDetail.phone = this.addUserDetail.value.phoneno;
     userDetail.operationtype = 'INSERT';
     this.loginService
       .getUsers(userDetail)

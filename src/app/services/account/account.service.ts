@@ -11,6 +11,7 @@ export class AccountService {
   public USER_NAME?: string;
   public USER_ID?: number;
   public USER_TYPE?: string;
+  public CLIENT_CODE?: string;
 
   constructor(public storage: Storage) {
     this.storage.create();
@@ -39,10 +40,12 @@ export class AccountService {
     if (userDetails.usertoken == null) {
       this.storage.remove('access-token');
       this.storage.remove('username');
+      this.storage.remove('clientcode');
       return;
     } else {
       this.storage.set('access-token', userDetails.usertoken);
       this.storage.set('username', userDetails.username);
+      this.storage.set('clientcode', userDetails.clientcode);
     }
   }
 
@@ -71,6 +74,7 @@ export class AccountService {
   public removeToken(): void {
     this.ACCESS_TOKEN = null;
     this.USER_NAME = null;
+    this.CLIENT_CODE = null;
     this.storage.remove('access-token');
   }
 }

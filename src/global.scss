@@ -53,3 +53,15 @@ ion-icon {
     --ion-color-shade: var(--ion-color-white-shade);
     --ion-color-tint: var(--ion-color-white-tint);
   }
+  .required-asterisk::after{
+    color: red;
+    content:"*";
+    font-weight: bold;
+    margin-left: 2px;
+  }
+  .border{
+    border-radius: 4px !important;
+    border: 1px solid;
+    border-color: #041e37;
+    --padding-start: 10px;
+  }

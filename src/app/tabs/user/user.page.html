@@ -3,12 +3,12 @@
 </ion-header>
 
 <ion-content>
+  <!-- <ion-card>
+    <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>
+  </ion-card> -->
   <ion-card *ngFor="let item of users;let i = index">
     <ion-card-header>
-      <ion-card-title class="ion-text-start d-flex align-item-center">User # {{item.userid}}</ion-card-title>
-     
-     
-      
+      <ion-card-title class="ion-text-start d-flex align-item-center">User # {{item.userid}}</ion-card-title>  
     </ion-card-header>
     <ion-card-content>
     
@@ -30,5 +30,4 @@
       </ion-row>
     </ion-footer>
   </ion-card>
-
 </ion-content>

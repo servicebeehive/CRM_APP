@@ -6,32 +6,41 @@
   <form [formGroup]="addTaskDetail">
     <ion-card class="no-shadow">
       <ion-card-content>
-        <ion-item>
-          <ion-label position="floating">Customer Name</ion-label>
-          <ion-input formControlName="customerName"></ion-input>
-          <ion-icon name="person-outline" slot="end"></ion-icon>
-          
+        <ion-item class="border">
+          <ion-input formControlName="customerName" placeholder="Customer Name" class="required-asterisk"></ion-input> 
+          <ion-icon name="person-outline" slot="start"></ion-icon>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Phone Number</ion-label>
+        <ion-item class="border">
           <ion-input appIntegerInputDirective inputmode="numeric" type="text" maxlength="10"
-            formControlName="phoneNumber" placeholder="Phone Number *">
+            formControlName="phoneNumber" placeholder="Phone Number" class="required-asterisk">
           </ion-input>
-          <ion-icon name="call-outline" slot="end"></ion-icon>
+          <ion-icon name="call-outline" slot="start"></ion-icon>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Location</ion-label>
-          <ion-input formControlName="location"></ion-input>
-          <ion-icon name="location-outline" slot="end"></ion-icon>
+        <ion-item class="border">
+          <ion-input formControlName="location" placeholder="Location" class="required-asterisk"></ion-input>
+          <ion-icon name="location-outline" slot="start"></ion-icon>
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Remark</ion-label>
-          <ion-textarea formControlName="remark" ></ion-textarea>
-          <ion-icon name="bookmark-outline" slot="end"></ion-icon>
+        <ion-item class="border">
+          <ion-textarea formControlName="remark" placeholder="Remark"></ion-textarea>
+          <ion-icon name="bookmark-outline" slot="start"></ion-icon>
         </ion-item>
+
+        <ion-item class="border">
+          <ion-icon name="aperture-outline" slot="start"></ion-icon>
+          <ion-select formControlName="servicetype" placeholder="Select Service Type">
+            <ion-select-option>Sales</ion-select-option>
+            <ion-select-option>Service</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item class="border">
+          <ion-input formControlName="producttype" placeholder="Product Type"></ion-input>
+          <ion-icon name="tv-outline" slot="start"></ion-icon>
+        </ion-item>
+
       </ion-card-content>
       <ion-footer>
         <ion-row no-padding>

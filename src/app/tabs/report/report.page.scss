@@ -1,21 +1,23 @@
 p{
     font-size: medium; 
    }
-   
+   p {
+    font-size: medium;
+  }
+  
    span{
      color: #3880ff;
    }
    
-   ion-card-header{
-     font-size: large;
-     font-weight: bold;
-   }
-
    ion-item {
-    margin-left: -10px;
+    margin-left: 0px;
     margin-top: 10px;
   }
   
   ion-select {
     max-width: 80% !important;
+  }
+
+  form {
+    padding-top: 25px;
   }
