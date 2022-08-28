@@ -19,7 +19,7 @@ export class LoginPage implements OnInit {
   addloginDetail = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', Validators.required],
-    clientcode: ['CL2', Validators.required]
+    clientcode: ['', Validators.required]
   });
 
   constructor(
