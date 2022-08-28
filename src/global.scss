@@ -31,13 +31,13 @@ ion-icon {
 }
 
 .error-class {
-    --background: #f03838;
-    --color: #070707;
+    --background: #ff4961;
+    --color: #ffffff;
 }
 
 .success-class {
-    --background: #42ba96;
-    --color: #070707;
+    --background: #2fdf75;
+    --color: #ffffff;
 }
 .d-flex{ display: flex;}
 .justifiy-between{ justify-content: space-between;}
@@ -76,15 +76,31 @@ ion-icon {
   }
  
   .sc-ion-textarea-md{ margin-top: 0; padding-top: 0;}
+  ion-icon[slot="start"]{
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
+  ion-input,ion-select{
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+  }
   }
   
  .border-box.ion-invalid.ion-touched{
   border-color: $redcolor;
   ion-icon[slot="start"]{
-    color:$redcolor
+    color:$redcolor;
   }
  }
   .w-100{ width: 100%;}
 
 .item-has-focus{box-shadow: 0 0 4px #78bbff;}
   .mt-20{ margin-top: 20px;}
+ion-item{--min-height: 40px;}
+
+.success{
+  background-color: --ion-color-success;
+}
+.ion-padding-start-no{
+  --padding-start: 0;
+}
