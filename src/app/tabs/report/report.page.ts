@@ -74,41 +74,28 @@ export class ReportPage implements OnInit {
   }
 
   ngOnInit() {
-    if (this.accountServices.USER_TYPE === 'admin') {
-      this.status = [
-        {
-          key: 'In Progress',
-          value: 'in progress',
-        },
-        {
-          key: 'Customer Pending',
-          value: 'customer pending',
-        },
-        {
-          key: 'Resolved',
-          value: 'resolved',
-        },
-        {
-          key: 'Close',
-          value: 'close',
-        },
-      ];
-    } else {
-      this.status = [
-        {
-          key: 'In Progress',
-          value: 'in progress',
-        },
-        {
-          key: 'Customer Pending',
-          value: 'customer pending',
-        },
-        {
-          key: 'Resolved',
-          value: 'resolved',
-        },
-      ];
-    }
+    this.status = [
+      {
+        key: 'Open',
+        value: 'open',
+      },
+      {
+        key: 'In Progress',
+        value: 'in progress',
+      },
+      {
+        key: 'Customer Pending',
+        value: 'customer pending',
+      },
+      {
+        key: 'Resolved',
+        value: 'resolved',
+      },
+      {
+        key: 'Close',
+        value: 'close',
+      },
+    ];
   }
 
   public async ionViewDidEnter() {
@@ -150,8 +137,14 @@ export class ReportPage implements OnInit {
    reportModel.startdate = this.addReport.value.fromdate;
    reportModel.enddate = this.addReport.value.todate;
    reportModel.status = !this.addReport.value.status ? null : this.addReport.value.status;
-   reportModel.taskassignee = !this.addReport.value.taskassignee ? null : this.addReport.value.taskassignee;
+  // reportModel.taskassignee = !this.addReport.value.taskassignee ? null : this.addReport.value.taskassignee;
    reportModel.reporttypecode = this.addReport.value.reporttypecode;
+   if(this.accountServices.USER_TYPE === 'admin') {
+    reportModel.taskassignee = !this.addReport.value.taskassignee ? null : this.addReport.value.taskassignee;
+   }else{
+    
+      reportModel.taskassignee = String(this.accountServices.USER_ID);
+   }
    this.reportService
    .getReportData(reportModel)
    .then((result: ReturnResult<ReportData[]>) => {
@@ -180,6 +173,11 @@ export class ReportPage implements OnInit {
       this.notificationService.showToast<ReportData[]>(result);
     }
    });
+  }
+
+  onReset(){
+    this.addReport.reset();
+    this.reportData=[];
   }
 
 }
