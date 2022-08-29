@@ -3,97 +3,100 @@
 </ion-header>
 
 <ion-content>
-<ion-card-content>
-  <form [formGroup]="addReport">
+  <ion-card-content>
+    <form [formGroup]="addReport">
 
-    <ion-item lines="none" class="border-box mt-20">  
-      <ion-select  placeholder="Report Type"  class="w-100"  formControlName="reporttypecode">
-        <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">{{itm.reporttypename}}
-        </ion-select-option>
-      </ion-select>
-      <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
-    </ion-item>
+      <ion-item lines="none" class="border-box mt-20">
+        <ion-select placeholder="Report Type" class="w-100" formControlName="reporttypecode">
+          <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">
+            {{itm.reporttypename}}
+          </ion-select-option>
+        </ion-select>
+        <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
+      </ion-item>
 
-  <div class="form-group">
-    <ion-item lines="none" class="border-box mt-20">
-      <ion-input
-        placeholder="Pick Start Date" 
-        value="{{ addReport.value.fromdate  | date: 'dd-MM-YYYY' }}"
-        id="fromdate">
-      </ion-input>
-      <ion-popover trigger="fromdate" size="cover">
-      <ng-template>
-        <ion-datetime
-          presentation="fromdate"
-          formControlName="fromdate">
-        </ion-datetime>
-      </ng-template>
-      </ion-popover>
-      <ion-icon name="calendar-outline" slot="start"></ion-icon>
-    </ion-item>
-  </div>
+      <div class="form-group">
+        <ion-item lines="none" class="border-box mt-20">
+          <ion-input placeholder="Pick Start Date" value="{{ addReport.value.fromdate  | date: 'dd-MM-YYYY' }}"
+            id="fromdate">
+          </ion-input>
+          <ion-popover #ionPopover1 trigger="fromdate" size="cover" (click)="onPopoverClick()">
+            <ng-template>
+              <ion-datetime presentation="fromdate" formControlName="fromdate">
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        </ion-item>
+      </div>
 
-  <div class="form-group">
-    <ion-item lines="none" class="border-box mt-20">
-      <ion-input
-        placeholder="Pick End Date"
-        value="{{ addReport.value.todate  | date: 'dd-MM-YYYY' }}"
-        id="todate">
-      </ion-input>
-      <ion-popover trigger="todate" size="cover">
-        <ng-template>
-          <ion-datetime
-            presentation="todate"
-            formControlName="todate">
-          </ion-datetime>
-        </ng-template>
-        </ion-popover>
-        <ion-icon name="calendar-outline" slot="start"></ion-icon>
-    </ion-item> 
-  </div>
+      <div class="form-group">
+        <ion-item lines="none" class="border-box mt-20">
+          <ion-input placeholder="Pick End Date" value="{{ addReport.value.todate  | date: 'dd-MM-YYYY' }}" id="todate">
+          </ion-input>
+          <ion-popover #ionPopover2 trigger="todate" size="cover" (click)="onPopoverClick()">
+            <ng-template>
+              <ion-datetime presentation="todate" formControlName="todate">
+              </ion-datetime>
+            </ng-template>
+          </ion-popover>
+          <ion-icon name="calendar-outline" slot="start"></ion-icon>
+        </ion-item>
+      </div>
 
-    <ion-item lines="none" class="border-box mt-20" *ngIf="this.accountServices.USER_TYPE === 'admin'">
-      <ion-select placeholder="Assignee" class="w-100" formControlName="taskassignee">
-        <ion-select-option *ngFor="let item of users;let i = index" [value]="item.userid">{{item.fullname}}
-        </ion-select-option>
-      </ion-select>
-      <ion-icon name="document-text-outline" slot="start"></ion-icon>
-    </ion-item>
+      <ion-item lines="none" class="border-box mt-20" *ngIf="this.accountServices.USER_TYPE === 'admin'">
+        <ion-select placeholder="Assignee" class="w-100" formControlName="taskassignee">
+          <ion-select-option *ngFor="let item of users;let i = index" [value]="item.userid">{{item.fullname}}
+          </ion-select-option>
+        </ion-select>
+        <ion-icon name="document-text-outline" slot="start"></ion-icon>
+      </ion-item>
 
-    <ion-item lines="none" class="border-box mt-20"> 
-      <ion-select placeholder="Status" formControlName="status" class="w-100" >
-        <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
-        </ion-select-option>
-      </ion-select>
-      <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
-    </ion-item>
+      <ion-item lines="none" class="border-box mt-20">
+        <ion-select placeholder="Status" formControlName="status" class="w-100">
+          <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
+          </ion-select-option>
+        </ion-select>
+        <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+      </ion-item>
 
-    <ion-footer  class="ion-no-border mt-20">
-      <ion-row  class="ion-padding-bottom">
-        <ion-col class="ion-no-padding" center text-center>
-            <ion-button [disabled]="addReport.invalid"  type="submit" expand="block" color="primary" (click)="onReportData()">Show Report</ion-button>
+      <ion-footer class="ion-no-border mt-20">
+        <ion-row class="ion-padding-bottom">
+          <ion-col class="ion-no-padding" center text-center>
+            <ion-button [disabled]="addReport.invalid" type="submit" expand="block" color="primary"
+              (click)="onReportData()">Show Report</ion-button>
           </ion-col>
           <ion-col class="ion-no-padding" center text-center>
             <ion-button type="submit" expand="block" color="primary" (click)="onReset()">Reset</ion-button>
           </ion-col>
-      </ion-row>
-    </ion-footer>
-   
-  </form>
-</ion-card-content>
+        </ion-row>
+      </ion-footer>
 
-<ion-card *ngFor="let item of reportData; let i = index">
-  <ion-card-header>
-    Task # {{item.taskid}}
-  </ion-card-header>
-  <ion-card-content>
-    <p><ion-icon name="calendar-outline"></ion-icon> Task Date : <span>{{item.taskdate | date:'mediumDate'}}</span></p>
-    <p><ion-icon name="person-outline"></ion-icon> Customer Name : <span>{{item.customername}}</span></p>
-    <p><ion-icon name="location-outline"></ion-icon> Location : <span>{{item.location}}</span></p>
-    <p><ion-icon name="call-outline"></ion-icon> Phone : <span>{{item.phone}}</span></p>
-    <p><ion-icon
-      name="ellipse"  [color]="item.status=='in progress'?'warning':item.status=='open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'"></ion-icon>Status : <span>{{item.status}}</span></p>
+    </form>
   </ion-card-content>
-</ion-card>
-</ion-content>
 
+  <ion-card *ngFor="let item of reportData; let i = index">
+    <ion-card-header>
+      Task # {{item.taskid}}
+    </ion-card-header>
+    <ion-card-content>
+      <p>
+        <ion-icon name="calendar-outline"></ion-icon> Task Date : <span>{{item.taskdate | date:'mediumDate'}}</span>
+      </p>
+      <p>
+        <ion-icon name="person-outline"></ion-icon> Customer Name : <span>{{item.customername}}</span>
+      </p>
+      <p>
+        <ion-icon name="location-outline"></ion-icon> Location : <span>{{item.location}}</span>
+      </p>
+      <p>
+        <ion-icon name="call-outline"></ion-icon> Phone : <span>{{item.phone}}</span>
+      </p>
+      <p>
+        <ion-icon name="ellipse"
+          [color]="item.status=='in progress'?'warning':item.status=='open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'">
+        </ion-icon>Status : <span>{{item.status}}</span>
+      </p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
