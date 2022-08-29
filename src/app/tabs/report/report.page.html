@@ -5,10 +5,13 @@
 <ion-content>
   <ion-card class="no-shadow">
   <form [formGroup]="addReport">
-  <div class="form-group">
-    <!-- <ion-item>
-      <ion-label>Select Date Range:</ion-label>
-    </ion-item> -->
+    <ion-item class="border">
+      <ion-label>Report Type</ion-label>
+      <ion-select class="required-asterisk" formControlName="reporttypecode">
+        <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">{{itm.reporttypename}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
     <ion-item class="border">
       <ion-input
         class="required-asterisk"
@@ -26,8 +29,6 @@
       </ion-popover>
       <ion-icon name="calendar-outline" slot="end"></ion-icon>
     </ion-item>
-  </div>
-  <div class="form-group">
     <ion-item class="border">
       <ion-input 
         placeholder="Pick End Date"
@@ -45,7 +46,7 @@
         </ion-popover>
         <ion-icon name="calendar-outline" slot="end"></ion-icon>
     </ion-item> 
-  </div>
+    <div *ngIf="this.accountServices.USER_TYPE === 'admin'">
     <ion-item class="border">
       <ion-label>Assignee</ion-label>
       <ion-select formControlName="taskassignee">
@@ -53,6 +54,7 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+    </div>
     <ion-item class="border">
       <ion-label>Status</ion-label>
       <ion-select formControlName="status">
@@ -60,17 +62,14 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-item class="border">
-      <ion-label>Report Type</ion-label>
-      <ion-select class="required-asterisk" formControlName="reporttypecode">
-        <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">{{itm.reporttypename}}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
     <ion-footer>
       <ion-row no-padding>
          <ion-col center text-center>
             <ion-button [disabled]="addReport.invalid"  type="submit" expand="block" color="primary" (click)="onReportData()">Show Report</ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button type="submit" expand="block" color="primary" (click)="onReset()">Reset
+            </ion-button>
           </ion-col>
       </ion-row>
     </ion-footer>
