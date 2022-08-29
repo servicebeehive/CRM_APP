@@ -142,7 +142,8 @@ export class ReportPage implements OnInit {
    if(this.accountServices.USER_TYPE === 'admin') {
     reportModel.taskassignee = !this.addReport.value.taskassignee ? null : this.addReport.value.taskassignee;
    }else{
-    reportModel.taskassignee = this.addReport.value.taskassignee;
+    
+      reportModel.taskassignee = String(this.accountServices.USER_ID);
    }
    this.reportService
    .getReportData(reportModel)

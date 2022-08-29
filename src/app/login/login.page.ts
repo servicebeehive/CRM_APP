@@ -15,6 +15,7 @@ import { NotificationService } from '../services/notification/notification.servi
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  public brandUrl:string="assets/icon/logo.png"
   addloginDetail = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', Validators.required],

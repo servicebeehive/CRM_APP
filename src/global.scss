@@ -24,19 +24,20 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
-
+$greycolor:#d0d0d0;
+$redcolor:#f03838;
 ion-icon {
     font-size: 2rem;
 }
 
 .error-class {
-    --background: #ff0000;
-    --color: #070707;
+    --background: #ff4961;
+    --color: #ffffff;
 }
 
 .success-class {
-    --background: #42ba96;
-    --color: #070707;
+    --background: #2fdf75;
+    --color: #ffffff;
 }
 .d-flex{ display: flex;}
 .justifiy-between{ justify-content: space-between;}
@@ -54,7 +55,7 @@ ion-icon {
     --ion-color-tint: var(--ion-color-white-tint);
   }
   .required-asterisk::after{
-    color: red;
+    color: #f03838;
     content:"*";
     font-weight: bold;
     margin-left: 2px;
@@ -65,3 +66,41 @@ ion-icon {
     border-color: #041e37;
     --padding-start: 10px;
   }
+ .border-box{
+    border:1px solid $greycolor;
+    border-radius: 4px !important;
+    ion-icon[slot="start"]{
+      margin-right: unset;
+      margin-inline-end: 12px;
+    font-size: 1.5rem;
+  }
+ 
+  .sc-ion-textarea-md{ margin-top: 0; padding-top: 0;}
+  ion-icon[slot="start"]{
+    margin-top: 7px;
+    margin-bottom: 7px;
+  }
+  ion-input,ion-select{
+    --padding-top: 6px;
+    --padding-bottom: 6px;
+  }
+  }
+  
+ .border-box.ion-invalid.ion-touched{
+  border-color: $redcolor;
+  ion-icon[slot="start"]{
+    color:$redcolor;
+  }
+ }
+  .w-100{ width: 100%;}
+
+.item-has-focus{box-shadow: 0 0 4px #78bbff;}
+  .mt-20{ margin-top: 20px;}
+ion-item{--min-height: 40px;}
+
+.success{
+  background-color: --ion-color-success;
+}
+.ion-padding-start-no{
+  --padding-start: 0;
+}

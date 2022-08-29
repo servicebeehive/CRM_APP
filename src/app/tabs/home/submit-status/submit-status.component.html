@@ -21,30 +21,36 @@
         <p><ion-icon
           name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Current Status : <span>{{taskDetails.status}}</span></p>
 
-        <ion-item>
-          <ion-label>Status</ion-label>
-          <ion-select formControlName="status">
+       <ion-item lines="none" class="border-box mt-20">
+          <!-- <ion-label position="stacked"></ion-label> -->
+          <ion-select formControlName="status" class="w-100" placeholder="Status">
             <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
             </ion-select-option>
           </ion-select>
+          <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
+          
         </ion-item>
 
-        <ion-item>
-          <ion-label position="floating">Remark</ion-label>
-          <ion-textarea formControlName="remark"></ion-textarea>
-          <ion-icon name="bookmark-outline" slot="end"></ion-icon>
+        <ion-item lines="none" class="border-box mt-20">
+          <!-- <ion-label position="stacked"></ion-label> -->
+          <ion-textarea formControlName="remark" placeholder="Remark"></ion-textarea>
+          <ion-icon name="bookmark-outline" slot="start"></ion-icon>
         </ion-item>
 
       </ion-card-content>
-      <ion-row no-padding>
-        <ion-col center text-center>
-          <ion-button expand="block" [disabled]="addStatusDetail.invalid" (click)="onSubmitTaskStatus()" fill="outline">
+   
+   
+      <ion-footer  class="ion-no-border">
+        <ion-row >
+          <ion-col center text-center class="ion-padding-start  ion-padding-bottom">
+          <ion-button expand="block" [disabled]="addStatusDetail.invalid" (click)="onSubmitTaskStatus()" color="primary">
             Submit</ion-button>
         </ion-col>
-        <ion-col center text-center>
+        <ion-col center text-center class="ion-padding-end  ion-padding-bottom">
           <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
         </ion-col>
       </ion-row>
+     </ion-footer>
     </ion-card>
   </form>
 </ion-content>
