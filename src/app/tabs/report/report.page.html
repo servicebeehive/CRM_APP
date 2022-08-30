@@ -20,9 +20,9 @@
           <ion-input placeholder="Pick Start Date" value="{{ addReport.value.fromdate  | date: 'dd-MM-YYYY' }}"
             id="fromdate">
           </ion-input>
-          <ion-popover #ionPopover1 trigger="fromdate" size="cover" (click)="onPopoverClick()">
+          <ion-popover #ionPopover1 trigger="fromdate" size="cover">
             <ng-template>
-              <ion-datetime presentation="fromdate" formControlName="fromdate">
+              <ion-datetime presentation="fromdate" (ionChange)="onPopoverClick()" formControlName="fromdate">
               </ion-datetime>
             </ng-template>
           </ion-popover>
@@ -34,9 +34,9 @@
         <ion-item lines="none" class="border-box mt-20">
           <ion-input placeholder="Pick End Date" value="{{ addReport.value.todate  | date: 'dd-MM-YYYY' }}" id="todate">
           </ion-input>
-          <ion-popover #ionPopover2 trigger="todate" size="cover" (click)="onPopoverClick()">
+          <ion-popover #ionPopover2 trigger="todate" size="cover">
             <ng-template>
-              <ion-datetime presentation="todate" formControlName="todate">
+              <ion-datetime presentation="todate" (ionChange)="onPopoverClick()" formControlName="todate">
               </ion-datetime>
             </ng-template>
           </ion-popover>
