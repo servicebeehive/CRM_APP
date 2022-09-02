@@ -5,7 +5,8 @@
     <ion-grid>
     
         <ion-row class="ion-padding-end ion-padding-start ion-justify-content-center">
-          <ion-col size="12"><ion-img [src]="brandUrl" class="img-size  ion-margin-bottom ion-padding-end"></ion-img></ion-col>
+          <ion-col size="12"><ion-img [src]="brandUrl" class="img-size  ion-margin-bottom"></ion-img>
+          <h4 class="ion-text-center">Big Task</h4></ion-col>
          
           <ion-col size="12" class="ion-padding-top">
             <ion-item lines="none" class="border-box">
@@ -35,7 +36,21 @@
             </ion-button>
           </ion-col>
         </ion-row>
+        
     </ion-grid>
     
   </form>
+  <ion-footer class="no-shadow">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12" class="ion-text-center">
+          <ion-img [src]="companyUrl" class="img-size2  ion-margin-bottom"></ion-img>
+          <small >© Beehive Infotech</small>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+   
+    
+  </ion-footer>
 </ion-content>
