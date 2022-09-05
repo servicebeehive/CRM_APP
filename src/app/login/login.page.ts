@@ -23,8 +23,6 @@ export class LoginPage implements OnInit {
     clientcode: ['', Validators.required]
   });
 
-  isLoading = false;
-
   constructor(
     public router: Router,
     public fb: FormBuilder,
@@ -37,7 +35,6 @@ export class LoginPage implements OnInit {
   ngOnInit() {}
 
   onSignin() {
-    this.isLoading = true;
     const loginDetailData = new LoginDetail();
     loginDetailData.usercode = this.addloginDetail.value.username.trim();
     loginDetailData.pwd = this.addloginDetail.value.password;
@@ -53,10 +50,8 @@ export class LoginPage implements OnInit {
           this.accountServices.CLIENT_CODE = this.addloginDetail.value.clientcode;
           this.addloginDetail.reset();
           this.router.navigate(['tabs/home']);
-          this.isLoading = false;
         } else {
           this.notificationService.showToast<UserDetail>(result);
-          this.isLoading = false;
         }
       });
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 @Component({
   selector: 'app-loader',
   templateUrl: './loader.component.html',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoaderComponent implements OnInit {
 
-  
-  constructor() { }
+  // isLoading;
+
+  constructor(public assignmentService: AssignmentService) { 
+    // this.assignmentService.loader.subscribe( res => {
+    //   this.isLoading= res;
+    // })
+  }
 
   ngOnInit() {}
 }

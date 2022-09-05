@@ -2,6 +2,10 @@
   <app-header header="Task Details"></app-header>
 </ion-header>
 
+<div *ngIf="taskService.loader | async">
+  <app-loader></app-loader>
+</div>
+
 <ion-content>
   <form [formGroup]="addTaskDetail">
     

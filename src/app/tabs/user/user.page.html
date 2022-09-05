@@ -2,6 +2,10 @@
   <app-header header="Users Detail"></app-header>
 </ion-header>
 
+<div *ngIf="loginService.isLoading | async">
+  <app-loader></app-loader>
+</div>
+
 <ion-content>
   <!-- <ion-card>
     <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>

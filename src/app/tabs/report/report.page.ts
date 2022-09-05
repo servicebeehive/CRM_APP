@@ -8,7 +8,6 @@ import { UserDetail } from 'src/app/models/userdetail.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ReturnResult } from 'src/app/models/return-result';
-import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { ReportData } from 'src/app/models/reportdata';
 import { ReportType } from 'src/app/models/reporttype';
 import { ReportService } from 'src/app/services/report/report.service';
@@ -54,7 +53,6 @@ export class ReportPage implements OnInit {
     public datepipe: DatePipe,
     public _http: HttpClient,
     public loginService: LoginService,
-    public assignmentService: AssignmentService,
     public notificationService: NotificationService,
     public router: Router,
     public reportService: ReportService,

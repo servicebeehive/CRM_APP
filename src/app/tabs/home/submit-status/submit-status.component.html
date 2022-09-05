@@ -4,6 +4,11 @@
    <ion-icon slot="end" class="ion-padding" (click)="dismiss()" name="close-outline"></ion-icon>
    </ion-toolbar>
 </ion-header>
+
+<div *ngIf="assignmentService.loader | async">
+  <app-loader></app-loader>
+</div>
+
 <ion-content>
   <form [formGroup]="addStatusDetail">
     <ion-card class="no-shadow">
