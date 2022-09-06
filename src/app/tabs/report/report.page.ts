@@ -114,8 +114,10 @@ export class ReportPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
+          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
+          this.loginService.isLoading.next(false);
         }
       });
   }
@@ -127,8 +129,10 @@ export class ReportPage implements OnInit {
       .then((result: ReturnResult<ReportType[]>) => {
         if (result.success) {
           this.report = result.data;
+          this.reportService.loader.next(false);
         } else {
           this.notificationService.showToast<ReportType[]>(result);
+          this.reportService.loader.next(false);
         }
       });
   }
@@ -138,7 +142,6 @@ export class ReportPage implements OnInit {
     reportModel.startdate = this.addReport.value.fromdate;
     reportModel.enddate = this.addReport.value.todate;
     reportModel.status = !this.addReport.value.status ? null : this.addReport.value.status;
-    // reportModel.taskassignee = !this.addReport.value.taskassignee ? null : this.addReport.value.taskassignee;
     reportModel.reporttypecode = this.addReport.value.reporttypecode;
     if (this.accountServices.USER_TYPE === 'admin') {
       reportModel.taskassignee = !this.addReport.value.taskassignee ? null : this.addReport.value.taskassignee;
@@ -170,8 +173,10 @@ export class ReportPage implements OnInit {
         }
         else if (result.success) {
           this.reportData = result.data;
+          this.reportService.loader.next(false);
         } else {
           this.notificationService.showToast<ReportData[]>(result);
+          this.reportService.loader.next(false);
         }
       });
   }

@@ -92,8 +92,10 @@ export class SubmitStatusComponent implements OnInit {
             loaddata: true,
           });
           this.notificationService.showToast<any>(result);
+          this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<any>(result);
+          this.assignmentService.loader.next(false);
         }
       });
   }

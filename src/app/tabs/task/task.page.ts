@@ -75,8 +75,10 @@ export class TaskPage implements OnInit {
                   if (result.success) {
                     this.notificationService.showToast<string>(result);
                     this.addTaskDetail.reset();
+                    this.taskService.loader.next(false);
                   } else {
                     this.notificationService.showToast<string>(result);
+                    this.taskService.loader.next(false);
                   }
                 });
             },

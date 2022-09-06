@@ -83,10 +83,10 @@ export class HttpIntercertor implements HttpInterceptor {
             ) {
               //If tokenstatus is failed then redirect to login page.
             }
-            this.assignmentService.loader.next(false);
-            this.reportService.loader.next(false);
-            this.taskService.loader.next(false);
-            this.loginService.isLoading.next(false);
+            // this.assignmentService.loader.next(false);
+            // this.reportService.loader.next(false);
+            // this.taskService.loader.next(false);
+            // this.loginService.isLoading.next(false);
           }
         },
         (err) => {

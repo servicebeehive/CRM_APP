@@ -7,9 +7,9 @@
 </div>
 
 <ion-content>
-  <!-- <ion-card>
+  <ion-card>
     <ion-button expand="block" (click)="onClickOpenModal()" fill="outline">New User</ion-button>
-  </ion-card> -->
+  </ion-card>
   <ion-card *ngFor="let item of users;let i = index">
     <ion-card-header>
       <ion-card-title class="ion-text-start d-flex align-item-center">User # {{item.userid}}</ion-card-title>  
@@ -24,14 +24,9 @@
 
     </ion-card-content>
     <ion-footer class="no-shadow">
-      <ion-row no-padding>
-        <ion-col center text-center>
-          <ion-button expand="block" class="primary" disabled (click)="onClickOpenModal()" >Edit </ion-button>
-        </ion-col>
-        <ion-col center text-center>
-          <ion-button expand="block"   fill="outline" (click)="onClickOpenModal()">New User</ion-button>
-        </ion-col>
-      </ion-row>
+      <ion-button class="primary" fill="clear" color="dark" disabled (click)="onClickOpenModal()">
+        <ion-icon slot="icon-only" class="color-white" name="create-outline"></ion-icon>
+      </ion-button>
     </ion-footer>
   </ion-card>
 </ion-content>

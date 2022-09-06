@@ -62,8 +62,10 @@ export class UserDetailComponent implements OnInit {
             loaddata: true,
           });
           this.notificationService.showToast<UserDetail[]>(result);
+          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
+          this.loginService.isLoading.next(false);
         }
       });
   }

@@ -40,8 +40,10 @@ export class DisplayStatusComponent implements OnInit {
       .then((result: ReturnResult<TaskDetail[]>) => {
         if (result.success) {
           this.assignedTaskDetails = result.data;
+          this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
+          this.assignmentService.loader.next(false);
         }
       });
   }
