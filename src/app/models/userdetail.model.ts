@@ -12,6 +12,7 @@ export class UserDetail {
   email: string;
   enabled: string;
   clientcode: string;
+  photo: string;
   constructor() {
     this.userid = 0;
     this.username = '';
@@ -26,5 +27,6 @@ export class UserDetail {
     this.email ='';
     this.enabled = '';
     this.clientcode = '';
+    this.photo = '';
   }
 }

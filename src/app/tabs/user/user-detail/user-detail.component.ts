@@ -23,6 +23,7 @@ export class UserDetailComponent implements OnInit {
     phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
     emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true],
+    photo: ['']
   });
 
   constructor(
@@ -33,6 +34,8 @@ export class UserDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
+  msg="";
+  public url; 
 
   public dismiss(): void {
     this.modalController.dismiss({
@@ -52,6 +55,8 @@ export class UserDetailComponent implements OnInit {
     userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
     userDetail.email = this.addUserDetail.value.emailid;
     userDetail.phone = this.addUserDetail.value.phoneno;
+    userDetail.photo = this.addUserDetail.value.photo;
+    this.addUserDetail.value.photo = this.url;
     userDetail.operationtype = 'INSERT';
     this.loginService
       .getUsers(userDetail)
@@ -68,5 +73,26 @@ export class UserDetailComponent implements OnInit {
           this.loginService.isLoading.next(false);
         }
       });
+  }
+
+  selectFile(event: any) {
+		if(!event.target.files[0] || event.target.files[0].length == 0) {
+			this.msg = 'You must select an image';
+			return;
+		}
+    const mimeType = event.target.files[0].type;
+		
+		if (mimeType.match(/image\/*/) == null) {
+			this.msg = "Only images are supported";
+			return;
+		}
+		
+		const reader = new FileReader();
+		reader.readAsDataURL(event.target.files[0]);
+		
+		reader.onload = (_event) => {
+			this.msg = "";
+			this.url = reader.result; 
+		}
   }
 }

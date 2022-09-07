@@ -15,13 +15,18 @@
       <ion-card-title class="ion-text-start d-flex align-item-center">User # {{item.userid}}</ion-card-title>  
     </ion-card-header>
     <ion-card-content>
-    
+    <ion-row>
+      <ion-col>
       <p><ion-icon name="person-outline"></ion-icon> Name : <span>{{item.fullname}}</span></p>
       <p><ion-icon name="person-outline"></ion-icon> User Name : <span>{{item.username}}</span></p>
       <p><ion-icon name="ellipse" color="success"></ion-icon> Enable : <span>{{item.enabled}}</span></p>
       <p><ion-icon name="call-outline"></ion-icon>Phone : <span>{{item.phone}}</span></p>
       <p><ion-icon name="mail-outline"></ion-icon> Email : <span>{{item.email}}</span></p>
-
+      </ion-col>
+      <ion-col>
+        <img class="rounded-circle" src={{item.photo}}>
+      </ion-col>
+    </ion-row>    
     </ion-card-content>
     <ion-footer class="no-shadow">
       <ion-button class="primary" fill="clear" color="dark" disabled (click)="onClickOpenModal()">
