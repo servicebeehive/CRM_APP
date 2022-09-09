@@ -59,4 +59,17 @@ export class UserPage implements OnInit {
         }
       });
   }
+
+  public async onClickEditModal() {
+    const model = await this.modalController.create({
+      component: UserDetailComponent,
+    });
+    model.onDidDismiss().then((res) => {
+      if (res.data.loaddata) {
+        this.getUsers();
+      }
+    });
+    await model.present();
+  }
+
 }

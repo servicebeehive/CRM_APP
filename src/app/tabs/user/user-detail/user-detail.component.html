@@ -11,7 +11,8 @@
 
 <ion-content>
   <form [formGroup]="addUserDetail">
-    <ion-card class="no-shadow">
+  <div formArrayName="updateUser">
+    <ion-card class="no-shadow" *ngFor="let item of formControl.controls; let i = index">
       <ion-card-content>
         <ion-item lines="none" class="border-box mt-20">
           <ion-input formControlName="firstName" placeholder="First Name" ></ion-input>
@@ -60,7 +61,11 @@
 
       </ion-card-content>
       <ion-footer  class="ion-no-border">
-        <ion-row >
+        <ion-row>
+          <ion-col center text-center class="ion-padding-start  ion-padding-bottom" [hidden]="isDisplayed">
+            <ion-button expand="block" color="primary" (click)="onUserUpdate(item.value.index)">Update
+            </ion-button> 
+          </ion-col>
           <ion-col center text-center class="ion-padding-start  ion-padding-bottom">
             <ion-button expand="block" color="primary" [disabled]="addUserDetail.invalid" (click)="onSubmitUser()">Submit
             </ion-button>
@@ -71,5 +76,6 @@
         </ion-row>
       </ion-footer>
     </ion-card>
+  </div>
   </form>
 </ion-content>
