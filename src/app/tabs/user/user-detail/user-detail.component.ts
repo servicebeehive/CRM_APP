@@ -5,6 +5,7 @@ import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { AccountService } from 'src/app/services/account/account.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -14,6 +15,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 export class UserDetailComponent implements OnInit {
 
   public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
+  public isEdit;
 
   addUserDetail = this.fb.group({
     firstName: ['', Validators.required],
@@ -22,20 +24,20 @@ export class UserDetailComponent implements OnInit {
     password: ['', Validators.required],
     phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
     emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
-    enable: [true],
-    photo: [''],
-    updateUser: this.fb.array([])
-
+    enable: [true]
+  //  photo: ['']
   });
 
   constructor(
     public modalController: ModalController,
     public fb: FormBuilder,
     public notificationService: NotificationService,
-    public loginService: LoginService
+    public loginService: LoginService,
+    public accountServices: AccountService
   ) {}
 
   ngOnInit() {}
+
   msg="";
   public url; 
 
@@ -44,10 +46,6 @@ export class UserDetailComponent implements OnInit {
       dismissed: true,
       loaddata: false,
     });
-  }
-
-  get formControl() {
-    return this.addUserDetail.get('updateUser') as FormArray;
   }
 
   public onSubmitUser(): void {
@@ -61,9 +59,23 @@ export class UserDetailComponent implements OnInit {
     userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
     userDetail.email = this.addUserDetail.value.emailid;
     userDetail.phone = this.addUserDetail.value.phoneno;
-    userDetail.photo = this.addUserDetail.value.photo;
-    this.addUserDetail.value.photo = this.url;
-    userDetail.operationtype = 'INSERT';
+   // userDetail.photo = this.addUserDetail.value.photo;
+   // this.addUserDetail.value.photo = this.url;
+    userDetail.operationtype = this.isEdit === false ? 'INSERT' : 'UPDATE';
+    if (userDetail.operationtype = this.isEdit.value.true){
+      this.addUserDetail.controls.firstName.setValue(this.addUserDetail.value.firstName);
+      this.addUserDetail.controls.lastName.setValue(this.addUserDetail.value.lastName);
+      this.addUserDetail.controls.userName.setValue(this.addUserDetail.value.userName);
+      this.addUserDetail.controls.password.setValue(this.addUserDetail.value.password);
+      this.addUserDetail.controls.phoneno.setValue(this.addUserDetail.value.phoneno);
+      this.addUserDetail.controls.emailid.setValue(this.addUserDetail.value.emailid);
+      this.addUserDetail.controls.enable.setValue(this.addUserDetail.value.enable);
+    }
+    if(this.accountServices.USER_ID = 10){
+      userDetail.operationtype = 'INSERT';
+      this.addUserDetail.value.emailid = 'jgpt0510@gmail.com';
+      console.log(this.addUserDetail.value);
+    }
     this.loginService
       .getUsers(userDetail)
       .then((result: ReturnResult<UserDetail[]>) => {
@@ -81,61 +93,24 @@ export class UserDetailComponent implements OnInit {
       });
   }
 
-  selectFile(event: any) {
-		if(!event.target.files[0] || event.target.files[0].length == 0) {
-			this.msg = 'You must select an image';
-			return;
-		}
-    const mimeType = event.target.files[0].type;
+  // selectFile(event: any) {
+	// 	if(!event.target.files[0] || event.target.files[0].length == 0) {
+	// 		this.msg = 'You must select an image';
+	// 		return;
+	// 	}
+  //   const mimeType = event.target.files[0].type;
 		
-		if (mimeType.match(/image\/*/) == null) {
-			this.msg = "Only images are supported";
-			return;
-		}
+	// 	if (mimeType.match(/image\/*/) == null) {
+	// 		this.msg = "Only images are supported";
+	// 		return;
+	// 	}
 		
-		const reader = new FileReader();
-		reader.readAsDataURL(event.target.files[0]);
+	// 	const reader = new FileReader();
+	// 	reader.readAsDataURL(event.target.files[0]);
 		
-		reader.onload = (_event) => {
-			this.msg = "";
-			this.url = reader.result; 
-		}
-  }
-
-  public onUserUpdate(index){
-    const userDetail = new UserDetail();
-    userDetail.operationtype = 'UPDATE';  
-    userDetail.userid = (this.formControl.at(index).value as UserDetail).userid;
-    // userDetail.fullname = (this.formControl.at(index).value as UserDetail).fullname;
-    // userDetail.username = (this.formControl.at(index).value as UserDetail).username;
-    // userDetail.pwd = (this.formControl.at(index).value as UserDetail).pwd;
-    // userDetail.active = (this.formControl.at(index).value as UserDetail).active;
-    // userDetail.email = (this.formControl.at(index).value as UserDetail).email;
-    // userDetail.phone = (this.formControl.at(index).value as UserDetail).phone;
-    // userDetail.photo = (this.formControl.at(index).value as UserDetail).photo;
-    userDetail.fullname = this.formControl.at(index).get('firstName' + 'lastName').value;
-    userDetail.username = this.formControl.at(index).get('userName').value;
-    userDetail.pwd = this.formControl.at(index).get('password').value;
-    userDetail.active = this.formControl.at(index).get('enable').value;
-    userDetail.email = this.formControl.at(index).get('emailid').value;
-    userDetail.phone = this.formControl.at(index).get('phoneno').value;
-    this.loginService
-      .getUsers(userDetail)
-      .then((result: ReturnResult<UserDetail[]>) => {
-        if (result.success) {
-          this.modalController.dismiss({
-            dismissed: true,
-            loaddata: true,
-          });
-          this.notificationService.showToast<any>(result);
-        } else {
-          this.notificationService.showToast<any>(result);
-        }
-      });
-  }
-
-  isDisplayed = false;
-  show(){
-    this.isDisplayed = !this.isDisplayed;
-  }
+	// 	reader.onload = (_event) => {
+	// 		this.msg = "";
+	// 		this.url = reader.result; 
+	// 	}
+  // }
 }
