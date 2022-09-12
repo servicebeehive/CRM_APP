@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { Controllers } from 'src/app/models/controllers';
 import { IConfig } from 'src/app/models/iconfig';
 import { LoginDetail } from 'src/app/models/logindetail.model';
@@ -38,4 +39,6 @@ export class LoginService extends BaseService {
       userDetailData
     );
   }
+
+public isLoading: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

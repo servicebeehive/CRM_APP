@@ -2,6 +2,14 @@
   <app-header header="Assignment"></app-header>
 </ion-header>
 
+<div *ngIf="assignmentService.loader | async">
+  <app-loader></app-loader>
+</div> 
+
+<div *ngIf="loginService.isLoading | async">
+  <app-loader></app-loader>
+</div>  
+
 <ion-content>
   <form [formGroup]="assignmentForm">
     <div formArrayName="assignTaskForm">

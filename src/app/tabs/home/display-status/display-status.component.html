@@ -5,6 +5,10 @@
     
   </ion-toolbar>
 </ion-header>
+ 
+<div *ngIf="assignmentService.loader | async">
+  <app-loader></app-loader>
+</div>
 
 <ion-content>
   <!-- <h4>Task # {{taskDetails.taskid}}</h4> -->

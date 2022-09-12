@@ -9,6 +9,7 @@ import { TaskDetail } from 'src/app/tabs/task/task.page';
 import { environment } from 'src/environments/environment';
 import { BaseService } from '../base/base.service';
 import { ConfigService } from '../config/config.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -30,4 +31,6 @@ export class TaskService extends BaseService {
       taskDetailData
     );
   }
+
+  public loader: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

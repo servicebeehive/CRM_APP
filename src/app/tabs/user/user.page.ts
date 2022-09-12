@@ -52,9 +52,24 @@ export class UserPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
+          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
+          this.loginService.isLoading.next(false);
         }
       });
   }
+
+  public async onClickEditModal() {
+    const model = await this.modalController.create({
+      component: UserDetailComponent,
+    });
+    model.onDidDismiss().then((res) => {
+      if (res.data.loaddata) {
+        this.getUsers();
+      }
+    });
+    await model.present();
+  }
+
 }

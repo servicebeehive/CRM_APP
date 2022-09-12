@@ -2,6 +2,14 @@
   <app-header header="Report"></app-header>
 </ion-header>
 
+<div *ngIf="reportService.loader | async">
+  <app-loader></app-loader>
+</div>
+
+<div *ngIf="loginService.isLoading | async">
+  <app-loader></app-loader>
+</div>
+
 <ion-content>
   <ion-card-content>
     <form [formGroup]="addReport">

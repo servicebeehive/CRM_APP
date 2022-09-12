@@ -90,8 +90,10 @@ export class AssignmentPage {
               })
             );
           });
+          this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
+          this.assignmentService.loader.next(false);
         }
       });
   }
@@ -104,8 +106,10 @@ export class AssignmentPage {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
+          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
+          this.loginService.isLoading.next(false);
         }
       });
   }
@@ -130,8 +134,10 @@ export class AssignmentPage {
         if (result.success) {
           this.getTaskDetails();
           this.notificationService.showToast<any>(result);
+          this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<any>(result);
+          this.assignmentService.loader.next(false);
         }
       });
   }

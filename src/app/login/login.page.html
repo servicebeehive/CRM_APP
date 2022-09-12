@@ -1,5 +1,7 @@
 <ion-content>
- 
+  <div *ngIf="loginService.isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <form [formGroup]="addloginDetail" (ngSubmit)="onSignin()">
 
     <ion-grid>

@@ -50,8 +50,10 @@ export class LoginPage implements OnInit {
           this.accountServices.CLIENT_CODE = this.addloginDetail.value.clientcode;
           this.addloginDetail.reset();
           this.router.navigate(['tabs/home']);
+          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail>(result);
+          this.loginService.isLoading.next(false);
         }
       });
   }

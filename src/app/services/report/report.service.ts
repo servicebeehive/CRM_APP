@@ -7,6 +7,7 @@ import { IConfig } from 'src/app/models/iconfig';
 import { ReportData } from 'src/app/models/reportdata';
 import { ReturnResult } from 'src/app/models/return-result';
 import { ReportType } from 'src/app/models/reporttype';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -38,4 +39,6 @@ export class ReportService extends BaseService {
       reportTypeData
     );
   }
+
+  public loader: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }
