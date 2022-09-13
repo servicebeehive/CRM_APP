@@ -24,17 +24,25 @@ export class UserPage implements OnInit {
     public notificationService: NotificationService,
     public accountService: AccountService,
     public router: Router
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public async ionViewDidEnter() {
     await this.getUsers();
   }
 
-  public async onClickOpenModal() {
+  public async onClickOpenModal(isEdit: boolean, item?: UserDetail) {
+    let paramData: UserDetail;
+    if (isEdit) {
+      paramData = item;
+    }
+    else {
+      paramData = null;
+    }
     const model = await this.modalController.create({
       component: UserDetailComponent,
+      componentProps: { userDetail: paramData }
     });
     model.onDidDismiss().then((res) => {
       if (res.data.loaddata) {

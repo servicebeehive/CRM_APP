@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { LoginService } from 'src/app/services/login/login.service';
@@ -15,7 +15,8 @@ import { AccountService } from 'src/app/services/account/account.service';
 export class UserDetailComponent implements OnInit {
 
   public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
-  public isEdit;
+
+  public userDetail = this.navParams.get('userDetail');
 
   addUserDetail = this.fb.group({
     firstName: ['', Validators.required],
@@ -25,7 +26,7 @@ export class UserDetailComponent implements OnInit {
     phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
     emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true]
-  //  photo: ['']
+    //  photo: ['']
   });
 
   constructor(
@@ -33,13 +34,24 @@ export class UserDetailComponent implements OnInit {
     public fb: FormBuilder,
     public notificationService: NotificationService,
     public loginService: LoginService,
-    public accountServices: AccountService
-  ) {}
+    public accountServices: AccountService,
+    public navParams: NavParams,
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.userDetail) {
+      this.addUserDetail.controls.firstName.setValue(this.userDetail);
+      this.addUserDetail.controls.lastName.setValue(this.addUserDetail.value.lastName);
+      this.addUserDetail.controls.userName.setValue(this.addUserDetail.value.userName);
+      this.addUserDetail.controls.password.setValue(this.addUserDetail.value.password);
+      this.addUserDetail.controls.phoneno.setValue(this.addUserDetail.value.phoneno);
+      this.addUserDetail.controls.emailid.setValue(this.userDetail.email);
+      this.addUserDetail.controls.enable.setValue(this.addUserDetail.value.enable);
+    }
+  }
 
-  msg="";
-  public url; 
+  msg = "";
+  public url;
 
   public dismiss(): void {
     this.modalController.dismiss({
@@ -59,23 +71,9 @@ export class UserDetailComponent implements OnInit {
     userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
     userDetail.email = this.addUserDetail.value.emailid;
     userDetail.phone = this.addUserDetail.value.phoneno;
-   // userDetail.photo = this.addUserDetail.value.photo;
-   // this.addUserDetail.value.photo = this.url;
-    userDetail.operationtype = this.isEdit === false ? 'INSERT' : 'UPDATE';
-    if (userDetail.operationtype = this.isEdit.value.true){
-      this.addUserDetail.controls.firstName.setValue(this.addUserDetail.value.firstName);
-      this.addUserDetail.controls.lastName.setValue(this.addUserDetail.value.lastName);
-      this.addUserDetail.controls.userName.setValue(this.addUserDetail.value.userName);
-      this.addUserDetail.controls.password.setValue(this.addUserDetail.value.password);
-      this.addUserDetail.controls.phoneno.setValue(this.addUserDetail.value.phoneno);
-      this.addUserDetail.controls.emailid.setValue(this.addUserDetail.value.emailid);
-      this.addUserDetail.controls.enable.setValue(this.addUserDetail.value.enable);
-    }
-    if(this.accountServices.USER_ID = 10){
-      userDetail.operationtype = 'INSERT';
-      this.addUserDetail.value.emailid = 'jgpt0510@gmail.com';
-      console.log(this.addUserDetail.value);
-    }
+    // userDetail.photo = this.addUserDetail.value.photo;
+    // this.addUserDetail.value.photo = this.url;
+    userDetail.operationtype = this.userDetail ? 'INSERT' : 'UPDATE';
     this.loginService
       .getUsers(userDetail)
       .then((result: ReturnResult<UserDetail[]>) => {
@@ -92,25 +90,4 @@ export class UserDetailComponent implements OnInit {
         }
       });
   }
-
-  // selectFile(event: any) {
-	// 	if(!event.target.files[0] || event.target.files[0].length == 0) {
-	// 		this.msg = 'You must select an image';
-	// 		return;
-	// 	}
-  //   const mimeType = event.target.files[0].type;
-		
-	// 	if (mimeType.match(/image\/*/) == null) {
-	// 		this.msg = "Only images are supported";
-	// 		return;
-	// 	}
-		
-	// 	const reader = new FileReader();
-	// 	reader.readAsDataURL(event.target.files[0]);
-		
-	// 	reader.onload = (_event) => {
-	// 		this.msg = "";
-	// 		this.url = reader.result; 
-	// 	}
-  // }
 }
