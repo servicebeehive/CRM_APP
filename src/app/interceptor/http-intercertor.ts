@@ -49,7 +49,7 @@ export class HttpIntercertor implements HttpInterceptor {
             this.loginService.isLoading.next(false);
           }
         )
-      )
+      );
     } else {
       const reqData = JSON.parse(data);
       const tokendata = {
@@ -98,5 +98,5 @@ export class HttpIntercertor implements HttpInterceptor {
       )
     );
   }
-  }
+}
   

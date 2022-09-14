@@ -6,14 +6,6 @@ import { AssignmentService } from 'src/app/services/assignment/assignment.servic
   styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent implements OnInit {
-
-  // isLoading;
-
-  constructor(public assignmentService: AssignmentService) { 
-    // this.assignmentService.loader.subscribe( res => {
-    //   this.isLoading= res;
-    // })
-  }
-
+  constructor(public assignmentService: AssignmentService) {}
   ngOnInit() {}
 }
