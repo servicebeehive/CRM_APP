@@ -6,8 +6,7 @@ import { UserDetail } from 'src/app/models/userdetail.model';
 import { AccountService } from 'src/app/services/account/account.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import { UserDetailComponent } from './user-detail/user-detail.component';
-
+import { UserDetailPage } from 'src/app/tabs/user/user-detail/user-detail.page';
 @Component({
   selector: 'app-user',
   templateUrl: './user.page.html',
@@ -41,7 +40,7 @@ export class UserPage implements OnInit {
       paramData = null;
     }
     const model = await this.modalController.create({
-      component: UserDetailComponent,
+      component: UserDetailPage,
       componentProps: { userDetail: paramData }
     });
     model.onDidDismiss().then((res) => {

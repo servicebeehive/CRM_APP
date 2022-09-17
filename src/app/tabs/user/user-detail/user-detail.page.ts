@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
@@ -9,10 +9,10 @@ import { AccountService } from 'src/app/services/account/account.service';
 
 @Component({
   selector: 'app-user-detail',
-  templateUrl: './user-detail.component.html',
-  styleUrls: ['./user-detail.component.scss'],
+  templateUrl: './user-detail.page.html',
+  styleUrls: ['./user-detail.page.scss'],
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailPage {
 
   public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
 
@@ -26,7 +26,6 @@ export class UserDetailComponent implements OnInit {
     phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
     emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true]
-    //  photo: ['']
   });
 
   constructor(
@@ -38,20 +37,17 @@ export class UserDetailComponent implements OnInit {
     public navParams: NavParams,
   ) { }
 
-  ngOnInit() {
+  public async ionViewDidEnter() {
     if (this.userDetail) {
-      this.addUserDetail.controls.firstName.setValue(this.userDetail);
-      this.addUserDetail.controls.lastName.setValue(this.addUserDetail.value.lastName);
-      this.addUserDetail.controls.userName.setValue(this.addUserDetail.value.userName);
-      this.addUserDetail.controls.password.setValue(this.addUserDetail.value.password);
-      this.addUserDetail.controls.phoneno.setValue(this.addUserDetail.value.phoneno);
+      this.addUserDetail.controls.firstName.setValue(this.userDetail.fullname.split(" ",1));
+      this.addUserDetail.controls.lastName.setValue(this.userDetail.fullname.trim().split(" ").slice(-1));
+      this.addUserDetail.controls.userName.setValue(this.userDetail.username);
+      this.addUserDetail.controls.password.setValue(this.userDetail.pwd);
+      this.addUserDetail.controls.phoneno.setValue(this.userDetail.phone);
       this.addUserDetail.controls.emailid.setValue(this.userDetail.email);
-      this.addUserDetail.controls.enable.setValue(this.addUserDetail.value.enable);
+      this.addUserDetail.controls.enable.setValue(this.userDetail.active);
     }
   }
-
-  msg = "";
-  public url;
 
   public dismiss(): void {
     this.modalController.dismiss({
@@ -71,8 +67,6 @@ export class UserDetailComponent implements OnInit {
     userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
     userDetail.email = this.addUserDetail.value.emailid;
     userDetail.phone = this.addUserDetail.value.phoneno;
-    // userDetail.photo = this.addUserDetail.value.photo;
-    // this.addUserDetail.value.photo = this.url;
     userDetail.operationtype = this.userDetail ? 'INSERT' : 'UPDATE';
     this.loginService
       .getUsers(userDetail)
@@ -90,4 +84,5 @@ export class UserDetailComponent implements OnInit {
         }
       });
   }
+
 }
