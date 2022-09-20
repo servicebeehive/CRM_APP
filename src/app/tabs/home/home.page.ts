@@ -69,8 +69,7 @@ export class HomePage implements OnInit {
         if (result.success) {
           this.assignedTaskDetails = result.data;
           this.assignmentService.loader.next(false);
-        
-        } else {
+        } else{
           this.notificationService.showToast<TaskDetail[]>(result);
           this.assignmentService.loader.next(false);
         }

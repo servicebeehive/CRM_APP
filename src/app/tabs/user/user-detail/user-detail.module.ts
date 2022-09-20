@@ -17,6 +17,6 @@ import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
     ReactiveFormsModule,
     SharedmoduleModule
   ],
-  declarations: [UserDetailPage]
+//  declarations: [UserDetailPage]
 })
 export class UserDetailPageModule {}

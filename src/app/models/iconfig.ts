@@ -1,3 +1,3 @@
 export interface IConfig {
-  APIUrl: string;
+  apiUrl: string;
 }

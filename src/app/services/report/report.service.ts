@@ -13,13 +13,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class ReportService extends BaseService {
-
+  public loader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(
     public httpClient: HttpClient,
     public controllers: Controllers,
     public config: ConfigService<IConfig>
-  ) { 
-    super(httpClient, config.getSettingsObject().APIUrl);
+  ){
+    super(httpClient, config.getSettingsObject().apiUrl);
   }
 
   public async getReportData(
@@ -39,6 +39,4 @@ export class ReportService extends BaseService {
       reportTypeData
     );
   }
-
-  public loader: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

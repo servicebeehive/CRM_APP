@@ -14,12 +14,13 @@ import { ConfigService } from '../config/config.service';
   providedIn: 'root',
 })
 export class LoginService extends BaseService {
+  public isLoading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(
     public httpClient: HttpClient,
     public controllers: Controllers,
     public config: ConfigService<IConfig>
   ) {
-    super(httpClient, config.getSettingsObject().APIUrl);
+    super(httpClient, config.getSettingsObject().apiUrl);
   }
 
   public async getUserDetails(
@@ -39,6 +40,4 @@ export class LoginService extends BaseService {
       userDetailData
     );
   }
-
-public isLoading: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

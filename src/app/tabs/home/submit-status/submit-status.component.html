@@ -14,7 +14,7 @@
     <ion-card class="no-shadow">
       <ion-card-header class="d-flex justifiy-between  align-item-start">
         <ion-card-title class="ion-text-start d-flex align-item-center"><ion-icon
-           name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Task # {{taskDetails.taskid}} </ion-card-title>
+           name="ellipse"  [color]="taskDetails.status==='in progress'?'warning':taskDetails.status==='open'?'light':taskDetails.status==='resolved'?'success':taskDetails.status==='customer pending'?'medium':'secondary'"></ion-icon> Task # {{taskDetails.taskid}} </ion-card-title>
       
         </ion-card-header>
     
@@ -24,10 +24,9 @@
         <p><ion-icon name="location-outline"> </ion-icon>Location : <span>{{taskDetails.location}}</span></p>
         <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{taskDetails.fullname}}</span></p>
         <p><ion-icon
-          name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Current Status : <span>{{taskDetails.status}}</span></p>
+          name="ellipse"  [color]="taskDetails.status==='in progress'?'warning':taskDetails.status==='open'?'light':taskDetails.status==='resolved'?'success':taskDetails.status==='customer pending'?'medium':'secondary'"></ion-icon> Current Status : <span>{{taskDetails.status}}</span></p>
 
        <ion-item lines="none" class="border-box mt-20">
-          <!-- <ion-label position="stacked"></ion-label> -->
           <ion-select formControlName="status" class="w-100" placeholder="Status">
             <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
             </ion-select-option>
@@ -37,7 +36,6 @@
         </ion-item>
 
         <ion-item lines="none" class="border-box mt-20">
-          <!-- <ion-label position="stacked"></ion-label> -->
           <ion-textarea formControlName="remark" placeholder="Remark"></ion-textarea>
           <ion-icon name="bookmark-outline" slot="start"></ion-icon>
         </ion-item>

@@ -8,7 +8,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpIntercertor } from './interceptor/http-intercertor';
+import { HttpIntercertor } from './common/interceptor/http-intercertor';
 import { Controllers } from './models/controllers';
 import { ConfigInit } from './services/config/config.init';
 import { ConfigService } from './services/config/config.service';

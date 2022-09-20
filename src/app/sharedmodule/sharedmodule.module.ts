@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HeaderComponent } from 'src/app/header/header.component';
+import { HeaderComponent } from 'src/app/common/header/header.component';
 import { IonicModule } from '@ionic/angular';
-import { LoaderComponent } from 'src/app/loader/loader.component';
+import { LoaderComponent } from 'src/app/common/loader/loader.component';
 
 
 @NgModule({

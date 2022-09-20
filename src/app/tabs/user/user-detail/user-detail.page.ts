@@ -23,7 +23,7 @@ export class UserDetailPage {
     lastName: ['', Validators.required],
     userName: ['', Validators.required],
     password: ['', Validators.required],
-    phoneno: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), Validators.minLength(10)]],
+    phoneno: ['', [Validators.required, Validators.pattern('^((\\+91-?)|0)?[0-9]{10}$'), Validators.minLength(10)]],
     emailid: ['', [Validators.required, Validators.pattern(this.emailpattern)]],
     enable: [true]
   });
@@ -39,8 +39,8 @@ export class UserDetailPage {
 
   public async ionViewDidEnter() {
     if (this.userDetail) {
-      this.addUserDetail.controls.firstName.setValue(this.userDetail.fullname.split(" ",1));
-      this.addUserDetail.controls.lastName.setValue(this.userDetail.fullname.trim().split(" ").slice(-1));
+      this.addUserDetail.controls.firstName.setValue(this.userDetail.fullname.split(' ',1));
+      this.addUserDetail.controls.lastName.setValue(this.userDetail.fullname.trim().split(' ').slice(-1));
       this.addUserDetail.controls.userName.setValue(this.userDetail.username);
       this.addUserDetail.controls.password.setValue(this.userDetail.pwd);
       this.addUserDetail.controls.phoneno.setValue(this.userDetail.phone);

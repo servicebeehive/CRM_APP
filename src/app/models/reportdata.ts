@@ -1,15 +1,15 @@
 export class ReportData {
  userid: number;
- startdate : Date;
- enddate : Date;
- status : string;
- taskassignee : string;
- reporttypecode : string;
- taskid : number;
- taskdate : Date;
- customername : string;
- location : string;
- phone : number;
+ startdate: Date;
+ enddate: Date;
+ status: string;
+ taskassignee: string;
+ reporttypecode: string;
+ taskid: number;
+ taskdate: Date;
+ customername: string;
+ location: string;
+ phone: number;
  constructor() {
      this.userid = 0;
      this.startdate = new Date('');
@@ -22,5 +22,5 @@ export class ReportData {
      this.customername = '';
      this.location = '';
      this.phone = 0;
-    }  
+ }
 }

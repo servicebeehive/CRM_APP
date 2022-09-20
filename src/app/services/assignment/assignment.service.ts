@@ -17,12 +17,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class AssignmentService extends BaseService {
+  public loader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(
     public httpClient: HttpClient,
     public controllers: Controllers,
     public config: ConfigService<IConfig>
   ) {
-    super(httpClient, config.getSettingsObject().APIUrl);
+    super(httpClient, config.getSettingsObject().apiUrl);
   }
 
   public async getTaskDetails(
@@ -42,6 +43,4 @@ export class AssignmentService extends BaseService {
       taskAssignmnetModelData
     );
   }
-
-  public loader: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

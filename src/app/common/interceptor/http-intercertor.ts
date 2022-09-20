@@ -13,7 +13,7 @@ import {
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account/account.service';
-import { LoginService } from '../services/login/login.service';
+import { LoginService } from 'src/app/services/login/login.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { ReportService } from 'src/app/services/report/report.service';
 import { TaskService } from 'src/app/services/task/task.service';
@@ -99,4 +99,3 @@ export class HttpIntercertor implements HttpInterceptor {
     );
   }
 }
-  

@@ -48,6 +48,14 @@ export class ReportPage implements OnInit {
   public reportData: ReportData[] = [];
   status: Status[] = [];
 
+  addReport = new FormGroup({
+    fromdate: new FormControl('', Validators.required),
+    todate: new FormControl('', Validators.required),
+    status: new FormControl(''),
+    taskassignee: new FormControl(''),
+    reporttypecode: new FormControl('', Validators.required)
+  });
+
   constructor(
     public accountServices: AccountService,
     public datepipe: DatePipe,
@@ -57,23 +65,13 @@ export class ReportPage implements OnInit {
     public router: Router,
     public reportService: ReportService,
     public alertCtrl: AlertController
-  ) { }
-
-  addReport = new FormGroup({
-    fromdate: new FormControl('', Validators.required),
-    todate: new FormControl('', Validators.required),
-    status: new FormControl(''),
-    taskassignee: new FormControl(''),
-    reporttypecode: new FormControl('', Validators.required)
-  });
-
+  ){}
   get fromdate() {
     return this.addReport.get('fromdate');
   }
   get todate() {
     return this.addReport.get('todate');
   }
-
   ngOnInit() {
     this.status = [
       {

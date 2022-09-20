@@ -15,12 +15,13 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class TaskService extends BaseService {
+  public loader: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(
     public httpClient: HttpClient,
     public controllers: Controllers,
     public config: ConfigService<IConfig>
   ) {
-    super(httpClient, config.getSettingsObject().APIUrl);
+    super(httpClient, config.getSettingsObject().apiUrl);
   }
 
   public async postTaskDetail(
@@ -31,6 +32,4 @@ export class TaskService extends BaseService {
       taskDetailData
     );
   }
-
-  public loader: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

@@ -10,6 +10,8 @@ export const environment = {
   gettaskdetails: 'api/v1/gettaskdetails',
   updatetaskdetails: 'api/v1/updatetaskdetails',
   getuserdetails: 'api/v1/getuserdetails',
+  getreporttype: `/api/v1/getreporttype`,
+  getreportdata: `/api/v1/getreportdata`,
 };
 
 /*
