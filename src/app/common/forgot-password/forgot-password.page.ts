@@ -3,6 +3,11 @@ import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CustomValidators } from 'src/app/sharedmodule/cofirm-password.validator';
+import { UserDetail } from 'src/app/models/userdetail.model';
+import { LoginService } from 'src/app/services/login/login.service';
+import { ReturnResult } from 'src/app/models/return-result';
+import { NotificationService } from 'src/app/services/notification/notification.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-forgot-password',
@@ -21,10 +26,15 @@ export class ForgotPasswordPage implements OnInit {
   }
   );
 
+  public users: UserDetail[] = [];
+
   constructor(
     public accountServices: AccountService,
     public router: Router,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    public loginService: LoginService,
+    public modalController: ModalController,
+    public notificationService: NotificationService
   ) { }
 
   isDisplayed = false;
@@ -33,9 +43,27 @@ export class ForgotPasswordPage implements OnInit {
   }
 
   public async onSubmit(){
-   if (this.accountServices.USER_NAME = this.forgotpwd.value.username){
+    const userDetail = new UserDetail();
+    userDetail.userid = this.accountServices.USER_ID;
+    userDetail.username = this.forgotpwd.value.username;
+    userDetail.pwd = this.forgotpwd.value.password;
+    userDetail.operationtype = 'INSERT';
+    if (this.accountServices.USER_NAME = userDetail.username){
       this.isDisplayed = true;
-   }
+    }
+    this.loginService
+    .getUsers(userDetail)
+    .then((result: ReturnResult<any>) => {
+      if (result.success) {
+        this.modalController.dismiss({
+          dismissed: true,
+          loaddata: true,
+        });
+        this.notificationService.showToast<any>(result);
+      } else {
+        this.notificationService.showToast<any>(result);
+      }
+    });
   }
 
   public cancel(): void {
