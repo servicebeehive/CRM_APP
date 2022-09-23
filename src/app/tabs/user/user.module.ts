@@ -10,6 +10,7 @@ import { UserPage } from './user.page';
 import { SharedmoduleModule } from 'src/app/sharedmodule/sharedmodule.module';
 import { IntegerInputDirectiveModule } from 'src/app/directives/integer-input/integer-input-directive.module';
 import { HttpClientModule } from '@angular/common/http';
+import { UserDetailPage } from './user-detail/user-detail.page';
 
 @NgModule({
   imports: [
@@ -22,6 +23,6 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     SharedmoduleModule
   ],
-  declarations: [UserPage]
+  declarations: [UserPage, UserDetailPage]
 })
-export class UserPageModule {}
+export class UserPageModule { }

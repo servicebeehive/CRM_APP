@@ -1,39 +1,54 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>  Submit status of Task {{taskDetails.taskid}}</ion-title>
-   <ion-icon slot="end" class="ion-padding" (click)="dismiss()" name="close-outline"></ion-icon>
-   </ion-toolbar>
+    <ion-title> Submit status of Task {{taskDetails.taskid}}</ion-title>
+    <ion-icon slot="end" class="ion-padding" (click)="dismiss()" name="close-outline"></ion-icon>
+  </ion-toolbar>
 </ion-header>
 
-<div *ngIf="assignmentService.loader | async">
+<!-- <div *ngIf="assignmentService.loader | async">
   <app-loader></app-loader>
-</div>
+</div> -->
 
 <ion-content>
   <form [formGroup]="addStatusDetail">
     <ion-card class="no-shadow">
       <ion-card-header class="d-flex justifiy-between  align-item-start">
-        <ion-card-title class="ion-text-start d-flex align-item-center"><ion-icon
-           name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Task # {{taskDetails.taskid}} </ion-card-title>
-      
-        </ion-card-header>
-    
-      <ion-card-content>
-        <p><ion-icon name="calendar-outline"></ion-icon> Date : <span>{{taskDetails.createdon | date:'mediumDate'}}</span></p>
-        <p><ion-icon name="person-outline"></ion-icon> Customer Name : <span>{{taskDetails.customername}}</span></p>
-        <p><ion-icon name="location-outline"> </ion-icon>Location : <span>{{taskDetails.location}}</span></p>
-        <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{taskDetails.fullname}}</span></p>
-        <p><ion-icon
-          name="ellipse"  [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'"></ion-icon> Current Status : <span>{{taskDetails.status}}</span></p>
+        <ion-card-title class="ion-text-start d-flex align-item-center">
+          <ion-icon name="ellipse"
+            [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'">
+          </ion-icon> Task # {{taskDetails.taskid}}
+        </ion-card-title>
 
-       <ion-item lines="none" class="border-box mt-20">
+      </ion-card-header>
+
+      <ion-card-content>
+        <p>
+          <ion-icon name="calendar-outline"></ion-icon> Date : <span>{{taskDetails.createdon |
+            date:'mediumDate'}}</span>
+        </p>
+        <p>
+          <ion-icon name="person-outline"></ion-icon> Customer Name : <span>{{taskDetails.customername}}</span>
+        </p>
+        <p>
+          <ion-icon name="location-outline"> </ion-icon>Location : <span>{{taskDetails.location}}</span>
+        </p>
+        <p>
+          <ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{taskDetails.fullname}}</span>
+        </p>
+        <p>
+          <ion-icon name="ellipse"
+            [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'">
+          </ion-icon> Current Status : <span>{{taskDetails.status}}</span>
+        </p>
+
+        <ion-item lines="none" class="border-box mt-20">
           <!-- <ion-label position="stacked"></ion-label> -->
           <ion-select formControlName="status" class="w-100" placeholder="Status">
             <ion-select-option *ngFor="let iem of status" [value]="iem.value">{{iem.key}}
             </ion-select-option>
           </ion-select>
           <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
-          
+
         </ion-item>
 
         <ion-item lines="none" class="border-box mt-20">
@@ -43,19 +58,20 @@
         </ion-item>
 
       </ion-card-content>
-   
-   
-      <ion-footer  class="ion-no-border">
-        <ion-row >
+
+
+      <ion-footer class="ion-no-border">
+        <ion-row>
           <ion-col center text-center class="ion-padding-start  ion-padding-bottom">
-          <ion-button expand="block" [disabled]="addStatusDetail.invalid" (click)="onSubmitTaskStatus()" color="primary">
-            Submit</ion-button>
-        </ion-col>
-        <ion-col center text-center class="ion-padding-end  ion-padding-bottom">
-          <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
-        </ion-col>
-      </ion-row>
-     </ion-footer>
+            <ion-button expand="block" [disabled]="addStatusDetail.invalid" (click)="onSubmitTaskStatus()"
+              color="primary">
+              Submit</ion-button>
+          </ion-col>
+          <ion-col center text-center class="ion-padding-end  ion-padding-bottom">
+            <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-footer>
     </ion-card>
   </form>
 </ion-content>

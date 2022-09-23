@@ -1,36 +1,45 @@
 <ion-header class="ion-no-border">
   <ion-toolbar>
-    <ion-title>  Display status of Task {{taskDetails.taskid}}</ion-title>
+    <ion-title> Display status of Task {{taskDetails.taskid}}</ion-title>
     <ion-icon class="ion-padding" slot="end" (click)="dismiss()" name="close-outline"></ion-icon>
-    
+
   </ion-toolbar>
 </ion-header>
- 
-<div *ngIf="assignmentService.loader | async">
+
+<!-- <div *ngIf="assignmentService.loader | async">
   <app-loader></app-loader>
-</div>
+</div> -->
 
 <ion-content>
   <!-- <h4>Task # {{taskDetails.taskid}}</h4> -->
- 
-    <ion-card-content>
-      <ion-card  *ngFor="let item of assignedTaskDetails; let i = index">
-        <p><ion-icon name="calendar-outline"></ion-icon> Date : <span>{{item.createdon | date:'mediumDate'}}</span></p>
-        <p><ion-icon
-          name="ellipse"  [color]="item.status=='in progress'?'warning':item.status=='open'||item.status=='Open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'"></ion-icon> Status : <span>{{item.status}}</span></p>
-        <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.fullname}}</span></p>
-        <p><ion-icon name="bookmark-outline"></ion-icon> Remark : <span>{{item.remarks}}</span></p>
-      </ion-card>
-   
-     
-    </ion-card-content>
-    <ion-footer  class="ion-no-border">
-      <ion-row  class="ion-padding-start ion-padding-end ion-padding-bottom">
-        <ion-col class="ion-no-padding" center text-center>
-          <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
-        </ion-col>
-      </ion-row>
-   
-    </ion-footer>
- 
+
+  <ion-card-content>
+    <ion-card *ngFor="let item of assignedTaskDetails; let i = index">
+      <p>
+        <ion-icon name="calendar-outline"></ion-icon> Date : <span>{{item.createdon | date:'mediumDate'}}</span>
+      </p>
+      <p>
+        <ion-icon name="ellipse"
+          [color]="item.status=='in progress'?'warning':item.status=='open'||item.status=='Open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'">
+        </ion-icon> Status : <span>{{item.status}}</span>
+      </p>
+      <p>
+        <ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.fullname}}</span>
+      </p>
+      <p>
+        <ion-icon name="bookmark-outline"></ion-icon> Remark : <span>{{item.remarks}}</span>
+      </p>
+    </ion-card>
+
+
+  </ion-card-content>
+  <ion-footer class="ion-no-border">
+    <ion-row class="ion-padding-start ion-padding-end ion-padding-bottom">
+      <ion-col class="ion-no-padding" center text-center>
+        <ion-button expand="block" (click)="dismiss()" fill="outline">Back</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-footer>
+
 </ion-content>

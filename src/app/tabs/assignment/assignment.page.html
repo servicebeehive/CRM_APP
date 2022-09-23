@@ -2,46 +2,63 @@
   <app-header header="Assignment"></app-header>
 </ion-header>
 
-<div *ngIf="assignmentService.loader | async">
+<!-- <div *ngIf="assignmentService.loader | async">
   <app-loader></app-loader>
 </div> 
 
 <div *ngIf="loginService.isLoading | async">
   <app-loader></app-loader>
-</div>  
+</div>   -->
 
 <ion-content>
   <form [formGroup]="assignmentForm">
     <div formArrayName="assignTaskForm">
       <ion-card *ngFor="let item of formControl.controls; let i = index">
         <div [formGroupName]="i">
-       
-            <ion-card-header class="d-flex justifiy-between  align-item-start">
-              <ion-card-title class="ion-text-start d-flex align-item-center"><ion-icon
-                name="ellipse"  [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'"></ion-icon> Task # {{item.value.taskid}}</ion-card-title>
-             
-              </ion-card-header>
-           
-         
+
+          <ion-card-header class="d-flex justifiy-between  align-item-start">
+            <ion-card-title class="ion-text-start d-flex align-item-center">
+              <ion-icon name="ellipse"
+                [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'">
+              </ion-icon> Task # {{item.value.taskid}}
+            </ion-card-title>
+
+          </ion-card-header>
+
+
           <ion-card-content>
-            <p><ion-icon name="calendar-outline"></ion-icon> Date : <span>{{item.value.createdon | date:'mediumDate'}}</span></p>
-            <p><ion-icon name="person-outline"></ion-icon>Customer Name : <span>{{item.value.customername}}</span></p>
-            <p><ion-icon name="location-outline"></ion-icon>Location : <span>{{item.value.location}}</span></p>
-            <p><ion-icon name="bookmark-outline"></ion-icon>Remark : <span>{{item.value.remark}}</span></p>
-            <p><ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.value.fullname}}</span></p>
-            <p><ion-icon
-              name="ellipse"  [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'"></ion-icon> Status : <span>{{item.value.status}}</span></p>
+            <p>
+              <ion-icon name="calendar-outline"></ion-icon> Date : <span>{{item.value.createdon |
+                date:'mediumDate'}}</span>
+            </p>
+            <p>
+              <ion-icon name="person-outline"></ion-icon>Customer Name : <span>{{item.value.customername}}</span>
+            </p>
+            <p>
+              <ion-icon name="location-outline"></ion-icon>Location : <span>{{item.value.location}}</span>
+            </p>
+            <p>
+              <ion-icon name="bookmark-outline"></ion-icon>Remark : <span>{{item.value.remark}}</span>
+            </p>
+            <p>
+              <ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.value.fullname}}</span>
+            </p>
+            <p>
+              <ion-icon name="ellipse"
+                [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'">
+              </ion-icon> Status : <span>{{item.value.status}}</span>
+            </p>
             <ion-item lines="none" class="border-box mt-20">
               <ion-select placeholder="Assignee" class="w-100" formControlName="assigneeUser">
                 <ion-select-option *ngFor="let user of users" [value]="user.userid">{{user.fullname}}
                 </ion-select-option>
               </ion-select>
             </ion-item>
-         </ion-card-content>
-          <ion-footer  class="ion-no-border">
-            <ion-row  class="ion-padding-start ion-padding-end ion-padding-bottom">
+          </ion-card-content>
+          <ion-footer class="ion-no-border">
+            <ion-row class="ion-padding-start ion-padding-end ion-padding-bottom">
               <ion-col class="ion-no-padding" center text-center>
-                <ion-button  expand="block"  (click)="onAssignUser(item.value.index)">Assign</ion-button>
+                <ion-button expand="block" (click)="onAssignUser(item.value.index)">Assign</ion-button>
               </ion-col>
             </ion-row>
           </ion-footer>

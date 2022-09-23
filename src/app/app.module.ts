@@ -12,7 +12,9 @@ import { HttpIntercertor } from './interceptor/http-intercertor';
 import { Controllers } from './models/controllers';
 import { ConfigInit } from './services/config/config.init';
 import { ConfigService } from './services/config/config.service';
-
+import { FCM } from 'cordova-plugin-fcm-with-dependecy-updated/ionic/ngx';
+import { SplashScreen } from '@awesome-cordova-plugins/splash-screen/ngx';
+import { StatusBar } from '@awesome-cordova-plugins/status-bar/ngx';
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -33,7 +35,11 @@ import { ConfigService } from './services/config/config.service';
     },
     { provide: HTTP_INTERCEPTORS, useClass: HttpIntercertor, multi: true },
     Controllers,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    FCM,
+    SplashScreen,
+    StatusBar
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

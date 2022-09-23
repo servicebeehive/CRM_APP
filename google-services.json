@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "502206272302",
+    "project_id": "bigtask-crm",
+    "storage_bucket": "bigtask-crm.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502206272302:android:775f23cb5033e1ecfee0bf",
+        "android_client_info": {
+          "package_name": "com.crm.pushnotification"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502206272302-ak66vmgoav965jdtejbg30nllqna8ake.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG6ly0MPb8N4s01qCeyS8MMf10vSA9UfQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502206272302-ak66vmgoav965jdtejbg30nllqna8ake.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

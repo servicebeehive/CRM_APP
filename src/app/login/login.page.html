@@ -1,58 +1,60 @@
 <ion-content>
-  <div *ngIf="loginService.isLoading | async">
+  <!-- <div *ngIf="loginService.isLoading | async">
     <app-loader></app-loader>
-  </div>
+  </div> -->
   <form [formGroup]="addloginDetail" (ngSubmit)="onSignin()">
-
     <ion-grid>
-    
-        <ion-row class="ion-padding-end ion-padding-start ion-justify-content-center">
-          <ion-col size="12"><ion-img [src]="brandUrl" class="img-size  ion-margin-bottom"></ion-img>
-          <h4 class="ion-text-center">Big Task</h4></ion-col>
-         
-          <ion-col size="12" class="ion-padding-top">
-            <ion-item lines="none" class="border-box">
-              <ion-input type="text" formControlName="username" placeholder="Username"> 
-                <ion-icon  slot="start" name="person-circle-outline"></ion-icon>
-              </ion-input>
-            </ion-item>
-           
-          </ion-col>
-          <ion-col size="12">
-            <ion-item lines="none" class="border-box"> <ion-input type="Password" formControlName="password" placeholder="Password">
+      <ion-row class="ion-padding-end ion-padding-start ion-justify-content-center">
+
+        <ion-col size="12">
+          <ion-img [src]="brandUrl" class="img-size  ion-margin-bottom"></ion-img>
+          <h4 class="ion-text-center">Big Task</h4>
+        </ion-col>
+
+        <ion-col size="12" class="ion-padding-top">
+          <ion-item lines="none" class="border-box">
+            <ion-input type="text" formControlName="username" placeholder="Username">
+              <ion-icon slot="start" name="person-circle-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input type="Password" formControlName="password" placeholder="Password">
               <ion-icon slot="start" name="key-outline"></ion-icon>
-            </ion-input></ion-item>
-           
-          </ion-col>
-          <ion-col size="12" class="ion-margin-bottom">
-            <ion-item lines="none" class="border-box">
-              <ion-input type="text" formControlName="clientcode" placeholder="Client Code">
-                <ion-icon slot="start" name="people-outline"></ion-icon>
-              </ion-input>
-            </ion-item>
-           
-          </ion-col>
-          <ion-col size="12">
-            <ion-button type="submit" expand="block"  [disabled]="addloginDetail.invalid" >Sign in
-            
-            </ion-button>
-          </ion-col>
-        </ion-row>
-        
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12" class="ion-margin-bottom">
+          <ion-item lines="none" class="border-box">
+            <ion-input type="text" formControlName="clientcode" placeholder="Client Code">
+              <ion-icon slot="start" name="people-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-button type="submit" expand="block" [disabled]="addloginDetail.invalid">Sign in
+          </ion-button>
+        </ion-col>
+
+      </ion-row>
     </ion-grid>
-    
+
   </form>
   <ion-footer class="no-shadow">
     <ion-grid>
       <ion-row>
         <ion-col size="12" class="ion-text-center">
           <ion-img [src]="companyUrl" class="img-size2  ion-margin-bottom"></ion-img>
-          <small >© Beehive Infotech</small>
+          <small>© Beehive Infotech</small>
         </ion-col>
 
       </ion-row>
     </ion-grid>
-   
-    
+
+
   </ion-footer>
 </ion-content>
