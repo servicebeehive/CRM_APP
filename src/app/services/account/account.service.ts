@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage-angular';
+import { DeviceDetails } from 'src/app/models/devicedetail';
 import { UserDetail } from 'src/app/models/userdetail.model';
 
 @Injectable({
@@ -12,6 +13,8 @@ export class AccountService {
   public USER_ID?: number;
   public USER_TYPE?: string;
   public CLIENT_CODE?: string;
+  public DEVICE_TOKEN: string;
+  public DEVICE_TOKEN_DETAILS: DeviceDetails[]
 
   constructor(public storage: Storage) {
     this.storage.create();
@@ -41,6 +44,7 @@ export class AccountService {
       this.storage.remove('access-token');
       this.storage.remove('username');
       this.storage.remove('clientcode');
+      this.storage.remove('device-token');
       return;
     } else {
       this.storage.set('access-token', userDetails.usertoken);
@@ -77,4 +81,9 @@ export class AccountService {
     this.CLIENT_CODE = null;
     this.storage.remove('access-token');
   }
+
+  public setDeviceToken(deviceToken): void {
+    this.storage.set('device-token', deviceToken);
+  }
+
 }

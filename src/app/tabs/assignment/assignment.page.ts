@@ -2,12 +2,14 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationDetail } from 'src/app/models/notification.model';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { SendNotificationUtility } from 'src/app/utilities/sendNotification-utility';
 import { TaskDetail } from '../task/task.page';
 
 export class OperationType {
@@ -52,8 +54,9 @@ export class AssignmentPage {
     public fb: FormBuilder,
     public loginService: LoginService,
     public accountServices: AccountService,
-    public router: Router
-  ) {}
+    public router: Router,
+    public sendNotificationUtility: SendNotificationUtility
+  ) { }
 
   get formControl() {
     return this.assignmentForm.get('assignTaskForm') as FormArray;
@@ -133,12 +136,23 @@ export class AssignmentPage {
       .then((result: ReturnResult<any>) => {
         if (result.success) {
           this.getTaskDetails();
+          this.setPushNotification(this.formControl.at(index).get('assigneeUser').value, (
+            this.formControl.at(index).value as TaskAssignmnetModel
+          ).taskid)
           this.notificationService.showToast<any>(result);
-          this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<any>(result);
-          this.assignmentService.loader.next(false);
         }
       });
+  }
+
+  setPushNotification(userId: number, taskID: number) {
+    const userDetail = this.users.find(x => x.userid === userId)
+    const notificationDetail = new NotificationDetail();
+    notificationDetail.notificationBody = `You have assigned new task ${taskID}`;
+    notificationDetail.notificationPriority = 'high';
+    notificationDetail.notificationTitle = `Big Task CRM `;
+    notificationDetail.userid = userId
+    this.sendNotificationUtility.sendNotification(userDetail, notificationDetail)
   }
 }

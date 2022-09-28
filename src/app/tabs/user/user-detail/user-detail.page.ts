@@ -39,13 +39,16 @@ export class UserDetailPage {
 
   public async ionViewDidEnter() {
     if (this.userDetail) {
-      this.addUserDetail.controls.firstName.setValue(this.userDetail.fullname.split(" ",1));
-      this.addUserDetail.controls.lastName.setValue(this.userDetail.fullname.trim().split(" ").slice(-1));
+      this.addUserDetail.controls.firstName.setValue(this.userDetail.fullname.split(" ", 1)[0]);
+      this.addUserDetail.controls.lastName.setValue(this.userDetail.fullname.trim().split(" ").slice(-1)[0]);
       this.addUserDetail.controls.userName.setValue(this.userDetail.username);
       this.addUserDetail.controls.password.setValue(this.userDetail.pwd);
       this.addUserDetail.controls.phoneno.setValue(this.userDetail.phone);
       this.addUserDetail.controls.emailid.setValue(this.userDetail.email);
-      this.addUserDetail.controls.enable.setValue(this.userDetail.active);
+      this.addUserDetail.controls.enable.setValue(this.userDetail.enabled === 'y' ? true : false);
+
+      this.addUserDetail.controls.password.clearValidators();
+      this.addUserDetail.controls.password.updateValueAndValidity();
     }
   }
 
@@ -63,11 +66,11 @@ export class UserDetailPage {
       ' ' +
       this.addUserDetail.value.lastName.trim();
     userDetail.username = this.addUserDetail.value.userName.trim();
-    userDetail.pwd = this.addUserDetail.value.password.trim();
-    userDetail.active = this.addUserDetail.value.enable ? 'y' : 'n';
+    userDetail.pwd = !this.userDetail ? this.addUserDetail.value.password.trim() : '';
+    userDetail.active = this.addUserDetail.value.enable === true ? 'y' : 'n';
     userDetail.email = this.addUserDetail.value.emailid;
     userDetail.phone = this.addUserDetail.value.phoneno;
-    userDetail.operationtype = this.userDetail ? 'INSERT' : 'UPDATE';
+    userDetail.operationtype = 'INSERT'
     this.loginService
       .getUsers(userDetail)
       .then((result: ReturnResult<UserDetail[]>) => {

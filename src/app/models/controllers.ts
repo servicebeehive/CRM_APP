@@ -9,4 +9,6 @@ export class Controllers {
   public readonly getuserdetails = `/api/v1/getuserdetails`;
   public readonly getreporttype = `/api/v1/getreporttype`;
   public readonly getreportdata = `/api/v1/getreportdata`;
+  public readonly getdevicetoken = `/api/v1/getdevicetoken`;
+  public readonly notification = `/api/v1/notification`;
 }

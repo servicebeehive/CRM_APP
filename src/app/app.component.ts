@@ -29,15 +29,10 @@ export class AppComponent {
 
 
   initilizeApp() {
-    console.log('test');
     this.platform.ready().then(() => {
-      // this.statusBar.styleDefault();
-      // this.splashScreen.hide();
-      console.log('test');
-      this.fcm.getToken().then(token => {
-        console.log('token', token);
-      });
-
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+      this.getToken();
       this.fcm.onNotification().subscribe(data => {
         console.log(data);
         if (data.wasTapped) {
@@ -48,10 +43,29 @@ export class AppComponent {
       });
       // refresh the FCM token
       this.fcm.onTokenRefresh().subscribe(token => {
+        this.accountService.DEVICE_TOKEN = token;
         console.log(token);
       });
 
+      this.subscribeToTopic();
+      this.unsubscribeFromTopic();
+
     })
+  }
+
+  subscribeToTopic() {
+    this.fcm.subscribeToTopic('enappd');
+  }
+
+  unsubscribeFromTopic() {
+    this.fcm.unsubscribeFromTopic('enappd');
+  }
+
+  getToken() {
+    this.fcm.getToken().then(token => {
+      this.accountService.DEVICE_TOKEN = token;
+      console.log('token', token);
+    });
   }
 
 }

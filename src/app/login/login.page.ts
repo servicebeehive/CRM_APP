@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController, Platform } from '@ionic/angular';
+import { DeviceDetails } from '../models/devicedetail';
 import { LoginDetail } from '../models/logindetail.model';
 import { ReturnResult } from '../models/return-result';
 import { UserDetail } from '../models/userdetail.model';
 import { AccountService } from '../services/account/account.service';
+import { FcmService } from '../services/fcm/fcm.service';
 import { LoginService } from '../services/login/login.service';
 import { NotificationService } from '../services/notification/notification.service';
 
@@ -31,6 +33,7 @@ export class LoginPage implements OnInit {
     public notificationService: NotificationService,
     public loginService: LoginService,
     public alertCtrl: AlertController,
+    public fcmService: FcmService
   ) { }
 
   ngOnInit() { }
@@ -51,52 +54,43 @@ export class LoginPage implements OnInit {
           this.accountServices.CLIENT_CODE = this.addloginDetail.value.clientcode;
           this.addloginDetail.reset();
           this.router.navigate(['tabs/home']);
-          this.loginService.isLoading.next(false);
+          if (this.accountServices.DEVICE_TOKEN) {
+            this.setDeviceToken(result.data);
+          }
         } else {
           this.notificationService.showToast<UserDetail>(result);
-          this.loginService.isLoading.next(false);
         }
       });
   }
 
-
-  async getUniqueDeviceID() {
-    // this.fcm.subscribeToTopic('marketing');
-    // this.platform.ready().then(() => {
-    //   // this.uniqueDeviceID.get()
-    //   //   .then((uuid: any) => {
-    //   //     console.log(uuid);
-    //   //     this.UniqueDeviceID = uuid;
-    //   //   })
-    //   //   .catch((error: any) => {
-    //   //     console.log(error);
-    //   //     this.UniqueDeviceID = "Error! ${error}";
-    //   //   });
-    //   this.alertCtrl.create({
-    //     header: "test",
-    //     subHeader: "test",
-    //     message: "test",
-    //     buttons: ['OK']
-    //   }).then(res => {
-
-    //     res.present();
-
-    //   });
-    // this.fcm.getToken().then(token => {
-    //   this.alertCtrl.create({
-    //     header: "token",
-    //     subHeader: "token",
-    //     message: String(token),
-    //     buttons: ['OK']
-    //   }).then(res => {
-
-    //     res.present();
-
-    //   });
-    // });
-    // })
+  public setDeviceToken(userDetailData: UserDetail): boolean {
+    const deviceDetails = new DeviceDetails();
+    deviceDetails.userid = userDetailData.userid,
+      deviceDetails.username = userDetailData.username,
+      deviceDetails.operationtype = "GETTOKEN"
+    this.fcmService.getDeviceToken(deviceDetails).then(result => {
+      this.accountServices.DEVICE_TOKEN_DETAILS = result.data;
+      const index = this.accountServices.DEVICE_TOKEN_DETAILS.findIndex(value => value.devicetoken === this.accountServices.DEVICE_TOKEN);
+      if (index < 0) {
+        deviceDetails.userid = userDetailData.userid,
+          deviceDetails.username = userDetailData.username,
+          deviceDetails.operationtype = "INSERT",
+          deviceDetails.emailaddress = userDetailData.email,
+          deviceDetails.devicetoken = this.accountServices.DEVICE_TOKEN,
+          deviceDetails.operatingsystem = "Android 12",
+          deviceDetails.devicemodel = "One plus 10",
+          deviceDetails.deviceid = "312323432532"
+        this.fcmService.getDeviceToken(deviceDetails).then(result => {
+          if (result.success) {
+            this.notificationService.showToast<DeviceDetails[]>(result);
+          }
+        })
+      }
+    })
+    return true;
 
   }
+
 
 }
 

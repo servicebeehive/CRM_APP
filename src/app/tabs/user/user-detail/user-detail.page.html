@@ -24,11 +24,11 @@
         </ion-item>
 
         <ion-item lines="none" class="border-box mt-20">
-          <ion-input formControlName="userName" placeholder="User Name"></ion-input>
+          <ion-input [disabled]="this.userDetail" formControlName="userName" placeholder="User Name"></ion-input>
           <ion-icon name="person-circle-outline" slot="start"></ion-icon>
         </ion-item>
 
-        <ion-item lines="none" class="border-box mt-20">
+        <ion-item *ngIf="!this.userDetail" lines="none" class="border-box mt-20">
           <ion-input type="password" formControlName="password" placeholder="Password"></ion-input>
           <ion-icon name="key-outline" slot="start"></ion-icon>
         </ion-item>

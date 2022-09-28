@@ -152,7 +152,6 @@ export class ReportPage implements OnInit {
     this.reportService
       .getReportData(reportModel)
       .then((result: ReturnResult<ReportData[]>) => {
-        console.log(reportModel.startdate && reportModel.enddate);
         if (reportModel.startdate > reportModel.enddate) {
           this.alertCtrl
             .create({

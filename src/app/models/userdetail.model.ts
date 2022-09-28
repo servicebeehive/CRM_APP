@@ -24,7 +24,7 @@ export class UserDetail {
     this.operationtype = '';
     this.usertype = '';
     this.phone = 0;
-    this.email ='';
+    this.email = '';
     this.enabled = '';
     this.clientcode = '';
     this.photo = '';
