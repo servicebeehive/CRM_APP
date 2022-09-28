@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { DeviceDetails } from '../models/devicedetail';
 import { LoginDetail } from '../models/logindetail.model';
 import { ReturnResult } from '../models/return-result';
 import { UserDetail } from '../models/userdetail.model';
 import { AccountService } from '../services/account/account.service';
 import { FcmService } from '../services/fcm/fcm.service';
+import { LoaderService } from '../services/loader/loader.service';
 import { LoginService } from '../services/login/login.service';
 import { NotificationService } from '../services/notification/notification.service';
 
@@ -16,10 +18,11 @@ import { NotificationService } from '../services/notification/notification.servi
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage {
   public brandUrl: string = "assets/icon/logo2.png"
   public companyUrl: string = "assets/icon/logo.png"
   public UniqueDeviceID: string;
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
   addloginDetail = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', Validators.required],
@@ -33,10 +36,9 @@ export class LoginPage implements OnInit {
     public notificationService: NotificationService,
     public loginService: LoginService,
     public alertCtrl: AlertController,
-    public fcmService: FcmService
+    public fcmService: FcmService,
+    public loaderService: LoaderService
   ) { }
-
-  ngOnInit() { }
 
   onSignin() {
     const loginDetailData = new LoginDetail();

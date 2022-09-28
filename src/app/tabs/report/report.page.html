@@ -2,18 +2,12 @@
   <app-header header="Report"></app-header>
 </ion-header>
 
-<!-- <div *ngIf="reportService.loader | async">
-  <app-loader></app-loader>
-</div>
-
-<div *ngIf="loginService.isLoading | async">
-  <app-loader></app-loader>
-</div> -->
-
 <ion-content>
+  <div *ngIf="isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <ion-card-content>
     <form [formGroup]="addReport">
-
       <ion-item lines="none" class="border-box mt-20">
         <ion-select placeholder="Report Type" class="w-100" formControlName="reporttypecode">
           <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">

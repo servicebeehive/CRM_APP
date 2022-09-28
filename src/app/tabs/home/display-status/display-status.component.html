@@ -6,13 +6,10 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <div *ngIf="assignmentService.loader | async">
-  <app-loader></app-loader>
-</div> -->
-
 <ion-content>
-  <!-- <h4>Task # {{taskDetails.taskid}}</h4> -->
-
+  <div *ngIf="isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <ion-card-content>
     <ion-card *ngFor="let item of assignedTaskDetails; let i = index">
       <p>

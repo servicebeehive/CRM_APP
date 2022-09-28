@@ -5,11 +5,10 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <div *ngIf="loginService.isLoading | async">
-  <app-loader></app-loader>
-</div> -->
-
 <ion-content>
+  <div *ngIf="isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <form [formGroup]="addUserDetail">
     <ion-card class="no-shadow">
       <ion-card-content>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalController, NavParams } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { ReturnResult } from 'src/app/models/return-result';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { TaskAssignmnetModel } from '../../assignment/assignment.page';
 import { TaskDetail } from '../../task/task.page';
@@ -20,6 +22,7 @@ interface Status {
 })
 export class SubmitStatusComponent implements OnInit {
   public taskDetails: TaskDetail = this.navParams.get('value');
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   status: Status[] = [];
 
@@ -34,8 +37,9 @@ export class SubmitStatusComponent implements OnInit {
     public fb: FormBuilder,
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
-    public accountServices: AccountService
-  ) {}
+    public accountServices: AccountService,
+    public loaderService: LoaderService
+  ) { }
 
   ngOnInit() {
     if (this.accountServices.USER_TYPE === 'admin') {

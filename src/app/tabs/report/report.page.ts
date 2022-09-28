@@ -12,6 +12,8 @@ import { ReportData } from 'src/app/models/reportdata';
 import { ReportType } from 'src/app/models/reporttype';
 import { ReportService } from 'src/app/services/report/report.service';
 import { AlertController, IonPopover } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 interface Status {
   key: string;
@@ -46,6 +48,7 @@ export class ReportPage implements OnInit {
   public users: UserDetail[] = [];
   public report: ReportType[] = [];
   public reportData: ReportData[] = [];
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
   status: Status[] = [];
 
   constructor(
@@ -56,7 +59,8 @@ export class ReportPage implements OnInit {
     public notificationService: NotificationService,
     public router: Router,
     public reportService: ReportService,
-    public alertCtrl: AlertController
+    public alertCtrl: AlertController,
+    public loaderService: LoaderService
   ) { }
 
   addReport = new FormGroup({
@@ -114,10 +118,8 @@ export class ReportPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
-          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
-          this.loginService.isLoading.next(false);
         }
       });
   }

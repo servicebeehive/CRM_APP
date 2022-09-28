@@ -2,13 +2,11 @@
   <app-header header="Task Details"></app-header>
 </ion-header>
 
-<!-- <div *ngIf="taskService.loader | async">
-  <app-loader></app-loader>
-</div> -->
-
 <ion-content>
+  <div *ngIf="isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <form [formGroup]="addTaskDetail">
-
     <ion-card-content>
       <ion-item lines="none" class="border-box mt-20">
         <ion-input formControlName="customerName" placeholder="Customer Name"></ion-input>

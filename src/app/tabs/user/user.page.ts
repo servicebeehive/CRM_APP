@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { UserDetailPage } from 'src/app/tabs/user/user-detail/user-detail.page';
@@ -16,13 +18,15 @@ export class UserPage implements OnInit {
   public test = [1, 2, 3, 4];
 
   public users: UserDetail[] = [];
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public modalController: ModalController,
     public loginService: LoginService,
     public notificationService: NotificationService,
     public accountService: AccountService,
-    public router: Router
+    public router: Router,
+    public loaderService: LoaderService
   ) { }
 
   ngOnInit() { }
@@ -59,10 +63,8 @@ export class UserPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
-          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
-          this.loginService.isLoading.next(false);
         }
       });
   }

@@ -2,9 +2,11 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { ReturnResult } from 'src/app/models/return-result';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { OperationType } from '../assignment/assignment.page';
 import { TaskDetail } from '../task/task.page';
@@ -18,6 +20,7 @@ import { SubmitStatusComponent } from './submit-status/submit-status.component';
 })
 export class HomePage implements OnInit {
   public assignedTaskDetails: TaskDetail[] = [];
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public datepipe: DatePipe,
@@ -25,10 +28,11 @@ export class HomePage implements OnInit {
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
     public accountServices: AccountService,
-    public router: Router
-  ) {}
+    public router: Router,
+    public loaderService: LoaderService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public async ionViewDidEnter() {
     await this.getAssignedTask();
@@ -69,7 +73,7 @@ export class HomePage implements OnInit {
         if (result.success) {
           this.assignedTaskDetails = result.data;
           this.assignmentService.loader.next(false);
-        
+
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
           this.assignmentService.loader.next(false);

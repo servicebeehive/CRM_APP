@@ -2,11 +2,10 @@
   <app-header header="Home"></app-header>
 </ion-header>
 
-<!-- <div *ngIf="assignmentService.loader | async">
-  <app-loader></app-loader>
-</div> -->
-
 <ion-content>
+  <div *ngIf="isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <ion-card *ngFor="let item of assignedTaskDetails;let i = index">
     <ion-card-header class="d-flex justifiy-between  align-item-start">
       <ion-card-title class="ion-text-start d-flex align-item-center">

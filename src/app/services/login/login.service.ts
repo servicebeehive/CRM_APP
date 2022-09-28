@@ -6,7 +6,6 @@ import { IConfig } from 'src/app/models/iconfig';
 import { LoginDetail } from 'src/app/models/logindetail.model';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
-import { environment } from 'src/environments/environment';
 import { BaseService } from '../base/base.service';
 import { ConfigService } from '../config/config.service';
 
@@ -39,6 +38,4 @@ export class LoginService extends BaseService {
       userDetailData
     );
   }
-
-public isLoading: BehaviorSubject<boolean> =  new BehaviorSubject<boolean>(false);
 }

@@ -5,11 +5,10 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- <div *ngIf="assignmentService.loader | async">
-  <app-loader></app-loader>
-</div> -->
-
 <ion-content>
+  <div *ngIf="isLoading | async">
+    <app-loader></app-loader>
+  </div>
   <form [formGroup]="addStatusDetail">
     <ion-card class="no-shadow">
       <ion-card-header class="d-flex justifiy-between  align-item-start">

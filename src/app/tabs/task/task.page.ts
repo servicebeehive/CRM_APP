@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { Subject } from 'rxjs';
 import { ReturnResult } from 'src/app/models/return-result';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { TaskService } from 'src/app/services/task/task.service';
 
@@ -27,6 +29,8 @@ export class TaskDetail {
   styleUrls: ['./task.page.scss'],
 })
 export class TaskPage implements OnInit {
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   addTaskDetail = this.fb.group({
     customerName: ['', Validators.required],
     location: ['', Validators.required],
@@ -42,10 +46,11 @@ export class TaskPage implements OnInit {
     public notificationService: NotificationService,
     public accountService: AccountService,
     public router: Router,
-    public alertCtrl: AlertController
-  ) {}
+    public alertCtrl: AlertController,
+    public loaderService: LoaderService
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   public async onTaskAdd() {
     const taskDetail = new TaskDetail();

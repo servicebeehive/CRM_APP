@@ -13,10 +13,7 @@ import {
 import { Observable } from 'rxjs';
 import { finalize, tap } from 'rxjs/operators';
 import { AccountService } from 'src/app/services/account/account.service';
-import { LoginService } from '../services/login/login.service';
-import { AssignmentService } from 'src/app/services/assignment/assignment.service';
-import { ReportService } from 'src/app/services/report/report.service';
-import { TaskService } from 'src/app/services/task/task.service';
+import { LoaderService } from '../services/loader/loader.service';
 
 @Injectable({
   providedIn: 'root',
@@ -24,16 +21,13 @@ import { TaskService } from 'src/app/services/task/task.service';
 export class HttpIntercertor implements HttpInterceptor {
   constructor(
     public accountSrvices: AccountService,
-    public loginService: LoginService,
-    public assignmentService: AssignmentService,
-    public reportService: ReportService,
-    public taskService: TaskService
-    ) {}
+    private loaderService: LoaderService
+  ) { }
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-
+    this.loaderService.show();
     const data = request.body;
     if (request.url.includes('login')) {
       request = request.clone({
@@ -42,11 +36,10 @@ export class HttpIntercertor implements HttpInterceptor {
         }),
         body: data,
       });
-      this.loginService.isLoading.next(true);
       return next.handle(request).pipe(
         finalize(
           () => {
-            this.loginService.isLoading.next(false);
+            this.loaderService.hide();
           }
         )
       );
@@ -70,23 +63,18 @@ export class HttpIntercertor implements HttpInterceptor {
     }
 
     return next.handle(request).pipe(
+      finalize(
+        () => {
+          this.loaderService.hide();
+        }
+      ),
       tap(
         (event: HttpEvent<any>) => {
-          this.assignmentService.loader.next(true);
-          this.reportService.loader.next(true);
-          this.taskService.loader.next(true);
-          this.loginService.isLoading.next(true);
           if (event instanceof HttpResponse) {
-            if (
-              event.body.tokenstatus !== undefined &&
-              !event.body.tokenstatus
-            ) {
+            if (event.body.tokenstatus !== undefined && !event.body.tokenstatus) {
               //If tokenstatus is failed then redirect to login page.
             }
-            // this.assignmentService.loader.next(false);
-            // this.reportService.loader.next(false);
-            // this.taskService.loader.next(false);
-            // this.loginService.isLoading.next(false);
+
           }
         },
         (err) => {
@@ -99,4 +87,4 @@ export class HttpIntercertor implements HttpInterceptor {
     );
   }
 }
-  
+

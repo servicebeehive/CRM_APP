@@ -6,6 +6,8 @@ import { UserDetail } from 'src/app/models/userdetail.model';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { AccountService } from 'src/app/services/account/account.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-user-detail',
@@ -17,6 +19,7 @@ export class UserDetailPage {
   public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
 
   public userDetail = this.navParams.get('userDetail');
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   addUserDetail = this.fb.group({
     firstName: ['', Validators.required],
@@ -35,6 +38,7 @@ export class UserDetailPage {
     public loginService: LoginService,
     public accountServices: AccountService,
     public navParams: NavParams,
+    public loaderService: LoaderService
   ) { }
 
   public async ionViewDidEnter() {
@@ -80,10 +84,8 @@ export class UserDetailPage {
             loaddata: true,
           });
           this.notificationService.showToast<UserDetail[]>(result);
-          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
-          this.loginService.isLoading.next(false);
         }
       });
   }

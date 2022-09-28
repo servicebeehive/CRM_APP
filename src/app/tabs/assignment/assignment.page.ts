@@ -2,11 +2,13 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { NotificationDetail } from 'src/app/models/notification.model';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { AccountService } from 'src/app/services/account/account.service';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LoginService } from 'src/app/services/login/login.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { SendNotificationUtility } from 'src/app/utilities/sendNotification-utility';
@@ -43,6 +45,8 @@ export class AssignmentPage {
 
   public users: UserDetail[] = [];
 
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+
   public assignmentForm = this.fb.group({
     assignTaskForm: this.fb.array([]),
   });
@@ -55,7 +59,8 @@ export class AssignmentPage {
     public loginService: LoginService,
     public accountServices: AccountService,
     public router: Router,
-    public sendNotificationUtility: SendNotificationUtility
+    public sendNotificationUtility: SendNotificationUtility,
+    public loaderService: LoaderService
   ) { }
 
   get formControl() {
@@ -109,10 +114,8 @@ export class AssignmentPage {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
-          this.loginService.isLoading.next(false);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
-          this.loginService.isLoading.next(false);
         }
       });
   }

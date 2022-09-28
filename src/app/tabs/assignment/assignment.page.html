@@ -2,13 +2,9 @@
   <app-header header="Assignment"></app-header>
 </ion-header>
 
-<!-- <div *ngIf="assignmentService.loader | async">
+<div *ngIf="isLoading | async">
   <app-loader></app-loader>
-</div> 
-
-<div *ngIf="loginService.isLoading | async">
-  <app-loader></app-loader>
-</div>   -->
+</div>
 
 <ion-content>
   <form [formGroup]="assignmentForm">
@@ -22,7 +18,6 @@
                 [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'">
               </ion-icon> Task # {{item.value.taskid}}
             </ion-card-title>
-
           </ion-card-header>
 
 
@@ -64,7 +59,7 @@
           </ion-footer>
         </div>
       </ion-card>
-      <p class="error ion-padding" *ngIf="assignedTaskDetails.length === 0">No task to be assigned.</p>
+      <p class="error ion-padding" *ngIf="assignedTaskDetails?.length === 0">No task to be assigned.</p>
     </div>
   </form>
 </ion-content>
