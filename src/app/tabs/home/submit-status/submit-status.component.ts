@@ -9,6 +9,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { TaskAssignmnetModel } from '../../assignment/assignment.page';
 import { TaskDetail } from '../../task/task.page';
+import { AlertController } from '@ionic/angular';
 
 interface Status {
   key: string;
@@ -38,7 +39,8 @@ export class SubmitStatusComponent implements OnInit {
     public assignmentService: AssignmentService,
     public notificationService: NotificationService,
     public accountServices: AccountService,
-    public loaderService: LoaderService
+    public loaderService: LoaderService,
+    public alertCtrl: AlertController
   ) { }
 
   ngOnInit() {
@@ -87,21 +89,39 @@ export class SubmitStatusComponent implements OnInit {
     taskAssign.remark = this.addStatusDetail.value.remark;
     taskAssign.taskassignee = this.accountServices.USER_ID;
 
-    this.assignmentService
-      .updateTaskDetails(taskAssign)
-      .then((result: ReturnResult<any>) => {
-        if (result.success) {
-          this.modalController.dismiss({
-            dismissed: true,
-            loaddata: true,
-          });
-          this.notificationService.showToast<any>(result);
-          this.assignmentService.loader.next(false);
-        } else {
-          this.notificationService.showToast<any>(result);
-          this.assignmentService.loader.next(false);
-        }
-      });
+    this.alertCtrl
+    .create({
+      header: 'Confirm Alert',
+      subHeader: 'Are you sure you want to change Status?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            this.assignmentService
+            .updateTaskDetails(taskAssign)
+            .then((result: ReturnResult<any>) => {
+              if (result.success) {
+                this.modalController.dismiss({
+                  dismissed: true,
+                  loaddata: true,
+                });
+                this.notificationService.showToast<any>(result);
+                this.assignmentService.loader.next(false);
+              } else {
+                this.notificationService.showToast<any>(result);
+                this.assignmentService.loader.next(false);
+              }
+       });
+      },
+      },
+      ],
+    })
+    .then((res) => {
+      res.present();
+    });
   }
 
   public dismiss(): void {

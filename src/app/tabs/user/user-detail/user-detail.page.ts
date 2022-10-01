@@ -8,6 +8,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { AccountService } from 'src/app/services/account/account.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Subject } from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-user-detail',
@@ -38,7 +39,8 @@ export class UserDetailPage {
     public loginService: LoginService,
     public accountServices: AccountService,
     public navParams: NavParams,
-    public loaderService: LoaderService
+    public loaderService: LoaderService,
+    public alertCtrl: AlertController
   ) { }
 
   public async ionViewDidEnter() {
@@ -75,19 +77,39 @@ export class UserDetailPage {
     userDetail.email = this.addUserDetail.value.emailid;
     userDetail.phone = this.addUserDetail.value.phoneno;
     userDetail.operationtype = 'INSERT'
-    this.loginService
-      .getUsers(userDetail)
-      .then((result: ReturnResult<UserDetail[]>) => {
-        if (result.success) {
-          this.modalController.dismiss({
-            dismissed: true,
-            loaddata: true,
-          });
+
+    this.alertCtrl
+    .create({
+      header: 'Confirm Alert',
+      subHeader: 'Are you sure you want to create or update User?',
+      message:
+        'After Submit, User Detail is displayed in User Panel.',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+          this.loginService
+          .getUsers(userDetail)
+          .then((result: ReturnResult<UserDetail[]>) => {
+          if (result.success) {
+            this.modalController.dismiss({
+              dismissed: true,
+              loaddata: true,
+            });
           this.notificationService.showToast<UserDetail[]>(result);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
         }
-      });
+       });
+      },
+      },
+      ],
+    })
+    .then((res) => {
+      res.present();
+    });
   }
-
 }
