@@ -29,7 +29,7 @@ export class HttpIntercertor implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     this.loaderService.show();
     const data = request.body;
-    if (request.url.includes('login')) {
+    if (request.url.includes('login') || request.url.includes('forgotpassword')) {
       request = request.clone({
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

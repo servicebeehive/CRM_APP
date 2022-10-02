@@ -11,4 +11,5 @@ export class Controllers {
   public readonly getreportdata = `/api/v1/getreportdata`;
   public readonly getdevicetoken = `/api/v1/getdevicetoken`;
   public readonly notification = `/api/v1/notification`;
+  public readonly forgotpassword = `/api/v1/forgotpassword`;
 }

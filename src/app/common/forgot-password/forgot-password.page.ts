@@ -8,24 +8,28 @@ import { LoginService } from 'src/app/services/login/login.service';
 import { ReturnResult } from 'src/app/models/return-result';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { ModalController } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.page.html',
   styleUrls: ['./forgot-password.page.scss'],
 })
-export class ForgotPasswordPage implements OnInit {
+export class ForgotPasswordPage {
   forgotpwd = this.fb.group({
     username: ['', [Validators.required]],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$')]],
+    clientCode: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPassword: ['', [Validators.required]]
   },
-  {
-    validators: CustomValidators.passwordMatchValidator,
-  }
+    {
+      validators: CustomValidators.passwordMatchValidator,
+    }
   );
 
   public users: UserDetail[] = [];
+  public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public accountServices: AccountService,
@@ -33,39 +37,39 @@ export class ForgotPasswordPage implements OnInit {
     public fb: FormBuilder,
     public loginService: LoginService,
     public modalController: ModalController,
-    public notificationService: NotificationService
+    public notificationService: NotificationService,
+    public loaderService: LoaderService
   ) { }
 
   isDisplayed = false;
-  ngOnInit() {
+
+  public setInputFocus() {
+    if (this.forgotpwd.value.username && this.forgotpwd.value.clientCode) {
+      this.isDisplayed = true;
+    } else {
+      this.isDisplayed = false;
+    }
   }
 
-  public async onSubmit(){
+  public async onSubmit() {
     const userDetail = new UserDetail();
-    userDetail.userid = this.accountServices.USER_ID;
     userDetail.username = this.forgotpwd.value.username;
+    userDetail.clientcode = this.forgotpwd.value.clientCode;
     userDetail.pwd = this.forgotpwd.value.password;
-    userDetail.operationtype = 'INSERT';
-    if (this.accountServices.USER_NAME = userDetail.username){
-      this.isDisplayed = true;
-   }
+    userDetail.operationtype = 'FORGET';
     this.loginService
-    .getUsers(userDetail)
-    .then((result: ReturnResult<any>) => {
-      if (result.success) {
-        this.modalController.dismiss({
-          dismissed: true,
-          loaddata: true,
-        });
-        this.notificationService.showToast<any>(result);
-      } else {
-        this.notificationService.showToast<any>(result);
-      }
-    });
+      .forgotPassword(userDetail)
+      .then((result: ReturnResult<any>) => {
+        if (result.success) {
+          this.router.navigate(['/']);
+          this.notificationService.showToast<any>(result);
+        } else {
+          this.notificationService.showToast<any>(result);
+        }
+      });
   }
 
   public cancel(): void {
-    this.accountServices.removeToken();
     this.router.navigate(['/']);
   }
 }

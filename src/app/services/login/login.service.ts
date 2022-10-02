@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { Controllers } from 'src/app/models/controllers';
 import { IConfig } from 'src/app/models/iconfig';
 import { LoginDetail } from 'src/app/models/logindetail.model';
@@ -35,6 +34,15 @@ export class LoginService extends BaseService {
   ): Promise<ReturnResult<UserDetail[]>> {
     return this.PostReturn<UserDetail, ReturnResult<UserDetail[]>>(
       this.controllers.getuserdetails,
+      userDetailData
+    );
+  }
+
+  public async forgotPassword(
+    userDetailData: UserDetail
+  ): Promise<ReturnResult<UserDetail[]>> {
+    return this.PostReturn<UserDetail, ReturnResult<UserDetail[]>>(
+      this.controllers.forgotpassword,
       userDetailData
     );
   }
