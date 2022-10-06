@@ -13,6 +13,8 @@ export class UserDetail {
   enabled: string;
   clientcode: string;
   photo: string;
+  isUser: boolean
+  oldpwd: string;
   constructor() {
     this.userid = 0;
     this.username = '';
@@ -28,5 +30,7 @@ export class UserDetail {
     this.enabled = '';
     this.clientcode = '';
     this.photo = '';
+    this.isUser = false;
+    this.oldpwd = '';
   }
 }

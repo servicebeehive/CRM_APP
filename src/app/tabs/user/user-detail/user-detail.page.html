@@ -43,7 +43,7 @@
           <ion-icon name="mail-outline" slot="start"></ion-icon>
         </ion-item>
 
-        <ion-item lines="none" class="ion-padding-start-no">
+        <ion-item lines="none" class="ion-padding-start-no" *ngIf="accountServices.USER_TYPE !=='user'">
           <ion-label>Enable</ion-label>
           <ion-checkbox slot="start" formControlName="enable"></ion-checkbox>
         </ion-item>

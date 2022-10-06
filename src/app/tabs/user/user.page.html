@@ -41,6 +41,10 @@
       <ion-button class="primary" fill="clear" color="dark" (click)="onClickOpenModal(true,item)">
         <ion-icon slot="icon-only" class="color-white" name="create-outline"></ion-icon>
       </ion-button>
+      <ion-button *ngIf="item?.isUser" class="primary" fill="clear" color="dark"
+        (click)="onClickOpenChangePassword(item)">
+        <ion-icon slot="icon-only" class="color-white" name="construct-outline"></ion-icon>
+      </ion-button>
     </ion-footer>
   </ion-card>
 </ion-content>

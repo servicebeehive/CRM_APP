@@ -55,6 +55,10 @@ export class UserDetailPage {
 
       this.addUserDetail.controls.password.clearValidators();
       this.addUserDetail.controls.password.updateValueAndValidity();
+      if (this.accountServices.USER_TYPE === 'user') {
+        this.addUserDetail.controls.enable.clearValidators();
+        this.addUserDetail.controls.enable.updateValueAndValidity();
+      }
     }
   }
 
@@ -79,37 +83,37 @@ export class UserDetailPage {
     userDetail.operationtype = 'INSERT'
 
     this.alertCtrl
-    .create({
-      header: 'Confirm Alert',
-      subHeader: 'Are you sure you want to create or update User?',
-      message:
-        'After Submit, User Detail is displayed in User Panel.',
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-          this.loginService
-          .getUsers(userDetail)
-          .then((result: ReturnResult<UserDetail[]>) => {
-          if (result.success) {
-            this.modalController.dismiss({
-              dismissed: true,
-              loaddata: true,
-            });
-          this.notificationService.showToast<UserDetail[]>(result);
-        } else {
-          this.notificationService.showToast<UserDetail[]>(result);
-        }
-       });
-      },
-      },
-      ],
-    })
-    .then((res) => {
-      res.present();
-    });
+      .create({
+        header: 'Confirm Alert',
+        subHeader: 'Are you sure you want to create or update User?',
+        message:
+          'After Submit, User Detail is displayed in User Panel.',
+        buttons: [
+          {
+            text: 'Cancel',
+          },
+          {
+            text: 'Ok',
+            handler: () => {
+              this.loginService
+                .getUsers(userDetail)
+                .then((result: ReturnResult<UserDetail[]>) => {
+                  if (result.success) {
+                    this.modalController.dismiss({
+                      dismissed: true,
+                      loaddata: true,
+                    });
+                    this.notificationService.showToast<UserDetail[]>(result);
+                  } else {
+                    this.notificationService.showToast<UserDetail[]>(result);
+                  }
+                });
+            },
+          },
+        ],
+      })
+      .then((res) => {
+        res.present();
+      });
   }
 }

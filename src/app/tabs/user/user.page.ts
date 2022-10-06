@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subject } from 'rxjs';
+import { ChangePasswordPage } from 'src/app/common/change-password/change-password.page';
 import { ReturnResult } from 'src/app/models/return-result';
 import { UserDetail } from 'src/app/models/userdetail.model';
 import { AccountService } from 'src/app/services/account/account.service';
@@ -55,6 +56,14 @@ export class UserPage implements OnInit {
     await model.present();
   }
 
+  public async onClickOpenChangePassword(item?: UserDetail) {
+    const model = await this.modalController.create({
+      component: ChangePasswordPage,
+      componentProps: { userDetail: item }
+    });
+    await model.present();
+  }
+
   public getUsers() {
     const userDetail = new UserDetail();
     userDetail.operationtype = 'GETUSER';
@@ -63,6 +72,8 @@ export class UserPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
+          const userIndex = this.users.findIndex(x => x.username === this.accountService.USER_NAME)
+          this.users[userIndex].isUser = true
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
         }
