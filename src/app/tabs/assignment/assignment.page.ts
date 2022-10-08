@@ -135,8 +135,8 @@ export class AssignmentPage {
     taskAssign.taskassignee = this.formControl
       .at(index)
       .get('assigneeUser').value;
-    
-      this.alertCtrl
+
+    this.alertCtrl
       .create({
         header: 'Confirm Alert',
         message:
@@ -145,21 +145,21 @@ export class AssignmentPage {
           {
             text: 'Ok',
             handler: () => {
-            this.assignmentService
-            .updateTaskDetails(taskAssign)
-            .then((result: ReturnResult<any>) => {
-            if (result.success) {
-              this.getTaskDetails();
-              this.setPushNotification(this.formControl.at(index).get('assigneeUser').value, (
-              this.formControl.at(index).value as TaskAssignmnetModel
-            ).taskid)
-            this.notificationService.showToast<any>(result);
-            } else {
-            this.notificationService.showToast<any>(result);
-          }
-          });
+              this.assignmentService
+                .updateTaskDetails(taskAssign)
+                .then((result: ReturnResult<any>) => {
+                  if (result.success) {
+                    this.getTaskDetails();
+                    this.setPushNotification(this.formControl.at(index).get('assigneeUser').value, (
+                      this.formControl.at(index).value as TaskAssignmnetModel
+                    ).taskid)
+                    this.notificationService.showToast<any>(result);
+                  } else {
+                    this.notificationService.showToast<any>(result);
+                  }
+                });
+            },
           },
-         },
         ],
       })
       .then((res) => {
@@ -170,7 +170,7 @@ export class AssignmentPage {
   setPushNotification(userId: number, taskID: number) {
     const userDetail = this.users.find(x => x.userid === userId)
     const notificationDetail = new NotificationDetail();
-    notificationDetail.notificationBody = `You have assigned new task ${taskID}`;
+    notificationDetail.notificationBody = `You have been assigned a new task # ${taskID}. To get more details, open the Big Task`;
     notificationDetail.notificationPriority = 'high';
     notificationDetail.notificationTitle = `Big Task CRM `;
     notificationDetail.userid = userId

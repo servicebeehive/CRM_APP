@@ -89,6 +89,10 @@ export class ReportPage implements OnInit {
         value: 'in progress',
       },
       {
+        key: 'Engineer Assigned',
+        value: "engineer assigned",
+      },
+      {
         key: 'Customer Pending',
         value: 'customer pending',
       },

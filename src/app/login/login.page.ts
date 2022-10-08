@@ -83,9 +83,6 @@ export class LoginPage {
           deviceDetails.devicemodel = "One plus 10",
           deviceDetails.deviceid = "312323432532"
         this.fcmService.getDeviceToken(deviceDetails).then(result => {
-          if (result.success) {
-            this.notificationService.showToast<DeviceDetails[]>(result);
-          }
         })
       }
     })
