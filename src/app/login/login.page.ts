@@ -22,7 +22,7 @@ export class LoginPage {
   public brandUrl: string = "assets/icon/logo2.png"
   public companyUrl: string = "assets/icon/logo.png"
   public UniqueDeviceID: string;
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
   addloginDetail = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', Validators.required],

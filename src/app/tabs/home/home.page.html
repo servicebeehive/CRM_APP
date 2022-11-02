@@ -3,9 +3,10 @@
 </ion-header>
 
 <ion-content>
-  <div *ngIf="isLoading | async">
+  <!-- <div *ngIf="isLoading | async">
     <app-loader></app-loader>
-  </div>
+  </div> -->
+  <form>
   <ion-card *ngFor="let item of assignedTaskDetails;let i = index">
     <ion-card-header class="d-flex justifiy-between  align-item-start">
       <ion-card-title class="ion-text-start d-flex align-item-center">
@@ -32,6 +33,12 @@
       <p>
         <ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.fullname}}</span>
       </p>
+      <p>
+        <ion-icon name="aperture-outline"></ion-icon> Service Type : <span>{{item.servicetype}}</span>
+      </p>
+      <p>
+        <ion-icon name="tv-outline"></ion-icon> Product Type : <span>{{item.producttype}}</span>
+      </p>
     </ion-card-content>
     <ion-footer class="no-shadow">
       <ion-row no-padding>
@@ -45,5 +52,5 @@
     </ion-footer>
   </ion-card>
   <p class="error" *ngIf="assignedTaskDetails.length === 0">No task to be assigned.</p>
-
+</form>
 </ion-content>

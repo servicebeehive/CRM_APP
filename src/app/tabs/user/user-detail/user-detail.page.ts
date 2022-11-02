@@ -20,7 +20,7 @@ export class UserDetailPage {
   public emailpattern = '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,4}$';
 
   public userDetail = this.navParams.get('userDetail');
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   addUserDetail = this.fb.group({
     firstName: ['', Validators.required],

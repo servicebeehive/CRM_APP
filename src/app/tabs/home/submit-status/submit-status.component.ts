@@ -23,7 +23,7 @@ interface Status {
 })
 export class SubmitStatusComponent implements OnInit {
   public taskDetails: TaskDetail = this.navParams.get('value');
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   status: Status[] = [];
 
@@ -109,10 +109,10 @@ export class SubmitStatusComponent implements OnInit {
                   loaddata: true,
                 });
                 this.notificationService.showToast<any>(result);
-                this.assignmentService.loader.next(false);
+                // this.assignmentService.loader.next(false);
               } else {
                 this.notificationService.showToast<any>(result);
-                this.assignmentService.loader.next(false);
+                // this.assignmentService.loader.next(false);
               }
        });
       },

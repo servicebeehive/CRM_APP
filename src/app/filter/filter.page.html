@@ -1,25 +1,14 @@
-<ion-header>
-  <app-header header="Report"></app-header>
-</ion-header>
-
 <ion-content>
-  <!-- <div *ngIf="isLoading | async">
-    <app-loader></app-loader>
-  </div> -->
   <ion-card-content>
-    <form [formGroup]="addReport">
+    <form [formGroup]="filterData">
       <ion-item lines="none" class="border-box mt-20">
-        <ion-select placeholder="Report Type" class="w-100" formControlName="reporttypecode">
-          <ion-select-option *ngFor="let itm of report;let i = index" [value]="itm.reporttypecode">
-            {{itm.reporttypename}}
-          </ion-select-option>
-        </ion-select>
-        <ion-icon name="pie-chart-outline" slot="start"></ion-icon>
+        <ion-input placeholder="Customer Name" formControlName="customername"></ion-input>
+        <ion-icon name="person-outline" slot="start"></ion-icon>
       </ion-item>
 
       <div class="form-group">
         <ion-item lines="none" class="border-box mt-20">
-          <ion-input placeholder="Pick Start Date" value="{{ addReport.value.fromdate  | date: 'dd-MM-YYYY' }}"
+          <ion-input placeholder="Pick Start Date" value="{{ filterData.value.fromdate  | date: 'dd-MM-YYYY' }}"
             id="fromdate">
           </ion-input>
           <ion-popover #ionPopover1 trigger="fromdate" size="cover">
@@ -34,7 +23,7 @@
 
       <div class="form-group">
         <ion-item lines="none" class="border-box mt-20">
-          <ion-input placeholder="Pick End Date" value="{{ addReport.value.todate  | date: 'dd-MM-YYYY' }}" id="todate">
+          <ion-input placeholder="Pick End Date" value="{{ filterData.value.todate  | date: 'dd-MM-YYYY' }}" id="todate">
           </ion-input>
           <ion-popover #ionPopover2 trigger="todate" size="cover">
             <ng-template>
@@ -62,14 +51,22 @@
         <ion-icon name="stats-chart-outline" slot="start"></ion-icon>
       </ion-item>
 
+      <ion-item lines="none" class="border-box mt-20">
+        <ion-icon name="aperture-outline" slot="start"></ion-icon>
+        <ion-select class="w-100" formControlName="servicetype" placeholder="Select Service Type">
+          <ion-select-option>Sales</ion-select-option>
+          <ion-select-option>Service</ion-select-option>
+        </ion-select>
+      </ion-item>
+
       <ion-footer class="ion-no-border mt-20">
         <ion-row class="ion-padding-bottom">
           <ion-col class="ion-no-padding" center text-center>
-            <ion-button [disabled]="addReport.invalid" type="submit" expand="block" color="primary"
-              (click)="onReportData()">Show Report</ion-button>
+            <ion-button type="submit" expand="block" color="primary"
+              (click)="onFilterData()">Ok</ion-button>
           </ion-col>
           <ion-col class="ion-no-padding" center text-center>
-            <ion-button type="submit" expand="block" color="primary" (click)="onReset()">Reset</ion-button>
+            <ion-button type="submit" expand="block" color="primary" (click)="onCancel()">Cancel</ion-button>
           </ion-col>
         </ion-row>
       </ion-footer>
@@ -77,13 +74,13 @@
     </form>
   </ion-card-content>
 
-  <ion-card *ngFor="let item of reportData; let i = index">
+  <ion-card *ngFor="let item of assignedTaskDetails; let i = index">
     <ion-card-header>
       Task # {{item.taskid}}
     </ion-card-header>
     <ion-card-content>
       <p>
-        <ion-icon name="calendar-outline"></ion-icon> Task Date : <span>{{item.taskdate | date:'mediumDate'}}</span>
+        <ion-icon name="calendar-outline"></ion-icon> Task Date : <span>{{item.createdon | date:'mediumDate'}}</span>
       </p>
       <p>
         <ion-icon name="person-outline"></ion-icon> Customer Name : <span>{{item.customername}}</span>

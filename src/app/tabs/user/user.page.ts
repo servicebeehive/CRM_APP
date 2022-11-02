@@ -19,7 +19,7 @@ export class UserPage implements OnInit {
   public test = [1, 2, 3, 4];
 
   public users: UserDetail[] = [];
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public modalController: ModalController,

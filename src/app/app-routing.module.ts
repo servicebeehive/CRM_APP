@@ -17,14 +17,19 @@ const routes: Routes = [
     path: '',
     redirectTo: 'login',
     pathMatch: 'full',
-  },  {
+  },
+  {
     path: 'forgot-password',
     loadChildren: () => import('./common/forgot-password/forgot-password.module').then( m => m.ForgotPasswordPageModule)
   },
   {
     path: 'change-password',
     loadChildren: () => import('./common/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
+  },  {
+    path: 'filter',
+    loadChildren: () => import('./filter/filter.module').then( m => m.FilterPageModule)
   },
+
 
 ];
 @NgModule({
