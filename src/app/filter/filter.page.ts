@@ -10,12 +10,10 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { ReturnResult } from 'src/app/models/return-result';
 import { ReportService } from 'src/app/services/report/report.service';
 import { AlertController, IonPopover } from '@ionic/angular';
-import { Subject } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { ModalController } from '@ionic/angular';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { TaskDetail } from 'src/app/tabs/task/task.page';
-import { OperationType } from 'src/app/tabs/assignment/assignment.page';
 
 interface Status {
   key: string;
@@ -23,17 +21,12 @@ interface Status {
 }
 
 export class ReportModel {
-  userid: number;
   startdate: Date;
   enddate: Date;
   status: string;
   taskassignee: string;
-  reporttypecode: string;
-  taskid: number;
-  taskdate: Date;
   customername: string;
-  location: string;
-  phone: number;
+  servicetype: string;
 }
 
 @Component({
@@ -50,7 +43,6 @@ export class FilterPage implements OnInit {
 
   public users: UserDetail[] = [];
   public assignedTaskDetails: TaskDetail[] = [];
-  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
   status: Status[] = [];
 
   constructor(
@@ -132,23 +124,24 @@ export class FilterPage implements OnInit {
   }
 
   public async onFilterData() {
-    const operationtype = new OperationType();
     const reportModel = new ReportModel();
     reportModel.startdate = !this.filterData.value.fromdate ? null : this.filterData.value.fromdate;
     reportModel.enddate = !this.filterData.value.todate ? null : this.filterData.value.todate;
     reportModel.status = !this.filterData.value.status ? null : this.filterData.value.status;
     reportModel.taskassignee = !this.filterData.value.taskassignee ? null : this.filterData.value.taskassignee;
-    // if(reportModel.startdate && reportModel.enddate || reportModel.status || reportModel.customername || reportModel.taskassignee){
-    //   this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.status === this.filterData.value.status);
-    //   this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.customername === this.filterData.value.customername);
-    //   this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.assignedto === this.filterData.value.taskassignee);
-    this.assignmentService
-    .getTaskDetails(operationtype)
-      .then((result: ReturnResult<TaskDetail[]>) => {
-      if(reportModel.startdate && reportModel.enddate || reportModel.status || reportModel.customername || reportModel.taskassignee){
+    reportModel.servicetype = !this.filterData.value.servicetype ? null : this.filterData.value.servicetype;
+      if(reportModel.startdate || reportModel.enddate || reportModel.status || reportModel.customername || reportModel.taskassignee){
           this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.status === this.filterData.value.status);
           this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.customername === this.filterData.value.customername);
           this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.assignedto === this.filterData.value.taskassignee);
+          this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.servicetype === this.filterData.value.servicetype);
+          console.log(this.filterData.value.customername);
+          console.log(this.filterData.value.startdate);
+          console.log(this.filterData.value.enddate);
+          console.log(this.filterData.value.status);
+          console.log(this.filterData.value.taskassignee);
+          console.log(this.filterData.value.servicetype);
+          console.log(this.assignedTaskDetails);
         if (reportModel.startdate > reportModel.enddate) {
           this.alertCtrl
             .create({
@@ -165,18 +158,18 @@ export class FilterPage implements OnInit {
             }).then((res) => {
               res.present();
             });
-        } 
-        else if (result.success) {
-          this.assignedTaskDetails = result.data;
-          this.modalController.dismiss({
-            dismissed: true,
-            loaddata: false,
-          });
         }
-       } else {
-          this.notificationService.showToast<TaskDetail[]>(result);
-        }
-      });
+        this.modalController.dismiss({
+          dismissed: true,
+          loaddata: false,
+        });
+      }
+      else{
+        this.modalController.dismiss({
+          dismissed: true,
+          loaddata: false,
+        });
+      }
     }
 
   onCancel() {
