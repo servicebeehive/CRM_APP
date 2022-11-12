@@ -43,7 +43,10 @@ export class FilterPage implements OnInit {
 
   public users: UserDetail[] = [];
   public assignedTaskDetails: TaskDetail[] = [];
+  public arrays: TaskDetail[] = [];
   status: Status[] = [];
+  newArray: any = [];
+  tempArray: any = [];
 
   constructor(
     public accountServices: AccountService,
@@ -131,34 +134,15 @@ export class FilterPage implements OnInit {
     reportModel.taskassignee = !this.filterData.value.taskassignee ? null : this.filterData.value.taskassignee;
     reportModel.servicetype = !this.filterData.value.servicetype ? null : this.filterData.value.servicetype;
       if(reportModel.startdate || reportModel.enddate || reportModel.status || reportModel.customername || reportModel.taskassignee){
-          this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.status === this.filterData.value.status);
-          this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.customername === this.filterData.value.customername);
-          this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.assignedto === this.filterData.value.taskassignee);
-          this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.servicetype === this.filterData.value.servicetype);
-          console.log(this.filterData.value.customername);
-          console.log(this.filterData.value.startdate);
-          console.log(this.filterData.value.enddate);
-          console.log(this.filterData.value.status);
-          console.log(this.filterData.value.taskassignee);
-          console.log(this.filterData.value.servicetype);
-          console.log(this.assignedTaskDetails);
-        if (reportModel.startdate > reportModel.enddate) {
-          this.alertCtrl
-            .create({
-              message:
-                'End Date must be greater than Start Date',
-              buttons: [
-                {
-                  text: 'Ok',
-                  handler: () => {
-                    this.filterData.reset();
-                  },
-                },
-              ],
-            }).then((res) => {
-              res.present();
-            });
-        }
+        //  this.newArray = this.assignedTaskDetails.filter(x => x.status === this.filterData.value.status);
+       //   this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.customername === this.filterData.value.customername);
+        //  this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.assignedto === this.filterData.value.taskassignee);
+        //  this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.servicetype === this.filterData.value.servicetype);
+        this.tempArray = this.arrays.filter((e) => e.status.includes(this.filterData.value.status));
+        this.assignedTaskDetails = [];
+        this.newArray.push(this.tempArray);
+        console.log(this.filterData.value.status);
+        console.log(this.newArray);
         this.modalController.dismiss({
           dismissed: true,
           loaddata: false,
