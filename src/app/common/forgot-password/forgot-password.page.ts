@@ -29,7 +29,7 @@ export class ForgotPasswordPage {
   );
 
   public users: UserDetail[] = [];
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public accountServices: AccountService,

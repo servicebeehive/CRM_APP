@@ -27,7 +27,8 @@ export class HttpIntercertor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    this.loaderService.show();
+    // this.loaderService.show();
+    this.loaderService.presentLoading();
     const data = request.body;
     if (request.url.includes('login') || request.url.includes('forgotpassword')) {
       request = request.clone({
@@ -39,7 +40,8 @@ export class HttpIntercertor implements HttpInterceptor {
       return next.handle(request).pipe(
         finalize(
           () => {
-            this.loaderService.hide();
+            // this.loaderService.hide();
+            this.loaderService.dismiss();
           }
         )
       );
@@ -65,7 +67,8 @@ export class HttpIntercertor implements HttpInterceptor {
     return next.handle(request).pipe(
       finalize(
         () => {
-          this.loaderService.hide();
+          // this.loaderService.hide();
+          this.loaderService.dismiss();
         }
       ),
       tap(

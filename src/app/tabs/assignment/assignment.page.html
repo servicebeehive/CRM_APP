@@ -2,9 +2,9 @@
   <app-header header="Assignment"></app-header>
 </ion-header>
 
-<div *ngIf="isLoading | async">
+<!-- <div *ngIf="isLoading | async">
   <app-loader></app-loader>
-</div>
+</div> -->
 
 <ion-content>
   <form [formGroup]="assignmentForm">
@@ -37,6 +37,12 @@
             </p>
             <p>
               <ion-icon name="cog-outline"></ion-icon> Engineer : <span>{{item.value.fullname}}</span>
+            </p>
+            <p>
+              <ion-icon name="aperture-outline"></ion-icon> Service Type : <span>{{item.value.servicetype}}</span>
+            </p>
+            <p>
+              <ion-icon name="tv-outline"></ion-icon> Product Type : <span>{{item.value.producttype}}</span>
             </p>
             <p>
               <ion-icon name="ellipse"

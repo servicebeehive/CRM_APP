@@ -1,6 +1,9 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="primary">
     <ion-title>{{header}}</ion-title>
+    <ion-button (click)="onClickOpenModel()" slot="end" fill="clear" color="dark">
+      <ion-icon slot="icon-only" class="color-white" name="filter-outline"></ion-icon>
+    </ion-button>
     <ion-button (click)="onClickLogout()" slot="end" fill="clear" color="dark">
       <ion-icon slot="icon-only" class="color-white" name="log-out-outline"></ion-icon>
     </ion-button>

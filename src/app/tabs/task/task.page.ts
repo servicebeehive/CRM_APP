@@ -29,7 +29,7 @@ export class TaskDetail {
   styleUrls: ['./task.page.scss'],
 })
 export class TaskPage implements OnInit {
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   addTaskDetail = this.fb.group({
     customerName: ['', Validators.required],
@@ -80,10 +80,10 @@ export class TaskPage implements OnInit {
                   if (result.success) {
                     this.notificationService.showToast<string>(result);
                     this.addTaskDetail.reset();
-                    this.taskService.loader.next(false);
+                    // this.taskService.loader.next(false);
                   } else {
                     this.notificationService.showToast<string>(result);
-                    this.taskService.loader.next(false);
+                    // this.taskService.loader.next(false);
                   }
                 });
             },

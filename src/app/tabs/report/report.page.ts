@@ -48,7 +48,7 @@ export class ReportPage implements OnInit {
   public users: UserDetail[] = [];
   public report: ReportType[] = [];
   public reportData: ReportData[] = [];
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
   status: Status[] = [];
 
   constructor(
@@ -135,10 +135,10 @@ export class ReportPage implements OnInit {
       .then((result: ReturnResult<ReportType[]>) => {
         if (result.success) {
           this.report = result.data;
-          this.reportService.loader.next(false);
+          // this.reportService.loader.next(false);
         } else {
           this.notificationService.showToast<ReportType[]>(result);
-          this.reportService.loader.next(false);
+          // this.reportService.loader.next(false);
         }
       });
   }
@@ -178,10 +178,10 @@ export class ReportPage implements OnInit {
         }
         else if (result.success) {
           this.reportData = result.data;
-          this.reportService.loader.next(false);
+          // this.reportService.loader.next(false);
         } else {
           this.notificationService.showToast<ReportData[]>(result);
-          this.reportService.loader.next(false);
+          // this.reportService.loader.next(false);
         }
       });
   }

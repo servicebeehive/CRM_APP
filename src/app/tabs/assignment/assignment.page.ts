@@ -46,7 +46,7 @@ export class AssignmentPage {
 
   public users: UserDetail[] = [];
 
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   public assignmentForm = this.fb.group({
     assignTaskForm: this.fb.array([]),
@@ -100,10 +100,10 @@ export class AssignmentPage {
               })
             );
           });
-          this.assignmentService.loader.next(false);
+          // this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
-          this.assignmentService.loader.next(false);
+          // this.assignmentService.loader.next(false);
         }
       });
   }

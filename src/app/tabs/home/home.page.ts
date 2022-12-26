@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Subject } from 'rxjs';
@@ -20,7 +21,7 @@ import { SubmitStatusComponent } from './submit-status/submit-status.component';
 })
 export class HomePage implements OnInit {
   public assignedTaskDetails: TaskDetail[] = [];
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public datepipe: DatePipe,
@@ -72,11 +73,11 @@ export class HomePage implements OnInit {
       .then((result: ReturnResult<TaskDetail[]>) => {
         if (result.success) {
           this.assignedTaskDetails = result.data;
-          this.assignmentService.loader.next(false);
+          // this.assignmentService.loader.next(false);
 
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
-          this.assignmentService.loader.next(false);
+          // this.assignmentService.loader.next(false);
         }
       });
   }

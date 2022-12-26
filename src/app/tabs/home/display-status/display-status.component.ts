@@ -17,7 +17,7 @@ import { TaskDetail } from '../../task/task.page';
 export class DisplayStatusComponent implements OnInit {
   public assignedTaskDetails: TaskDetail[] = [];
   public taskDetails: TaskDetail = this.navParams.get('value');
-  public isLoading: Subject<boolean> = this.loaderService.isLoading;
+  // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
   constructor(
     public modalController: ModalController,
@@ -44,10 +44,10 @@ export class DisplayStatusComponent implements OnInit {
       .then((result: ReturnResult<TaskDetail[]>) => {
         if (result.success) {
           this.assignedTaskDetails = result.data;
-          this.assignmentService.loader.next(false);
+          // this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
-          this.assignmentService.loader.next(false);
+          // this.assignmentService.loader.next(false);
         }
       });
   }
