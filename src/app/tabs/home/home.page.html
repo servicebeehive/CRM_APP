@@ -11,7 +11,7 @@
     <ion-card-header class="d-flex justifiy-between  align-item-start">
       <ion-card-title class="ion-text-start d-flex align-item-center">
         <ion-icon name="ellipse"
-          [color]="item.status=='in progress'?'warning':item.status=='open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'">
+          [color]="item.status==='in progress'?'warning':item.status==='open'?'light':item.status==='resolved'?'success':item.status==='customer pending'?'medium':'secondary'">
         </ion-icon> Task # {{item.taskid}}
       </ion-card-title>
       <ion-card-subtitle class="ion-text-end">Status:{{item.status}}</ion-card-subtitle>

@@ -16,7 +16,7 @@ export class LoaderService {
   // hide() {
   //   this.isLoading.next(false);
   // }
-  constructor (public loadingController: LoadingController){}
+  constructor(public loadingController: LoadingController){}
   async presentLoading(){
     const isLoading = await this.loadingController.create({
       cssClass: 'my-custom-class',

@@ -18,7 +18,7 @@ export class ReportService extends BaseService {
     public httpClient: HttpClient,
     public controllers: Controllers,
     public config: ConfigService<IConfig>
-  ) { 
+  ) {
     super(httpClient, config.getSettingsObject().APIUrl);
   }
 

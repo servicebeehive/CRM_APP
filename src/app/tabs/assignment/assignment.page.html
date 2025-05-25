@@ -15,7 +15,7 @@
           <ion-card-header class="d-flex justifiy-between  align-item-start">
             <ion-card-title class="ion-text-start d-flex align-item-center">
               <ion-icon name="ellipse"
-                [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'">
+                [color]="item.value.status==='in progress'?'warning':item.value.status==='open'||item.value.status==='Open'?'light':item.value.status==='resolved'?'success':item.value.status==='customer pending'?'medium':'secondary'">
               </ion-icon> Task # {{item.value.taskid}}
             </ion-card-title>
           </ion-card-header>
@@ -46,7 +46,7 @@
             </p>
             <p>
               <ion-icon name="ellipse"
-                [color]="item.value.status=='in progress'?'warning':item.value.status=='open'||item.value.status=='Open'?'light':item.value.status=='resolved'?'success':item.value.status=='customer pending'?'medium':'secondary'">
+                [color]="item.value.status==='in progress'?'warning':item.value.status==='open'||item.value.status==='Open'?'light':item.value.status==='resolved'?'success':item.value.status==='customer pending'?'medium':'secondary'">
               </ion-icon> Status : <span>{{item.value.status}}</span>
             </p>
             <ion-item lines="none" class="border-box mt-20">

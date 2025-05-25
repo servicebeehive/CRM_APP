@@ -50,7 +50,7 @@ export class AppComponent {
       this.subscribeToTopic();
       this.unsubscribeFromTopic();
 
-    })
+    });
   }
 
   subscribeToTopic() {

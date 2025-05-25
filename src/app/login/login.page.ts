@@ -19,8 +19,8 @@ import { NotificationService } from '../services/notification/notification.servi
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  public brandUrl: string = "assets/icon/logo2.png"
-  public companyUrl: string = "assets/icon/logo.png"
+  public brandUrl = 'assets/icon/logo2.png';
+  public companyUrl = 'assets/icon/logo.png';
   public UniqueDeviceID: string;
   // public isLoading: Subject<boolean> = this.loaderService.isLoading;
   addloginDetail = this.fb.group({
@@ -69,23 +69,23 @@ export class LoginPage {
     const deviceDetails = new DeviceDetails();
     deviceDetails.userid = userDetailData.userid,
       deviceDetails.username = userDetailData.username,
-      deviceDetails.operationtype = "GETTOKEN"
+      deviceDetails.operationtype = 'GETTOKEN';
     this.fcmService.getDeviceToken(deviceDetails).then(result => {
       this.accountServices.DEVICE_TOKEN_DETAILS = result.data;
       const index = this.accountServices.DEVICE_TOKEN_DETAILS.findIndex(value => value.devicetoken === this.accountServices.DEVICE_TOKEN);
       if (index < 0) {
         deviceDetails.userid = userDetailData.userid,
           deviceDetails.username = userDetailData.username,
-          deviceDetails.operationtype = "INSERT",
+          deviceDetails.operationtype = 'INSERT',
           deviceDetails.emailaddress = userDetailData.email,
           deviceDetails.devicetoken = this.accountServices.DEVICE_TOKEN,
-          deviceDetails.operatingsystem = "Android 12",
-          deviceDetails.devicemodel = "One plus 10",
-          deviceDetails.deviceid = "312323432532"
+          deviceDetails.operatingsystem = 'Android 12',
+          deviceDetails.devicemodel = 'One plus 10',
+          deviceDetails.deviceid = '312323432532';
         this.fcmService.getDeviceToken(deviceDetails).then(result => {
-        })
+        });
       }
-    })
+    });
     return true;
 
   }

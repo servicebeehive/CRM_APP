@@ -93,7 +93,7 @@
       </p>
       <p>
         <ion-icon name="ellipse"
-          [color]="item.status=='in progress'?'warning':item.status=='open'?'light':item.status=='resolved'?'success':item.status=='customer pending'?'medium':'secondary'">
+          [color]="item.status==='in progress'?'warning':item.status==='open'?'light':item.status==='resolved'?'success':item.status==='customer pending'?'medium':'secondary'">
         </ion-icon>Status : <span>{{item.status}}</span>
       </p>
     </ion-card-content>

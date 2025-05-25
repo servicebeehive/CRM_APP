@@ -19,8 +19,9 @@ export class TaskDetail {
   fullname: string;
   createdon: string;
   assignedto: string;
-  servicetype: string;
+  typeofservice: string;
   producttype: string;
+  servicetype: string;
 }
 
 @Component({

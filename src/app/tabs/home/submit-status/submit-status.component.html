@@ -14,7 +14,7 @@
       <ion-card-header class="d-flex justifiy-between  align-item-start">
         <ion-card-title class="ion-text-start d-flex align-item-center">
           <ion-icon name="ellipse"
-            [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'">
+            [color]="taskDetails.status==='in progress'?'warning':taskDetails.status==='open'?'light':taskDetails.status==='resolved'?'success':taskDetails.status==='customer pending'?'medium':'secondary'">
           </ion-icon> Task # {{taskDetails.taskid}}
         </ion-card-title>
 
@@ -36,7 +36,7 @@
         </p>
         <p>
           <ion-icon name="ellipse"
-            [color]="taskDetails.status=='in progress'?'warning':taskDetails.status=='open'?'light':taskDetails.status=='resolved'?'success':taskDetails.status=='customer pending'?'medium':'secondary'">
+            [color]="taskDetails.status==='in progress'?'warning':taskDetails.status==='open'?'light':taskDetails.status==='resolved'?'success':taskDetails.status==='customer pending'?'medium':'secondary'">
           </ion-icon> Current Status : <span>{{taskDetails.status}}</span>
         </p>
 

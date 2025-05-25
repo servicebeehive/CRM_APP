@@ -14,7 +14,7 @@ export class AccountService {
   public USER_TYPE?: string;
   public CLIENT_CODE?: string;
   public DEVICE_TOKEN: string;
-  public DEVICE_TOKEN_DETAILS: DeviceDetails[]
+  public DEVICE_TOKEN_DETAILS: DeviceDetails[];
 
   constructor(public storage: Storage) {
     this.storage.create();

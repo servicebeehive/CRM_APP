@@ -72,8 +72,8 @@ export class UserPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
-          const userIndex = this.users.findIndex(x => x.username === this.accountService.USER_NAME)
-          this.users[userIndex].isUser = true
+          const userIndex = this.users.findIndex(x => x.username === this.accountService.USER_NAME);
+          this.users[userIndex].isUser = true;
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
         }

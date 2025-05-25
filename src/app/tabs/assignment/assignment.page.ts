@@ -96,6 +96,8 @@ export class AssignmentPage {
                 remark: element.remarks,
                 status: element.status,
                 fullname: element.fullname,
+                servicetype: element.servicetype,
+                producttype: element.producttype,
                 index: [i],
               })
             );

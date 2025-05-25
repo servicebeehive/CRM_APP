@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { DeviceDetails } from "../models/devicedetail";
-import { NotificationDetail } from "../models/notification.model";
-import { ReturnResult } from "../models/return-result";
-import { UserDetail } from "../models/userdetail.model";
-import { FcmService } from "../services/fcm/fcm.service";
-import { NotificationService } from "../services/notification/notification.service";
+import { Injectable } from '@angular/core';
+import { DeviceDetails } from '../models/devicedetail';
+import { NotificationDetail } from '../models/notification.model';
+import { ReturnResult } from '../models/return-result';
+import { UserDetail } from '../models/userdetail.model';
+import { FcmService } from '../services/fcm/fcm.service';
+import { NotificationService } from '../services/notification/notification.service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,7 +21,7 @@ export class SendNotificationUtility {
         const deviceDetails = new DeviceDetails();
         deviceDetails.userid = userDetailData.userid,
             deviceDetails.username = userDetailData.username,
-            deviceDetails.operationtype = "GETTOKEN"
+            deviceDetails.operationtype = 'GETTOKEN';
         this.fcmService.getDeviceToken(deviceDetails).then(result => {
             deviceTokens = result.data;
             if (deviceTokens.length > 0) {
@@ -30,11 +30,11 @@ export class SendNotificationUtility {
                     this.fcmService.sendNotification(notificationDetail).then(result => {
                         if (result.success) {
                         }
-                    })
+                    });
                 }
             }
-        })
-        return
+        });
+        return;
     }
 
 }

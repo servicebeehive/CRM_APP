@@ -11,7 +11,7 @@ import { FilterPage } from 'src/app/filter/filter.page';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() header : string;
+  @Input() header: string;
 
   constructor(
     public accountServices: AccountService,

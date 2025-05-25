@@ -90,7 +90,7 @@ export class FilterPage implements OnInit {
       },
       {
         key: 'Engineer Assigned',
-        value: "engineer assigned",
+        value: 'engineer assigned',
       },
       {
         key: 'Customer Pending',
