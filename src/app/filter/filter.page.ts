@@ -142,7 +142,7 @@ export class FilterPage implements OnInit {
         this.assignedTaskDetails = [];
         this.newArray.push(this.tempArray);
         console.log(this.filterData.value.status);
-        console.log(this.newArray);
+      //  console.log(this.newArray);
         this.modalController.dismiss({
           dismissed: true,
           loaddata: false,
