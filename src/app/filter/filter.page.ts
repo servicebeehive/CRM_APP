@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { AccountService } from 'src/app/services/account/account.service';
 import { Router } from '@angular/router';
@@ -14,6 +14,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { ModalController } from '@ionic/angular';
 import { AssignmentService } from 'src/app/services/assignment/assignment.service';
 import { TaskDetail } from 'src/app/tabs/task/task.page';
+import { HomePage } from '../tabs/home/home.page';
 
 interface Status {
   key: string;
@@ -38,15 +39,17 @@ export class ReportModel {
 
 export class FilterPage implements OnInit {
 
-  @ViewChild('ionPopover1') public ionPopover1: IonPopover;
-  @ViewChild('ionPopover2') public ionPopover2: IonPopover;
+@ViewChild('ionPopover1') public ionPopover1: IonPopover;
+@ViewChild('ionPopover2') public ionPopover2: IonPopover;
 
   public users: UserDetail[] = [];
   public assignedTaskDetails: TaskDetail[] = [];
   public arrays: TaskDetail[] = [];
   status: Status[] = [];
-  newArray: any = [];
   tempArray: any = [];
+   newArray: any=[];
+  
+ 
 
   constructor(
     public accountServices: AccountService,
@@ -60,7 +63,7 @@ export class FilterPage implements OnInit {
     public alertCtrl: AlertController,
     public loaderService: LoaderService,
     public modalController: ModalController
-  ) { }
+  ) {}
 
   filterData = new FormGroup({
     fromdate: new FormControl(''),
@@ -120,6 +123,7 @@ export class FilterPage implements OnInit {
       .then((result: ReturnResult<UserDetail[]>) => {
         if (result.success) {
           this.users = result.data;
+          console.log('user:',this.users);
         } else {
           this.notificationService.showToast<UserDetail[]>(result);
         }
@@ -128,25 +132,31 @@ export class FilterPage implements OnInit {
 
   public async onFilterData() {
     const reportModel = new ReportModel();
+  //  this.filterData.value.taskassignee=this.users;
+    reportModel.customername= !this.filterData.value.customername ? null : this.filterData.value.customername;
     reportModel.startdate = !this.filterData.value.fromdate ? null : this.filterData.value.fromdate;
     reportModel.enddate = !this.filterData.value.todate ? null : this.filterData.value.todate;
     reportModel.status = !this.filterData.value.status ? null : this.filterData.value.status;
     reportModel.taskassignee = !this.filterData.value.taskassignee ? null : this.filterData.value.taskassignee;
     reportModel.servicetype = !this.filterData.value.servicetype ? null : this.filterData.value.servicetype;
       if(reportModel.startdate || reportModel.enddate || reportModel.status || reportModel.customername || reportModel.taskassignee){
-        //  this.newArray = this.assignedTaskDetails.filter(x => x.status === this.filterData.value.status);
-       //   this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.customername === this.filterData.value.customername);
+        //  this.newArray= this.assignedTaskDetails.filter(x => x.status === this.filterData.value.status);
+        //  this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.customername === this.filterData.value.customername);
         //  this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.assignedto === this.filterData.value.taskassignee);
         //  this.assignedTaskDetails = this.assignedTaskDetails.filter(x => x.servicetype === this.filterData.value.servicetype);
-        this.tempArray = this.arrays.filter((e) => e.status.includes(this.filterData.value.status));
-        this.assignedTaskDetails = [];
-        this.newArray.push(this.tempArray);
-        console.log(this.filterData.value.status);
-        console.log(this.newArray);
+        // this.tempArray = this.arrays.filter((e) => e.status.includes(this.filterData.value.status));
+        // console.log('task data:',this.taskData);
+        // //  console.log('values',this.filterData.value);
+        // this.newArray=this.assignedTaskDetails.filter(i=>
+        //   i.customername===reportModel.customername|| i.status===reportModel.status||i.fullname===reportModel.taskassignee || i.servicetype===reportModel.servicetype);
+        // this.assignedTaskDetails = [];
+        // this.newArray.push(this.tempArray);
+      //  console.log('ans:',this.newArray);
+       
         this.modalController.dismiss({
           dismissed: true,
           loaddata: false,
-        });
+        });    
       }
       else{
         this.modalController.dismiss({
@@ -154,6 +164,19 @@ export class FilterPage implements OnInit {
           loaddata: false,
         });
       }
+      const formData=this.filterData.value;
+       const modal = await this.modalController.create({
+    component: HomePage,
+    componentProps: {
+    formObject:formData
+    }
+  });
+  this.modalController.dismiss({
+          dismissed: true,
+          loaddata: false,
+        });    
+  console.log('filter:',formData);
+  await modal.present();
     }
 
   onCancel() {
@@ -167,5 +190,4 @@ export class FilterPage implements OnInit {
     this.ionPopover1.dismiss();
     this.ionPopover2.dismiss();
   }
-
 }
