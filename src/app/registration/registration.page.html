@@ -1,0 +1,130 @@
+<!-- 🔝 Header -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" class="ion-padding-start">
+      <!-- <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" ></ion-img> -->
+      <ion-title class="fw-bold" size="small">Hi there!</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end" class="ion-padding-end">
+      <ion-icon name="globe-outline" class="fs-5"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Form Card -->
+<ion-content>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <ion-grid class="ion-padding">
+      <ion-row
+        class="ion-padding-end ion-padding-start ion-justify-content-center"
+      >
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="text"
+              formControlName="realEstate"
+              placeholder="Real Estate"
+            >
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input type="text" formControlName="name" placeholder="Name">
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="text"
+              formControlName="phone"
+              placeholder="Phone Number"
+            >
+              <ion-icon slot="start" name="call-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="Email Id"
+            >
+              <ion-icon slot="start" name="mail-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="text"
+              formControlName="address"
+              placeholder="Address"
+              class="form-control"
+            >
+              <ion-icon slot="start" name="location-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <!-- <ion-icon name="flag-outline" class="select-icon"></ion-icon> -->
+          <ion-item lines="none" class="border-box">
+            <ion-select
+              formControlName="country"
+              class="right-arrow-select"
+              placeholder="Select Country"
+            >
+              <ion-select-option value="us">
+                <ion-icon name="flag" slot="start"></ion-icon>
+                United States
+              </ion-select-option>
+              <ion-select-option value="uk">
+                <ion-icon name="flag" slot="start"></ion-icon>
+                United Kingdom
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-select
+              type="text"
+              class="right-arrow-select"
+              formControlName="state"
+              placeholder="State"
+            ></ion-select>
+          </ion-item>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-select
+              type="text"
+              class="right-arrow-select"
+              formControlName="city"
+              placeholder="City"
+            ></ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+</ion-grid>
+      <!-- Buttons -->
+       <ion-footer class="ion-no-border ion-padding-end">
+       <ion-row class="ion-padding-start ion-padding-end">
+        <ion-col size="6" class="ion-padding-start"><ion-button expand="block" type="submit">Submit</ion-button></ion-col>
+        <ion-col size="6" class="ion-padding-start"> <ion-button expand="block" type="button">Cancel</ion-button></ion-col>
+       </ion-row>
+       </ion-footer>
+  </form>
+</ion-content>

@@ -25,9 +25,18 @@ const routes: Routes = [
   {
     path: 'change-password',
     loadChildren: () => import('./common/change-password/change-password.module').then( m => m.ChangePasswordPageModule)
-  },  {
+  },
+  {
     path: 'filter',
     loadChildren: () => import('./filter/filter.module').then( m => m.FilterPageModule)
+  },
+  {
+    path: 'registration',
+    loadChildren: () => import('./registration/registration.module').then( m => m.RegistrationPageModule)
+  },
+  {
+    path: 'otp',
+    loadChildren: () => import('./otp/otp.module').then( m => m.OtpPageModule)
   },
 
 

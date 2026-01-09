@@ -1,0 +1,59 @@
+<!-- 🔝 Header -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start" class="ion-padding-start">
+      <!-- <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" /> -->
+      <ion-title class="fw-bold" size="small">Hi there!</ion-title>
+    </ion-buttons>
+
+    <ion-buttons slot="end" class="ion-padding-end">
+      <ion-icon name="globe-outline" class="fs-5"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- 📲 OTP Section -->
+<ion-content class="ion-padding">
+  <ion-item lines="none" class="fw-medium">
+    Enter OTP sent to <b> +91 9871***06</b>
+  </ion-item>
+
+  <ion-grid>
+    <ion-row class="d-flex ion-justify-content-center">
+      <ion-col size="2" *ngFor="let digit of digits;let i=index">
+           <ion-input
+    type="tel"
+    maxlength="1"
+    inputmode="numeric"
+    [value]="digit[i]"
+    class="border-box"
+    >
+</ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-button (click)="verifyOtp()">Verify OTP</ion-button>
+
+  <ion-row class="small mt-2">
+    <ion-col>
+      <span (click)="resendOtp()" class="text-color">Resend OTP </span>
+      <span>in </span>
+      <span [class.text-muted]="!isResendEnabled"
+        >{{ timer | number: '2.0' }}</span
+      >
+    </ion-col>
+  </ion-row>
+
+  <ion-row class="small mt-2 ion-align-items-center">
+    <ion-col size="auto">
+      <p class="m-0">Having trouble logging in?</p>
+    </ion-col>
+
+    <ion-col size="auto">
+      <p class="m-0 medium fw-bold" color="primary">Get Help</p>
+    </ion-col>
+  </ion-row>
+
+  <ion-button class="mt-4">Subs Exp</ion-button>
+</ion-content>

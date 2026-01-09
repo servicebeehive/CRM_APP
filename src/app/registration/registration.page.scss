@@ -1,0 +1,21 @@
+
+.logo-sm {
+  width: 32px;
+  height: 32px;
+}
+
+.select-wrapper {
+  position: relative;
+  border: 1px solid rgb(230, 228, 228);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.right-arrow-select::part(icon){
+position: absolute;
+right: 10px;
+top:50%;
+ transform: translateY(-50%);
+  color:rgb(230, 228, 228);
+}

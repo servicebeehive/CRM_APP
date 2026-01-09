@@ -18,6 +18,10 @@ const routes: Routes = [
           import('./task/task.module').then((m) => m.TaskPageModule),
       },
       {
+    path: 'lead',
+    loadChildren: () => import('./lead/lead.module').then( m => m.LeadPageModule)
+  },
+      {
         path: 'assignment',
         loadChildren: () =>
           import('./assignment/assignment.module').then(
@@ -41,6 +45,8 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  
+
 ];
 
 @NgModule({
