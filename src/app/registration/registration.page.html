@@ -6,9 +6,29 @@
       <ion-title class="fw-bold" size="small">Hi there!</ion-title>
     </ion-buttons>
 
-    <ion-buttons slot="end" class="ion-padding-end">
-      <ion-icon name="globe-outline" class="fs-5"></ion-icon>
-    </ion-buttons>
+   <ion-buttons slot="end" class="ion-padding-end">
+  <ion-icon
+    name="globe-outline"
+    class="fs-5"
+    id="lang-trigger">
+  </ion-icon>
+</ion-buttons>
+
+<ion-popover
+  trigger="lang-trigger"
+  triggerAction="click"
+  side="bottom"
+  alignment="end"
+  show-backdrop="false">
+  
+  <ng-template>
+    <ion-list>
+      <ion-item lines="none">English</ion-item>
+      <ion-item lines="none">Hindi</ion-item>
+    </ion-list>
+  </ng-template>
+</ion-popover>
+
   </ion-toolbar>
 </ion-header>
 
@@ -29,6 +49,9 @@
               <ion-icon slot="start" name="business-outline"></ion-icon>
             </ion-input>
           </ion-item>
+          <ion-text color="danger" *ngIf="userForm.get('realEstate')?.touched">
+            <p class="ion-padding-start">Real Estate is required</p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
@@ -37,18 +60,40 @@
               <ion-icon slot="start" name="person-outline"></ion-icon>
             </ion-input>
           </ion-item>
+          <ion-text color="danger" *ngIf="userForm.get('name')?.touched">
+            <p class="ion-padding-start">Name is required</p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
           <ion-item lines="none" class="border-box">
             <ion-input
-              type="text"
+              type="tel"
               formControlName="phone"
               placeholder="Phone Number"
+              inputmode="numeric"
+              maxlength="10"
             >
               <ion-icon slot="start" name="call-outline"></ion-icon>
             </ion-input>
           </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="userForm.get('phone')?.touched && userForm.get('phone')?.invalid"
+          >
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('phone')?.errors?.['required']"
+            >
+              Phone number is required
+            </p>
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('phone')?.errors?.['pattern']"
+            >
+              Enter a valid 10-digit phone number
+            </p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
@@ -61,6 +106,23 @@
               <ion-icon slot="start" name="mail-outline"></ion-icon>
             </ion-input>
           </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid"
+          >
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('email')?.errors?.['required']"
+            >
+              Email is required
+            </p>
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('email')?.errors?.['email']"
+            >
+              Enter a valid email address
+            </p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
@@ -74,57 +136,73 @@
               <ion-icon slot="start" name="location-outline"></ion-icon>
             </ion-input>
           </ion-item>
+          <ion-text color="danger" *ngIf="userForm.get('address')?.touched">
+            <p class="ion-padding-start">Address is required</p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
           <!-- <ion-icon name="flag-outline" class="select-icon"></ion-icon> -->
-          <ion-item lines="none" class="border-box">
-            <ion-select
-              formControlName="country"
-              class="right-arrow-select"
-              placeholder="Select Country"
-            >
-              <ion-select-option value="us">
-                <ion-icon name="flag" slot="start"></ion-icon>
-                United States
-              </ion-select-option>
-              <ion-select-option value="uk">
-                <ion-icon name="flag" slot="start"></ion-icon>
-                United Kingdom
-              </ion-select-option>
-            </ion-select>
+          <ion-item lines="none" class="border-box" (click)="toggleCountry()">
+           <ion-label>{{userForm.get('country')?.value || 'Select Country'}}</ion-label>
           </ion-item>
+          <div *ngIf="showCountryDropdown" class="dropdown">
+            <div (click)="selectCountry('India')">India</div>
+             <div (click)="selectCountry('US')">US</div>
+          </div>
+          <ion-text color="danger" *ngIf="userForm.get('country')?.touched">
+            <p class="ion-padding-start">Country is required</p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
-          <ion-item lines="none" class="border-box">
-            <ion-select
-              type="text"
-              class="right-arrow-select"
-              formControlName="state"
-              placeholder="State"
-            ></ion-select>
+          <ion-item lines="none" class="border-box" (click)="toggleState()">
+            <ion-label>{{userForm.get('state')?.value || 'State'}}</ion-label>
           </ion-item>
+          <div *ngIf="showStateDropdown" class="dropdown">
+            <div (click)="selectState('CG')">CG</div>
+            <div (click)="selectState('Bihar')">Bihar</div>
+          </div>
+          <ion-text color="danger" *ngIf="userForm.get('state')?.touched">
+            <p class="ion-padding-start">State is required</p>
+          </ion-text>
         </ion-col>
 
         <ion-col size="12">
-          <ion-item lines="none" class="border-box">
-            <ion-select
-              type="text"
-              class="right-arrow-select"
-              formControlName="city"
-              placeholder="City"
-            ></ion-select>
+          <ion-item lines="none" class="border-box" (click)="toggleCity()">
+            <ion-label>{{userForm.get('city')?.value ||'City'}}</ion-label>
           </ion-item>
+          <div *ngIf="showCityDropdown" class="dropdown">
+            <div (click)="selectCity('Chennai')">Chennai</div>
+            <div (click)="selectCity('Mumbai')">Mumbai</div>
+            <div (click)="selectCity('Pune')">Pune</div>
+          </div>
+
+          <!-- Validation -->
+          <ion-text
+            color="danger"
+            *ngIf="userForm.get('city')?.touched && userForm.get('city')?.invalid"
+          >
+            <p class="ion-padding-start">City is required</p>
+          </ion-text>
         </ion-col>
       </ion-row>
-</ion-grid>
-      <!-- Buttons -->
-       <ion-footer class="ion-no-border ion-padding-end">
-       <ion-row class="ion-padding-start ion-padding-end">
-        <ion-col size="6" class="ion-padding-start"><ion-button expand="block" type="submit">Submit</ion-button></ion-col>
-        <ion-col size="6" class="ion-padding-start"> <ion-button expand="block" type="button">Cancel</ion-button></ion-col>
-       </ion-row>
-       </ion-footer>
+    </ion-grid>
+    <!-- Buttons -->
+    <ion-footer class="ion-no-border ion-padding-end">
+      <ion-row class="ion-padding-start ion-padding-end">
+        <ion-col size="6" class="ion-padding-start"
+          ><ion-button
+            expand="block"
+            type="submit"
+            [disabled]="userForm.invalid"
+            >Submit</ion-button
+          ></ion-col
+        >
+        <ion-col size="6" class="ion-padding-start">
+          <ion-button expand="block" type="button">Cancel</ion-button></ion-col
+        >
+      </ion-row>
+    </ion-footer>
   </form>
 </ion-content>

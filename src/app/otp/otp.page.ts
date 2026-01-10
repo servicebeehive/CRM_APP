@@ -9,7 +9,7 @@ import { IonInput, ToastController } from '@ionic/angular';
 export class OtpPage implements OnInit {
 digits: string[] = ['', '', '', '', '', ''];
 otpValue:string='';
-  timer: number = 30;
+  timer: number = 60;
   interval: any;
   isResendEnabled: boolean = false;
 
@@ -29,7 +29,7 @@ otpValue:string='';
   resendOtp() {
     this.digits = ['', '', '', '', '', ''];
     this.isResendEnabled = false;
-    this.timer = 30;
+    this.timer = 60;
     this.startTimer();
   }
 
