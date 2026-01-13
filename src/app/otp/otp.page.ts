@@ -12,7 +12,7 @@ otpValue:string='';
   timer: number = 60;
   interval: any;
   isResendEnabled: boolean = false;
-
+ public crmLogo='assets/icon/Logo_only.png';
   constructor(private toastCtrl: ToastController,private route:Router) {}
  @ViewChildren('otpInput') otpInputs!: QueryList<IonInput>;
   ngOnInit() {

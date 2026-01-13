@@ -8,15 +8,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./registration.page.scss'],
 })
 export class RegistrationPage implements OnInit {
+   public crmLogo='assets/icon/Logo_only.png';
   showCityDropdown = false;
 showStateDropdown = false;
 showCountryDropdown=false;
 showLanguageDropdown=false;
+showRealEstateDropdown=false;
 selectedCity = '';
 selectedState='';
 selectedCountry='';
 selectedLanguage='';
-
+selectedEstate='';
     ngOnInit() {}
  userForm = this.fb.group({
       realEstate: ['',[Validators.required]],
@@ -36,26 +38,42 @@ toggleLanguage(){
   this.showCityDropdown=false;
   this.showStateDropdown=false;
   this.showCountryDropdown=false;
+  this.showRealEstateDropdown=false;
+}
+toggleEstate(){
+   this.showRealEstateDropdown = !this.showRealEstateDropdown;
+  this.showCityDropdown=false;
+  this.showStateDropdown=false;
+  this.showCountryDropdown=false;
+  this.showLanguageDropdown=false;
 }
 toggleCity() {
   this.showCityDropdown = !this.showCityDropdown;
   this.showLanguageDropdown=false;
   this.showStateDropdown=false;
   this.showCountryDropdown=false;
+   this.showRealEstateDropdown=false;
 }
 toggleState() {
   this.showStateDropdown = !this.showStateDropdown;
   this.showLanguageDropdown=false;
   this.showCityDropdown=false;
   this.showCountryDropdown=false;
+   this.showRealEstateDropdown=false;
 }
 toggleCountry(){
   this.showCountryDropdown = !this.showCountryDropdown;
   this.showLanguageDropdown=false;
   this.showStateDropdown=false;
   this.showCityDropdown=false;
+   this.showRealEstateDropdown=false;
 }
 
+selectEstate(realEstate:string){
+  this.selectedEstate=realEstate;
+  this.userForm.patchValue({realEstate});
+  this.showRealEstateDropdown=false;
+}
 selectCity(city: string) {
   this.selectedCity = city;
   this.userForm.patchValue({ city });

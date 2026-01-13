@@ -1,0 +1,21 @@
+.img-size {
+  max-width: 40px;
+  margin: 0 auto;
+  text-align: center;
+}
+.ion-border {
+  border: 1px solid aqua;
+  border-radius: 50%;
+  background: aqua;
+  --background: transparent;
+  margin-top: 50px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.ion-border ion-label ion-icon{
+    margin-left:10px;
+}
+ 

@@ -1,20 +1,16 @@
 <!-- 🔝 Header -->
-<ion-header class="ion-no-border">
-  <ion-toolbar color="primary">
+<!-- <ion-header class="ion-no-border"> -->
+  <!-- <ion-toolbar color="primary">
     <ion-buttons slot="start" class="ion-padding-start">
-      <!-- <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" ></ion-img> -->
+      <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" ></ion-img>
       <ion-title class="fw-bold" size="small">Hi there!</ion-title>
-    </ion-buttons>
+    </ion-buttons> -->
 
-   <ion-buttons slot="end" class="ion-padding-end">
-  <ion-icon
-    name="globe-outline"
-    class="fs-5"
-    id="lang-trigger">
-  </ion-icon>
-</ion-buttons>
+   <!-- <ion-buttons slot="start" class="ion-padding-start">
+  <ion-icon name="arrow-back-outline"></ion-icon>
+</ion-buttons> -->
 
-<ion-popover
+<!-- <ion-popover
   trigger="lang-trigger"
   triggerAction="click"
   side="bottom"
@@ -29,26 +25,54 @@
   </ng-template>
 </ion-popover>
 
-  </ion-toolbar>
-</ion-header>
+  </ion-toolbar> -->
+ 
+<!-- </ion-header> -->
 
 <!-- Form Card -->
-<ion-content>
+<ion-content class="ion-padding-start ion-padding-end">
+ <!-- 🌟 Logo and Title -->
+   <ion-grid>
+    <ion-row
+      class="ion-justify-content-center"
+    >
+      <ion-col size="12">
+        <ion-item lines="none">
+           <ion-icon  class="ion-no-padding" slot="start" name="arrow-back-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" class="ion-justify-content-center ion-text-center ion-padding-end">
+        <ion-img
+          [src]="crmLogo"
+          alt="Logo"
+          class="img-size ion-margin-bottom"
+        ></ion-img>
+        <h2>BigTaskCRM</h2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+<ion-item lines="none">
+  <h3>Create Account</h3>
+</ion-item>
+<ion-text class="ion-padding-start" size="small">
+Sign up to get start
+</ion-text>
+
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <ion-grid class="ion-padding">
+    <ion-grid>
       <ion-row
         class="ion-padding-end ion-padding-start ion-justify-content-center"
       >
         <ion-col size="12">
-          <ion-item lines="none" class="border-box">
-            <ion-input
-              type="text"
-              formControlName="realEstate"
-              placeholder="Real Estate"
-            >
-              <ion-icon slot="start" name="business-outline"></ion-icon>
-            </ion-input>
+          <ion-item lines="none" class="border-box" (click)="toggleEstate()">
+            <ion-label>{{userForm.get('realEstate')?.value || 'Industry'}}</ion-label>
+              <ion-icon slot="start" name="cellular-outline"></ion-icon>
           </ion-item>
+          <div *ngIf="showRealEstateDropdown" class="dropdown">
+            <div (click)="selectEstate('Education')">Education</div>
+            <div (click)="selectEstate('Insurance')">Insurance</div>
+          </div>
           <ion-text color="danger" *ngIf="userForm.get('realEstate')?.touched">
             <p class="ion-padding-start">Real Estate is required</p>
           </ion-text>
@@ -144,6 +168,7 @@
         <ion-col size="12">
           <!-- <ion-icon name="flag-outline" class="select-icon"></ion-icon> -->
           <ion-item lines="none" class="border-box" (click)="toggleCountry()">
+             <ion-icon slot="start" name="globe-outline"></ion-icon>
            <ion-label>{{userForm.get('country')?.value || 'Select Country'}}</ion-label>
           </ion-item>
           <div *ngIf="showCountryDropdown" class="dropdown">
@@ -157,6 +182,7 @@
 
         <ion-col size="12">
           <ion-item lines="none" class="border-box" (click)="toggleState()">
+             <ion-icon slot="start" name="flag-outline"></ion-icon>
             <ion-label>{{userForm.get('state')?.value || 'State'}}</ion-label>
           </ion-item>
           <div *ngIf="showStateDropdown" class="dropdown">
@@ -170,6 +196,7 @@
 
         <ion-col size="12">
           <ion-item lines="none" class="border-box" (click)="toggleCity()">
+             <ion-icon slot="start" name="business-outline"></ion-icon>
             <ion-label>{{userForm.get('city')?.value ||'City'}}</ion-label>
           </ion-item>
           <div *ngIf="showCityDropdown" class="dropdown">
@@ -186,23 +213,24 @@
             <p class="ion-padding-start">City is required</p>
           </ion-text>
         </ion-col>
-      </ion-row>
-    </ion-grid>
-    <!-- Buttons -->
-    <ion-footer class="ion-no-border ion-padding-end">
-      <ion-row class="ion-padding-start ion-padding-end">
-        <ion-col size="6" class="ion-padding-start"
-          ><ion-button
+        <ion-col class="d-flex ion-align-items-center">
+          <ion-checkbox></ion-checkbox>
+          <ion-text class="ion-padding-start">I agree the <span color="primary">Terms & Conditions</span></ion-text>
+        </ion-col>
+         <ion-col size="12" expand="block">
+          <ion-button
             expand="block"
             type="submit"
-            [disabled]="userForm.invalid"
-            >Submit</ion-button
-          ></ion-col
-        >
-        <ion-col size="6" class="ion-padding-start">
-          <ion-button expand="block" type="button">Cancel</ion-button></ion-col
-        >
+            [disabled]="userForm.invalid">
+            Sign Up
+          </ion-button>
+        </ion-col>
       </ion-row>
-    </ion-footer>
+    </ion-grid>
   </form>
+  <ion-footer class="ion-no-border">
+    <p class="ion-text-center justify-content-center ">
+      Already have an account? <span color="text-primary">Login</span>
+    </p>
+  </ion-footer>
 </ion-content>

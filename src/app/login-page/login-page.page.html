@@ -1,0 +1,94 @@
+<ion-content
+  class="container vh-100 d-flex flex-column justify-content-center py-4"
+>
+  <!-- 🌟 Logo and Title -->
+  <ion-grid>
+    <ion-row
+      class="ion-padding-start ion-justify-content-center"
+    >
+      <ion-col size="12">
+        <ion-item lines="none">
+          <ion-icon slot="end" name="globe-outline"></ion-icon>
+        </ion-item>
+      </ion-col>
+      <ion-col size="12" class="ion-justify-content-center ion-text-center ion-padding-end">
+        <ion-img
+          [src]="crmLogo"
+          alt="Logo"
+          class="img-size ion-margin-bottom"
+        ></ion-img>
+        <h2>BigTaskCRM</h2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- 📱 Mobile Input Section -->
+  <form [formGroup]="loginForm" (ngSubmit)="sendOtp()">
+    <ion-grid
+      class="ion-padding-end ion-padding-start ion-justify-content-center"
+    >
+      <ion-row>
+        <ion-col size="2">
+          <ion-input class="border-box ion-padding-start">+91</ion-input>
+        </ion-col>
+        <ion-col size="8">
+          <ion-input
+            type="tel"
+            class="border-box"
+            formControlName="mobileNumber"
+            placeholder="Enter Mobile No"
+            maxlength="10"
+          ></ion-input>
+        </ion-col>
+        <ion-col size="2">
+          <button
+            type="button"
+            class="input-group-text"
+            (click)="clearNumber()"
+          >
+            <ion-icon name="close-outline"></ion-icon></button
+        ></ion-col>
+        <ion-col size="12">
+          <ion-text
+      *ngIf="mobileNumber?.invalid && mobileNumber?.touched"
+      class="danger ion-margin-bottom"
+    >
+      Please enter a valid 10-digit mobile number.
+    </ion-text>
+        </ion-col>
+
+        <ion-col size="12">
+           <ion-text class="ion-margin-bottom">
+      We'll send you an OTP on your WhatsApp to confirm your mobile number.
+    </ion-text>
+        </ion-col>
+        <ion-col size="12">
+<ion-button type="submit" class="ion-margin-bottom" expand="block" [disabled]="loginForm.invalid" >
+      Send OTP
+    </ion-button>
+        </ion-col>
+        <ion-col size="12" class="ion-margin-top justify-content-center ion-text-center ion-margin-bottom">
+          <ion-text class="ion-margin-bottom">A Product of</ion-text>
+            <ion-img [src]="companyUrl" class="img-size2 ion-margin-bottom"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <ion-footer class="ion-no-border ion-padding-start">
+     <p>
+      Don't have an account?
+      <ion-text lines="none" color="primary" (click)="signUp()">
+        Sign Up
+        </ion-text>
+      </p>
+      
+    <p>
+      Having trouble logging in?
+      <ion-text  color="primary"
+        >Get Help</ion-text
+      >
+    </p>
+    
+    </ion-footer>
+</ion-content>

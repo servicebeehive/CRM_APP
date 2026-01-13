@@ -37,7 +37,11 @@ const routes: Routes = [
   {
     path: 'otp',
     loadChildren: () => import('./otp/otp.module').then( m => m.OtpPageModule)
+  },  {
+    path: 'login-page',
+    loadChildren: () => import('./login-page/login-page.module').then( m => m.LoginPagePageModule)
   },
+
 
 
 ];

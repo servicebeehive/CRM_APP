@@ -12,10 +12,7 @@
           
           <ion-col size="auto">
             <ion-buttons >
-                <ion-icon slot="icon-only" name="globe-outline"></ion-icon>
-                <ion-icon slot="icon-only" name="funnel-outline" (click)="filter()"></ion-icon>
                 <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
-                <ion-icon slot="icon-only" name="log-out-outline" (click)="logout()"></ion-icon>
             </ion-buttons>
           </ion-col>
         </ion-row>
@@ -23,28 +20,73 @@
     </ion-toolbar>
  
   <!-- 🧾 Form Section -->
-   <ion-content class="lead-form-container">
-    <form [formGroup]="leadForm" class="ion-padding">
+   <ion-content class="ion-padding">
 
+<ion-item lines="none">
+  <h4>Lead Information</h4>
+</ion-item>
+<ion-segment [(ngModel)]="selectedSegment" value="personal">
+  <ion-segment-button value="personal">
+    <ion-label>Personal</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="requirement" content-id="requirement">
+    <ion-label>Requirement</ion-label>
+  </ion-segment-button>
+</ion-segment>
+
+    <form [formGroup]="leadForm">
       <!-- 🧍 Basic Info -->
-      <ion-card class="ion-margin-bottom" style="background-color: #faf5e7;">
+       <div [ngSwitch]="selectedSegment">
+        <div *ngSwitchCase="'personal'">
+         <ion-card class="ion-margin-bottom" style="background-color: #faf5e7;">
         <ion-card-content>
-          <ion-item lines="none" class="ion-margin-bottom" *ngFor="let field of basicFields">
+          <ng-container *ngFor="let field of basicFields">
+          <ion-item lines="none" class="ion-margin-top">
             <ion-icon slot="start" [name]="field.icon">
             </ion-icon>
           <ion-input
             type="text"
-            class="form-control"
             [placeholder]="field.label"
             formControlName="{{ field.name }}"
             class="ion-text-start"
           ></ion-input>
           </ion-item>
+         <ion-text color="danger" class="ion-padding ion-margin-top"
+    *ngIf="leadForm.get(field.name)?.invalid
+            && (leadForm.get(field.name)?.touched
+            || leadForm.get(field.name)?.dirty)">
+            <small *ngIf="leadForm.get(field.name)?.errors?.['required']">
+                {{ field.label }} is required
+            </small>
+
+   <small *ngIf="leadForm.get('contactNumber')?.errors?.['pattern']">
+    Enter valid 10-digit mobile number
+   </small>
+
+   <small *ngIf="leadForm.get('emailId')?.errors?.['pattern']">
+    Enter valid email address
+   </small>
+  </ion-text>
+</ng-container>
+  <!-- 📝 Remarks -->
+      <ion-item lines="none">
+        <span><ion-icon name="bookmark-outline"></ion-icon></span>
+        <ion-textarea
+          type="text"
+          placeholder="Remarks"
+          formControlName="remarks"
+        ></ion-textarea>
+        <span><ion-icon name="mic-outline"></ion-icon></span>
+      </ion-item>
         </ion-card-content>
       </ion-card>
+      
+        </div>
+     
 
       <!-- 🏠 Property Info -->
-      <ion-card class="ion-margin-bottom" style="background-color: #faf5e7;">
+       <div *ngSwitchCase="'requirement'">
+        <ion-card class="ion-margin-bottom" style="background-color: #faf5e7;">
         <ion-card-content>
           <ion-item lines="none" class="ion-margin-bottom" *ngFor="let field of propertyFields">
             <ion-icon slot="start" [name]="field.icon"></ion-icon>
@@ -58,22 +100,11 @@
           </ion-item>
         </ion-card-content>
       </ion-card>
-
-      <!-- 📝 Remarks -->
-      <ion-item lines="none" class="input-group mb-3">
-        <span class="input-group-text"><ion-icon name="bookmark-outline"></ion-icon></span>
-        <ion-input
-          type="text"
-          class="form-control"
-          placeholder="Remarks"
-          formControlName="remarks"
-        ></ion-input>
-        <span class="input-group-text"><ion-icon name="mic-outline"></ion-icon></span>
-      </ion-item>
-
+       </div>
+</div>
       <!-- 🔘 Buttons -->
       <ion-item  lines="none" class="d-flex gap-3 mt-3">
-        <ion-button type="submit" >Submit</ion-button>
+        <ion-button type="submit" [disabled]="leadForm.invalid" >Submit</ion-button>
         <ion-button type="button">Reset</ion-button>
       </ion-item>
     </form>

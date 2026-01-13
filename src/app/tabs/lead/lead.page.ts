@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,14 +8,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./lead.page.scss'],
 })
 export class LeadPage implements OnInit {
-  ngOnInit(){ }
+  ngOnInit(){}
+  selectedSegment: string='personal';
   constructor(private fb: FormBuilder, private route:Router) {}
   leadForm = this.fb.group({
-      leadName: [''],
-      contactNumber: [''],
-      emailId: [''],
-      location: [''],
-      leadSource: [''],
+      leadName: ['',[Validators.required]],
+      contactNumber: ['',[Validators.required,Validators.pattern(/^[6-9]\d{9}$/)]],
+      emailId: ['',[Validators.required,Validators.email,Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)]],
+      location: ['',[Validators.required]],
+      leadSource: ['',[Validators.required]],
       leadFor: [''],
       propertyType: [''],
       inventory: [''],
@@ -25,12 +26,14 @@ export class LeadPage implements OnInit {
       amenities: [''],
       remarks: ['']
     });
+    
   basicFields = [
-    { icon: 'person-outline', label: 'Lead Name', name: 'leadName' },
-    { icon: 'call-outline', label: 'Contact Number', name: 'contactNumber' },
-    { icon: 'mail-outline', label: 'Email Id', name: 'emailId' },
-    { icon: 'location-outline', label: 'Location', name: 'location' },
-    { icon: 'disc-outline', label: 'Lead Source', name: 'leadSource' },
+    { icon: 'person-outline', label: 'Lead Name', name: 'leadName', required:true },
+    { icon: 'call-outline', label: 'Contact Number', name: 'contactNumber', required:true },
+    { icon: 'mail-outline', label: 'Email Id', name: 'emailId', required:true },
+    { icon: 'location-outline', label: 'Location', name: 'location', required:true },
+    { icon: 'disc-outline', label: 'Lead Source', name: 'leadSource', required:true },
+    { icon: '',label:'', name:'remarks',required:''}
   ];
 
   propertyFields = [
