@@ -6,17 +6,15 @@
     </ion-item>
  <ion-grid>
   <ion-row class="ion-justify-content-center ion-align-items-center">
-    <ion-col size="auto" class="">
-      <ion-item lines="none" class="ion-border center-item">
-        <ion-label class="ion-text-center">
+    <ion-col size="auto">
+      <div class="ion-border">
  <ion-icon
           name="logo-whatsapp"
           color="primary"
-          size="large"
+         
           >
         </ion-icon>
-        </ion-label>
-      </ion-item>
+        </div>
     </ion-col>
   </ion-row>
 </ion-grid>
@@ -33,11 +31,13 @@
     <ion-row class="d-flex ion-margin-top ion-justify-content-center">
       <ion-col size="2" *ngFor="let digit of digits;let i=index">
            <ion-input
+           #otpInput
     type="tel"
     maxlength="1"
     inputmode="numeric"
-    [value]="digit[i]"
-    class="border-box"
+     class="border-box"
+    (ionInput) = "onInput($event,i)"
+   (keydown.backspace)="onBackspace(i)"
     >
 </ion-input>
       </ion-col>

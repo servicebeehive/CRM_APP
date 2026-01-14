@@ -31,64 +31,40 @@ selectedEstate='';
       city: ['',[Validators.required]],
     });
 
+    dropdowns={
+      realEstate:{
+        label:'Industry',
+        icon: 'cellular-outline',
+        options: ['RealEstate','Education','Insurance']
+      },
+       country: {
+    label: 'Select Country',
+    icon: 'globe-outline',
+    options: ['India', 'US']
+  },
+  state: {
+    label: 'State',
+    icon: 'flag-outline',
+    options: ['CG', 'Bihar']
+  },
+  city: {
+    label: 'City',
+    icon: 'business-outline',
+    options: ['Chennai', 'Mumbai', 'Pune']
+  }
+    };
+    activeDropdown:string|null =null;
 
 constructor(private fb: FormBuilder, private route:Router) { }
-toggleLanguage(){
-  this.showLanguageDropdown = !this.showLanguageDropdown;
-  this.showCityDropdown=false;
-  this.showStateDropdown=false;
-  this.showCountryDropdown=false;
-  this.showRealEstateDropdown=false;
+
+toggleDropdown(key:string){
+  this.activeDropdown = this.activeDropdown === key ? null : key;
 }
-toggleEstate(){
-   this.showRealEstateDropdown = !this.showRealEstateDropdown;
-  this.showCityDropdown=false;
-  this.showStateDropdown=false;
-  this.showCountryDropdown=false;
-  this.showLanguageDropdown=false;
-}
-toggleCity() {
-  this.showCityDropdown = !this.showCityDropdown;
-  this.showLanguageDropdown=false;
-  this.showStateDropdown=false;
-  this.showCountryDropdown=false;
-   this.showRealEstateDropdown=false;
-}
-toggleState() {
-  this.showStateDropdown = !this.showStateDropdown;
-  this.showLanguageDropdown=false;
-  this.showCityDropdown=false;
-  this.showCountryDropdown=false;
-   this.showRealEstateDropdown=false;
-}
-toggleCountry(){
-  this.showCountryDropdown = !this.showCountryDropdown;
-  this.showLanguageDropdown=false;
-  this.showStateDropdown=false;
-  this.showCityDropdown=false;
-   this.showRealEstateDropdown=false;
+selectOption(controlName:string,value:string){
+  this.userForm.patchValue({[controlName]:value});
+  this.activeDropdown=null;
 }
 
-selectEstate(realEstate:string){
-  this.selectedEstate=realEstate;
-  this.userForm.patchValue({realEstate});
-  this.showRealEstateDropdown=false;
-}
-selectCity(city: string) {
-  this.selectedCity = city;
-  this.userForm.patchValue({ city });
-  this.showCityDropdown = false;
-}
-selectState(state:string){
-  this.selectedState=state;
-  this.userForm.patchValue({state});
-  this.showStateDropdown=false
-}
-selectCountry(country:string){
-  this.selectedCountry=country;
-  this.userForm.patchValue({country});
-  this.showCountryDropdown=false;
-}
   onSubmit() {
     console.log(this.userForm.value);
      this.route.navigate(['/tabs/lead']);

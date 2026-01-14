@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-lead',
@@ -10,7 +11,7 @@ import { Router } from '@angular/router';
 export class LeadPage implements OnInit {
   ngOnInit(){}
   selectedSegment: string='personal';
-  constructor(private fb: FormBuilder, private route:Router) {}
+  constructor(private fb: FormBuilder, private route:Router, private popoverCtrl:PopoverController) {}
   leadForm = this.fb.group({
       leadName: ['',[Validators.required]],
       contactNumber: ['',[Validators.required,Validators.pattern(/^[6-9]\d{9}$/)]],
@@ -21,7 +22,8 @@ export class LeadPage implements OnInit {
       propertyType: [''],
       inventory: [''],
       inventorySize: [''],
-      budgetRange: [''],
+      minBudget: [''],
+      maxBudget:[''],
       locationPref: [''],
       amenities: [''],
       remarks: ['']
@@ -33,23 +35,22 @@ export class LeadPage implements OnInit {
     { icon: 'mail-outline', label: 'Email Id', name: 'emailId', required:true },
     { icon: 'location-outline', label: 'Location', name: 'location', required:true },
     { icon: 'disc-outline', label: 'Lead Source', name: 'leadSource', required:true },
-    { icon: '',label:'', name:'remarks',required:''}
   ];
 
-  propertyFields = [
-    { icon: 'help-circle-outline', label: 'Lead For - Sale, Rent', name: 'leadFor' },
-    { icon: 'business-outline', label: 'Property Type', name: 'propertyType' },
-    { icon: 'pricetags-outline', label: 'Inventory i.e. 1 BHK', name: 'inventory' },
-    { icon: 'grid-outline', label: 'Inventory Size', name: 'inventorySize' },
-    { icon: 'cash-outline', label: 'Budget Range', name: 'budgetRange' },
-    { icon: 'navigate-circle-outline', label: 'Location Preference', name: 'locationPref' },
-    { icon: 'list-outline', label: 'Amenities', name: 'amenities' },
-  ];
+  onlyDigits(event:any,fieldName:string){
+    if(fieldName === 'contactNumber'){
+      const input = event.target;
+      input.value = input.value.replace(/[^0-9]/g,'').slice(0-10);
+    }
+  }
   user(){
     this.route.navigate(['/pages/users']);
   }
   filter(){
     this.route.navigate(['/pages/filter']);
+  }
+  reset(){
+    this.leadForm.reset();
   }
   logout(){
   this.route.navigate(['/pages/login']);

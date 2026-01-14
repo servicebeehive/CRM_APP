@@ -38,6 +38,7 @@
             formControlName="mobileNumber"
             placeholder="Enter Mobile No"
             maxlength="10"
+            (ionInput)="onlyDigits($event)"
           ></ion-input>
         </ion-col>
         <ion-col size="2">
@@ -50,7 +51,7 @@
         ></ion-col>
         <ion-col size="12">
           <ion-text
-      *ngIf="mobileNumber?.invalid && mobileNumber?.touched"
+      *ngIf="mobileNumber?.invalid && (mobileNumber?.touched || mobileNumber.dirty)"
       class="danger ion-margin-bottom"
     >
       Please enter a valid 10-digit mobile number.

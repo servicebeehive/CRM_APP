@@ -1,56 +1,20 @@
-<!-- 🔝 Header -->
-<!-- <ion-header class="ion-no-border"> -->
-  <!-- <ion-toolbar color="primary">
-    <ion-buttons slot="start" class="ion-padding-start">
-      <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" ></ion-img>
-      <ion-title class="fw-bold" size="small">Hi there!</ion-title>
-    </ion-buttons> -->
-
-   <!-- <ion-buttons slot="start" class="ion-padding-start">
-  <ion-icon name="arrow-back-outline"></ion-icon>
-</ion-buttons> -->
-
-<!-- <ion-popover
-  trigger="lang-trigger"
-  triggerAction="click"
-  side="bottom"
-  alignment="end"
-  show-backdrop="false">
-  
-  <ng-template>
-    <ion-list>
-      <ion-item lines="none">English</ion-item>
-      <ion-item lines="none">Hindi</ion-item>
-    </ion-list>
-  </ng-template>
-</ion-popover>
-
-  </ion-toolbar> -->
- 
-<!-- </ion-header> -->
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
 
 <!-- Form Card -->
-<ion-content class="ion-padding-start ion-padding-end">
+<ion-content >
  <!-- 🌟 Logo and Title -->
-   <ion-grid>
-    <ion-row
-      class="ion-justify-content-center"
-    >
-      <ion-col size="12">
-        <ion-item lines="none">
-           <ion-icon  class="ion-no-padding" slot="start" name="arrow-back-outline"></ion-icon>
-        </ion-item>
-      </ion-col>
-      <ion-col size="12" class="ion-justify-content-center ion-text-center ion-padding-end">
         <ion-img
           [src]="crmLogo"
           alt="Logo"
-          class="img-size ion-margin-bottom"
-        ></ion-img>
-        <h2>BigTaskCRM</h2>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+          class="img-size">
+      </ion-img>
+        <h2 class="ion-text-center">BigTaskCRM</h2>
 
 <ion-item lines="none">
   <h3>Create Account</h3>
@@ -60,22 +24,21 @@ Sign up to get start
 </ion-text>
 
   <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-    <ion-grid>
+    <ion-grid class="ion-padding-start ion-padding-end">
       <ion-row
-        class="ion-padding-end ion-padding-start ion-justify-content-center"
+        class="ion-justify-content-center"
       >
         <ion-col size="12">
-          <ion-item lines="none" class="border-box" (click)="toggleEstate()">
-            <ion-label>{{userForm.get('realEstate')?.value || 'Industry'}}</ion-label>
-              <ion-icon slot="start" name="cellular-outline"></ion-icon>
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('realEstate')">
+              <ion-icon slot="start" [name]="dropdowns['realEstate'].icon"></ion-icon>
+               <ion-label>{{userForm.get('realEstate')?.value || dropdowns['realEstate'].label}}</ion-label>
           </ion-item>
-          <div *ngIf="showRealEstateDropdown" class="dropdown">
-            <div (click)="selectEstate('Education')">Education</div>
-            <div (click)="selectEstate('Insurance')">Insurance</div>
+          <div *ngIf="activeDropdown === 'realEstate'" class="dropdown">
+            <div *ngFor="let option of dropdowns['realEstate'].options" (click)="selectOption('realEstate',option)">{{option}}</div>
           </div>
-          <ion-text color="danger" *ngIf="userForm.get('realEstate')?.touched">
-            <p class="ion-padding-start">Real Estate is required</p>
-          </ion-text>
+           <ion-text color="danger" *ngIf="userForm.get('realEstate')?.touched && userForm.get('realEstate')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['realEstate'].label }} is required</p>
+  </ion-text>
         </ion-col>
 
         <ion-col size="12">
@@ -165,54 +128,44 @@ Sign up to get start
           </ion-text>
         </ion-col>
 
-        <ion-col size="12">
-          <!-- <ion-icon name="flag-outline" class="select-icon"></ion-icon> -->
-          <ion-item lines="none" class="border-box" (click)="toggleCountry()">
-             <ion-icon slot="start" name="globe-outline"></ion-icon>
-           <ion-label>{{userForm.get('country')?.value || 'Select Country'}}</ion-label>
+         <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('country')">
+              <ion-icon slot="start" [name]="dropdowns['country'].icon"></ion-icon>
+               <ion-label>{{userForm.get('country')?.value || dropdowns['country'].label}}</ion-label>
           </ion-item>
-          <div *ngIf="showCountryDropdown" class="dropdown">
-            <div (click)="selectCountry('India')">India</div>
-             <div (click)="selectCountry('US')">US</div>
+          <div *ngIf="activeDropdown === 'country'" class="dropdown">
+            <div *ngFor="let option of dropdowns['country'].options" (click)="selectOption('country',option)">{{option}}</div>
           </div>
-          <ion-text color="danger" *ngIf="userForm.get('country')?.touched">
-            <p class="ion-padding-start">Country is required</p>
-          </ion-text>
+           <ion-text color="danger" *ngIf="userForm.get('country')?.touched && userForm.get('country')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['country'].label }} is required</p>
+  </ion-text>
         </ion-col>
 
-        <ion-col size="12">
-          <ion-item lines="none" class="border-box" (click)="toggleState()">
-             <ion-icon slot="start" name="flag-outline"></ion-icon>
-            <ion-label>{{userForm.get('state')?.value || 'State'}}</ion-label>
+         <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('state')">
+              <ion-icon slot="start" [name]="dropdowns['state'].icon"></ion-icon>
+               <ion-label>{{userForm.get('state')?.value || dropdowns['state'].label}}</ion-label>
           </ion-item>
-          <div *ngIf="showStateDropdown" class="dropdown">
-            <div (click)="selectState('CG')">CG</div>
-            <div (click)="selectState('Bihar')">Bihar</div>
+          <div *ngIf="activeDropdown === 'state'" class="dropdown">
+            <div *ngFor="let option of dropdowns['state'].options" (click)="selectOption('state',option)">{{option}}</div>
           </div>
-          <ion-text color="danger" *ngIf="userForm.get('state')?.touched">
-            <p class="ion-padding-start">State is required</p>
-          </ion-text>
+           <ion-text color="danger" *ngIf="userForm.get('state')?.touched && userForm.get('state')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['state'].label }} is required</p>
+  </ion-text>
         </ion-col>
 
-        <ion-col size="12">
-          <ion-item lines="none" class="border-box" (click)="toggleCity()">
-             <ion-icon slot="start" name="business-outline"></ion-icon>
-            <ion-label>{{userForm.get('city')?.value ||'City'}}</ion-label>
+         <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('city')">
+              <ion-icon slot="start" [name]="dropdowns['city'].icon"></ion-icon>
+               <ion-label>{{userForm.get('city')?.value || dropdowns['city'].label}}</ion-label>
           </ion-item>
-          <div *ngIf="showCityDropdown" class="dropdown">
-            <div (click)="selectCity('Chennai')">Chennai</div>
-            <div (click)="selectCity('Mumbai')">Mumbai</div>
-            <div (click)="selectCity('Pune')">Pune</div>
+          <div *ngIf="activeDropdown === 'city'" class="dropdown">
+            <div *ngFor="let option of dropdowns['city'].options" (click)="selectOption('city',option)">{{option}}</div>
           </div>
-
-          <!-- Validation -->
-          <ion-text
-            color="danger"
-            *ngIf="userForm.get('city')?.touched && userForm.get('city')?.invalid"
-          >
-            <p class="ion-padding-start">City is required</p>
-          </ion-text>
-        </ion-col>
+           <ion-text color="danger" *ngIf="userForm.get('city')?.touched && userForm.get('city')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['city'].label }} is required</p>
+  </ion-text>    
+        </ion-col> 
         <ion-col class="d-flex ion-align-items-center">
           <ion-checkbox></ion-checkbox>
           <ion-text class="ion-padding-start">I agree the <span color="primary">Terms & Conditions</span></ion-text>

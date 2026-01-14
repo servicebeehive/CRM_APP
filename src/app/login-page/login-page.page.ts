@@ -18,7 +18,7 @@ ngOnInit() {
       '',
       [
         Validators.required,
-        Validators.pattern(/^[0-9]{10}$/), // Only 10 digits allowed
+        Validators.pattern(/^[6-9]\d{9}$/), // Only 10 digits allowed
       ],
     ],
   });
@@ -29,6 +29,11 @@ ngOnInit() {
   get mobileNumber() {
     return this.loginForm.get('mobileNumber');
   }
+
+  onlyDigits(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+}
 
   // Clear the input
   clearNumber() {
