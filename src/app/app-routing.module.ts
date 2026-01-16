@@ -45,6 +45,18 @@ const routes: Routes = [
     path: 'testing',
     loadChildren: () => import('./testing/testing.module').then( m => m.TestingPageModule)
   },
+  {
+    path: 'test2',
+    loadChildren: () => import('./test2/test2.module').then( m => m.Test2PageModule)
+  },
+  {
+    path: 'noti',
+    loadChildren: () => import('./noti/noti.module').then( m => m.NotiPageModule)
+  },
+  {
+    path: 'edit-profile',
+    loadChildren: () => import('./edit-profile/edit-profile.module').then( m => m.EditProfilePageModule)
+  },
 
 
 

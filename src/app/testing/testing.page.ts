@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TestingPage implements OnInit {
   ngOnInit(){}
- constructor(){}
+ constructor(private route:Router){}
  leads = [
   {
     title: '#740',
@@ -35,4 +36,13 @@ export class TestingPage implements OnInit {
     for: 'Rent'
   }
 ];
+leadCreation(){
+  this.route.navigate(['/tabs/lead'])
+}
+editLead(){
+  this.route.navigate(['/tabs/lead'])
+}
+leadDetail(){
+  this.route.navigate(['/test2'])
+}
 }

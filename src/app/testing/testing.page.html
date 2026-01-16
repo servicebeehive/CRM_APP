@@ -19,19 +19,19 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row class="ion-justify-content-between">
+    <ion-row class="ion-justify-content-between ion-align-items-center">
       <ion-col size="6">
         <h4>Lead Details</h4>
       </ion-col>
       <ion-col size="6" class="d-flex ion-justify-content-end" size="small">
         <ion-icon size="small" name="funnel-outline"></ion-icon>
-        <ion-icon size="small" name="add-circle-outline"></ion-icon>
+        <ion-icon size="small" name="add-circle-outline" (click)="leadCreation()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>
   <ion-grid>
     <ion-card *ngFor="let lead of leads">
-      <ion-row class="ion-no-padding">
+      <ion-row class="ion-no-padding ion-justify-content-between ion-align-items-center">
         <ion-col size="2" class="ion-justify-content-start">
           <ion-button size="small">{{lead.title}}</ion-button>
         </ion-col>
@@ -50,19 +50,24 @@
 
         <ion-col size="4" size="small" class="ion-justify-content-end">
           <div class="icon-container">
-            <ion-icon size="small" name="send-outline"></ion-icon>
-            <ion-icon size="small" name="create-outline"></ion-icon>
+            <ion-icon size="small" name="send-outline" (click)="leadDetail()"></ion-icon>
+            <ion-icon size="small" name="create-outline" (click)="editLead()"></ion-icon>
             <ion-icon size="small" name="reader-outline"></ion-icon>
           </div>
         </ion-col>
-        <ion-item line="none">
-          <ion-icon slot="start" name="person-circle-outline"></ion-icon>
-          <ion-label>
-            <p>Customer Name - {{ lead.customer }}</p>
-            <p>Lead For - {{ lead.for }}</p>
-          </ion-label>
-        </ion-item>
       </ion-row>
+      
+    <ion-row class="ion-align-items-start">
+      <ion-col size="auto">
+        <ion-icon size="small icon-size" name="person-circle-outline"></ion-icon>
+      </ion-col>
+
+      <ion-col>
+        <p>Customer Name - {{ lead.customer }}</p>
+        <p>Lead For - {{ lead.for }}</p>
+      </ion-col>
+    </ion-row>
+
     </ion-card>
   </ion-grid>
 </ion-content>
