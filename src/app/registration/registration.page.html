@@ -60,6 +60,7 @@ Sign up to get start
               placeholder="Phone Number"
               inputmode="numeric"
               maxlength="10"
+              (ionInput)="onlyDigits($event)"
             >
               <ion-icon slot="start" name="call-outline"></ion-icon>
             </ion-input>

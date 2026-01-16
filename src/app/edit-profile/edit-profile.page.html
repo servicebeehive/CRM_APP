@@ -14,6 +14,126 @@
     </ion-row>
   </ion-grid>
 </ion-toolbar>
-<ion-content>
-  
+<ion-content class="ion-padding">
+  <div class="profile-wrapper">
+<ion-avatar class="profile-border d-flex ion-justify-content-center">
+  <ion-img [src]="profileImage || 'assets/icon/images.png'"></ion-img>
+</ion-avatar>
+ 
+<ion-button size="small" fill="solid" shape="round" class=" profile-button " (click)="openActionSheet()">
+  <ion-icon name="camera-outline"></ion-icon>
+</ion-button>
+</div>
+<form [formGroup]="editProfileForm" (ngSubmit)="submit()">
+<h6 class="ion-margin-top" ><strong>Personal Information</strong></h6>
+<ion-row>
+  <ion-col size="12">
+<ion-item lines="none" class="border-box">
+  <ion-icon name="person-outline" slot="start"></ion-icon>
+  <ion-input type="text" placeholder="Full Name" formControlName="fullName"></ion-input>
+</ion-item>
+<ion-text color="danger" *ngIf="editProfileForm.get('fullName')?.touched">
+  <p class="ion-padding-start">Full Name is required</p>
+</ion-text>
+  </ion-col>
+  <ion-col size="12">
+<ion-item lines="none" class="border-box">
+   <ion-icon name="mail-outline" slot="start"></ion-icon>
+  <ion-input type="email" placeholder="Email Address" formControlName="email"></ion-input>
+</ion-item>
+<ion-text
+            color="danger"
+            *ngIf="editProfileForm.get('email')?.touched && editProfileForm.get('email')?.invalid"
+          >
+            <p
+              class="ion-padding-start"
+              *ngIf="editProfileForm.get('email')?.errors?.['required']"
+            >
+              Email is required
+            </p>
+            <p
+              class="ion-padding-start"
+              *ngIf="editProfileForm.get('email')?.errors?.['email']"
+            >
+              Enter a valid email address
+            </p>
+          </ion-text>
+  </ion-col>
+  <ion-col size="12">
+<ion-item lines="none" class="border-box">
+    <ion-icon name="call-outline" slot="start"></ion-icon>
+    <ion-input type="tel" placeholder="Phone Number" formControlName="phone" inputmode="numeric" maxlength="10" (ionInput)="onlyDigits($event)" ></ion-input>
+  </ion-item>
+  <ion-text
+            color="danger"
+            *ngIf="editProfileForm.get('phone')?.touched && editProfileForm.get('phone')?.invalid"
+          >
+            <p
+              class="ion-padding-start"
+              *ngIf="editProfileForm.get('phone')?.errors?.['required']"
+            >
+              Phone number is required
+            </p>
+            <p
+              class="ion-padding-start"
+              *ngIf="editProfileForm.get('phone')?.errors?.['pattern']"
+            >
+              Enter a valid 10-digit phone number
+            </p>
+          </ion-text>
+  </ion-col>
+</ion-row>
+
+  <h6 class="ion-margin-top" ><strong>Address</strong></h6>
+  <ion-row>
+    <ion-col size="12">
+  <ion-item lines="none" class="border-box">
+  <ion-icon name="home-outline" slot="start"></ion-icon>
+  <ion-input type="text" placeholder="Street Address" formControlName="address"></ion-input>
+</ion-item>
+<ion-text color="danger" *ngIf="editProfileForm.get('address')?.touched">
+  <p class="ion-padding-start">Address is required</p>
+</ion-text>
+</ion-col>
+
+<ion-col size="6">
+  <ion-item lines="none" class="border-box">
+  <ion-icon name="business-outline" slot="start"></ion-icon>
+  <ion-input type="text" placeholder="City" formControlName="city"></ion-input>
+</ion-item>
+<ion-text color="danger" *ngIf="editProfileForm.get('city')?.touched">
+  <p class="ion-padding-start">City is required</p>
+</ion-text>
+</ion-col>
+
+<ion-col size="6">
+  <ion-item lines="none" class="border-box">
+  <ion-icon name="earth-outline" slot="start"></ion-icon>
+  <ion-input type="text" placeholder="Country" formControlName="country"></ion-input>
+</ion-item>
+<ion-text color="danger" *ngIf="editProfileForm.get('country')?.touched">
+  <p class="ion-padding-start">Country is required</p>
+</ion-text>
+</ion-col>
+</ion-row>
+
+<h6 class="ion-margin-top" ><strong>About Me</strong></h6>
+<ion-row>
+  <ion-col size="12">
+  <ion-item lines="none" class="d-flex no-border-item border-box ion-align-items-start">
+    <ion-icon slot="start" name="document-text-outline"></ion-icon>
+    <ion-textarea
+      placeholder="Bio"
+      fill="clear"
+     
+      formControlName="bio"
+      class="no-border-textarea">
+    </ion-textarea>
+  </ion-item>
+</ion-col>
+<ion-col size="12">
+<ion-button pbutton type="submit" expand="block" >Save Changes</ion-button>
+</ion-col>
+</ion-row>
+  </form>
 </ion-content>

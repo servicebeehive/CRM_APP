@@ -9,16 +9,6 @@ import { Router } from '@angular/router';
 })
 export class RegistrationPage implements OnInit {
    public crmLogo='assets/icon/Logo_only.png';
-  showCityDropdown = false;
-showStateDropdown = false;
-showCountryDropdown=false;
-showLanguageDropdown=false;
-showRealEstateDropdown=false;
-selectedCity = '';
-selectedState='';
-selectedCountry='';
-selectedLanguage='';
-selectedEstate='';
     ngOnInit() {}
  userForm = this.fb.group({
       realEstate: ['',[Validators.required]],
@@ -56,6 +46,11 @@ selectedEstate='';
     activeDropdown:string|null =null;
 
 constructor(private fb: FormBuilder, private route:Router) { }
+
+ onlyDigits(event: any) {
+    const input = event.target;
+    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 10);
+}
 
 toggleDropdown(key:string){
   this.activeDropdown = this.activeDropdown === key ? null : key;
