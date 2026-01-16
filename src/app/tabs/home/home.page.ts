@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -13,13 +13,14 @@ import { OperationType } from '../assignment/assignment.page';
 import { TaskDetail } from '../task/task.page';
 import { DisplayStatusComponent } from './display-status/display-status.component';
 import { SubmitStatusComponent } from './submit-status/submit-status.component';
+import { FilterPage } from 'src/app/filter/filter.page';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   public assignedTaskDetails: TaskDetail[] = [];
   // public isLoading: Subject<boolean> = this.loaderService.isLoading;
 
@@ -32,11 +33,12 @@ export class HomePage implements OnInit {
     public router: Router,
     public loaderService: LoaderService
   ) { }
-
-  ngOnInit() { }
-
+ @Input() formObject:any;
+  
   public async ionViewDidEnter() {
     await this.getAssignedTask();
+    
+    console.log('home:',this.formObject);
   }
 
   public async onClickSubmitStatus(item: TaskDetail) {
@@ -64,17 +66,33 @@ export class HomePage implements OnInit {
     await model.present();
   }
 
-  public getAssignedTask() {
+   public getAssignedTask() {
     const operationtype = new OperationType();
     operationtype.operationtype = 'HOME';
     operationtype.p_user = this.accountServices.USER_ID;
     this.assignmentService
       .getTaskDetails(operationtype)
-      .then((result: ReturnResult<TaskDetail[]>) => {
+      .then( (result: ReturnResult<TaskDetail[]>) => {
         if (result.success) {
-          this.assignedTaskDetails = result.data;
-          // this.assignmentService.loader.next(false);
+               this.assignedTaskDetails = result.data;
+               
+      // clone the array safely
+      const newArray = this.assignedTaskDetails.slice();
 
+      if (this.formObject) {
+        const filtered = newArray.filter(i =>
+          (this.formObject.customername && i.customername === this.formObject.customername) ||
+          (this.formObject.status && i.status === this.formObject.status) ||
+          (this.formObject.startdate&& i.createdon>= this.formObject.startdate && i.createdon<= this.formObject.enddate)||
+          (this.formObject.servicetype && i.servicetype === this.formObject.servicetype)||
+          (this.formObject.taskassignee && i.fullname === this.formObject.user   )
+        );
+        console.log('fullname:',this.formObject.users);
+        console.log('Filtered tasks:', filtered);
+      } else {
+        console.log('No filter applied, tasks:', newArray);
+      }
+          // this.assignmentService.loader.next(false);
         } else {
           this.notificationService.showToast<TaskDetail[]>(result);
           // this.assignmentService.loader.next(false);
