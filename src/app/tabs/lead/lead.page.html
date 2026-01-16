@@ -1,0 +1,185 @@
+<ion-toolbar color="primary" class="shadow-sm rounded-bottom">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-between">
+      <ion-col size="auto">
+        <div class="d-flex ion-align-items-center ion-justify-content-start">
+          <!-- <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" > -->
+          <ion-title size="small" class="m-0 fw-bold" (click)="user()">
+            Hi Chittaranjan!
+          </ion-title>
+        </div>
+      </ion-col>
+
+      <ion-col size="auto">
+        <ion-buttons>
+          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
+
+<!-- 🧾 Form Section -->
+<ion-content class="ion-padding">
+  <ion-item lines="none">
+    <h4>Lead Information</h4>
+  </ion-item>
+  <ion-segment [(ngModel)]="selectedSegment" value="personal">
+    <ion-segment-button value="personal">
+      <ion-label>Personal</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="requirement" content-id="requirement">
+      <ion-label>Requirement</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <form [formGroup]="leadForm">
+    <!-- 🧍 Basic Info -->
+    <div [ngSwitch]="selectedSegment">
+      <div *ngSwitchCase="'personal'">
+        <ion-card class="ion-margin-bottom" style="background-color: #faf5e7">
+          <ion-card-content>
+            <ng-container *ngFor="let field of basicFields">
+              <ion-item lines="none" class="ion-margin-top">
+                <ion-icon slot="start" [name]="field.icon"> </ion-icon>
+                <ion-input
+                  [type]="field.name === 'contactNumber' ? '' : 'text'"
+                  [inputmode]="field.name === 'contactNumber' ? 'numeric' : 'text'"
+                  [maxlength]="field.name === 'contactNumber' ? 10 : null"
+                  [placeholder]="field.label"
+                  [formControlName]="field.name"
+                  class="ion-text-start"
+                  (ionInput)="onlyDigits($event,field.name)"
+                ></ion-input>
+              </ion-item>
+              <ion-text
+                color="danger"
+                class="ion-padding ion-margin-top"
+                *ngIf="leadForm.get(field.name)?.invalid
+            && (leadForm.get(field.name)?.touched
+            || leadForm.get(field.name)?.dirty)"
+              >
+                <small *ngIf="leadForm.get(field.name)?.errors?.['required']">
+                  {{ field.label }} is required
+                </small>
+
+                <small
+                  *ngIf="leadForm.get('contactNumber')?.errors?.['pattern']"
+                >
+                  Enter valid 10-digit mobile number
+                </small>
+
+                <small *ngIf="leadForm.get('emailId')?.errors?.['pattern']">
+                  Enter valid email address
+                </small>
+              </ion-text>
+            </ng-container>
+            <!-- 📝 Remarks -->
+            <div class="d-flex ion-align-items-center">
+              <ion-item lines="none" class="ion-margin-top">
+                <ion-icon slot="start" name="bookmark-outline"></ion-icon>
+                <ion-textarea
+                  placeholder="Remarks"
+                  autoGrow="true"
+                  formControlName="remarks"
+                ></ion-textarea
+              ></ion-item>
+              <ion-icon slot="end" name="mic-outline"></ion-icon>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+
+      <!-- 🏠 Property Info -->
+      <div *ngSwitchCase="'requirement'">
+        <ion-card class="ion-margin-bottom" style="background-color: #faf5e7">
+          <ion-card-content>
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="help-circle-outline"></ion-icon>
+              <ion-input
+                type="text"
+                placeholder="Lead For - Sale, Rent"
+                formControlName="leadFor"
+                class="ion-text-start"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="business-outline"></ion-icon>
+              <ion-select
+                formControlName="propertyType"
+                placeholder="Select Property Type"
+              >
+                <ion-select-option value="flat">Flat</ion-select-option>
+                <ion-select-option value="villa">Villa</ion-select-option>
+                <ion-select-option value="plot">Plot</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="pricetags-outline"></ion-icon>
+              <ion-select formControlName="inventory" placeholder="Select BHK">
+                <ion-select-option value="1bhk">1 BHK</ion-select-option>
+                <ion-select-option value="2bhk">2 BHK</ion-select-option>
+                <ion-select-option value="3bhk">3 BHK</ion-select-option>
+              </ion-select>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="grid-outline"></ion-icon>
+              <ion-input
+                type="number"
+                inputmode="numeric"
+                placeholder="Inventory Size"
+                formControlName="inventorySize"
+              >
+              </ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="cash-outline"></ion-icon>
+              <ion-input
+                type="number"
+                placeholder="Min Budget"
+                formControlName="minBudget"
+              ></ion-input>
+              <span>- </span>
+              <ion-input
+                type="number"
+                placeholder="Max Budget"
+                formControlName="maxBudget"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="navigate-circle-outline"></ion-icon>
+              <ion-input
+                type="text"
+                placeholder="Location Preference"
+                formControlName="locationPref"
+                class="ion-text-start"
+              ></ion-input>
+            </ion-item>
+
+            <ion-item lines="none" class="ion-margin-bottom">
+              <ion-icon slot="start" name="list-outline"></ion-icon>
+              <ion-input
+                type="text"
+                placeholder="Amenities"
+                formControlName="amenities"
+                class="ion-text-start"
+              ></ion-input>
+            </ion-item>
+          </ion-card-content>
+        </ion-card>
+      </div>
+    </div>
+    <!-- 🔘 Buttons -->
+    <ion-item lines="none" class="d-flex gap-3 mt-3">
+      <ion-button type="submit" [disabled]="leadForm.invalid"
+        >Submit</ion-button
+      >
+      <ion-button type="button" (click)="reset()">Reset</ion-button>
+    </ion-item>
+  </form>
+</ion-content>

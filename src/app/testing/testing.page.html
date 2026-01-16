@@ -1,0 +1,73 @@
+<ion-toolbar color="primary" class="shadow-sm rounded-bottom">
+  <ion-grid>
+    <ion-row class="ion-align-items-center ion-justify-content-between">
+      <ion-col size="auto">
+        <div class="d-flex ion-align-items-center ion-justify-content-start">
+          <!-- <ion-img src="assets/Logo_only.png" alt="Logo" class="logo-sm" > -->
+          <ion-title size="small"> Hi Chittaranjan! </ion-title>
+        </div>
+      </ion-col>
+
+      <ion-col size="auto">
+        <ion-buttons>
+          <ion-icon slot="icon-only" name="notifications-outline"></ion-icon>
+        </ion-buttons>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-toolbar>
+
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-justify-content-between ion-align-items-center">
+      <ion-col size="6">
+        <h4>Lead Details</h4>
+      </ion-col>
+      <ion-col size="6" class="d-flex ion-justify-content-end" size="small">
+        <ion-icon size="small" name="funnel-outline"></ion-icon>
+        <ion-icon size="small" name="add-circle-outline" (click)="leadCreation()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-card *ngFor="let lead of leads">
+      <ion-row class="ion-no-padding ion-justify-content-between ion-align-items-center">
+        <ion-col size="2" class="ion-justify-content-start">
+          <ion-button size="small">{{lead.title}}</ion-button>
+        </ion-col>
+        <ion-col size="6" class="ion-justify-content-center">
+          <ion-button
+            size="small"
+            [color]="lead.color"
+            expand="outline"
+            class="ion-no-padding"
+            >{{lead.status}}</ion-button
+          >
+          <ion-button size="small" expand="outline" class="ion-no-padding"
+            >{{lead.priority}}</ion-button
+          >
+        </ion-col>
+
+        <ion-col size="4" size="small" class="ion-justify-content-end">
+          <div class="icon-container">
+            <ion-icon size="small" name="send-outline" (click)="leadDetail()"></ion-icon>
+            <ion-icon size="small" name="create-outline" (click)="editLead()"></ion-icon>
+            <ion-icon size="small" name="reader-outline"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+      
+    <ion-row class="ion-align-items-start">
+      <ion-col size="auto">
+        <ion-icon size="small icon-size" name="person-circle-outline"></ion-icon>
+      </ion-col>
+
+      <ion-col>
+        <p>Customer Name - {{ lead.customer }}</p>
+        <p>Lead For - {{ lead.for }}</p>
+      </ion-col>
+    </ion-row>
+
+    </ion-card>
+  </ion-grid>
+</ion-content>

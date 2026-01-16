@@ -1,0 +1,69 @@
+
+<!-- 📲 OTP Section -->
+<ion-content class="ion-padding ion-margin-top">
+   <ion-item lines="none" class="ion-no-padding">
+      <ion-icon slot="start" name="arrow-back-outline"></ion-icon>
+    </ion-item>
+ <ion-grid>
+  <ion-row class="ion-justify-content-center ion-align-items-center">
+    <ion-col size="auto">
+      <div class="ion-border">
+ <ion-icon
+          name="logo-whatsapp"
+          color="primary"
+         
+          >
+        </ion-icon>
+        </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+  <ion-item lines="none" class="ion-no-padding ion-margin-bottom">
+   <h1>OTP Verification</h1>
+  </ion-item>
+
+  <ion-text class="ion-margin-bottom">
+    We have sent a verification code to <b> +91 9871***06</b>
+  </ion-text>
+
+  <ion-grid>
+    <ion-row class="d-flex ion-margin-top ion-justify-content-center">
+      <ion-col size="2" *ngFor="let digit of digits;let i=index">
+           <ion-input
+           #otpInput
+    type="tel"
+    maxlength="1"
+    inputmode="numeric"
+     class="border-box"
+    (ionInput) = "onInput($event,i)"
+   (keydown.backspace)="onBackspace(i)"
+    >
+</ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-row class="ion-text-center ion-margin-top ion-margin-bottom">
+    <ion-col>
+      <span (click)="resendOtp()" class="text-color">Resend OTP </span>
+      <span>in </span>
+      <span [class.text-muted]="!isResendEnabled"
+        >{{ timer | number: '2.0' }}</span
+      >
+    </ion-col>
+  </ion-row>
+
+   <ion-button expand="block" (click)="verifyOtp()">Verify & Continue</ion-button>
+<ion-footer class="ion-no-border">
+  <ion-row class="ion-align-items-center">
+    <ion-col size="auto">
+      <p class="m-0">Having trouble logging in?</p>
+    </ion-col>
+
+    <ion-col size="auto">
+      <p color="text-primary">Get Help</p>
+    </ion-col>
+  </ion-row>
+</ion-footer>
+</ion-content>

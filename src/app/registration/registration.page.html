@@ -1,0 +1,190 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Form Card -->
+<ion-content >
+ <!-- 🌟 Logo and Title -->
+        <ion-img
+          [src]="crmLogo"
+          alt="Logo"
+          class="img-size">
+      </ion-img>
+        <h2 class="ion-text-center">BigTaskCRM</h2>
+
+<ion-item lines="none">
+  <h3>Create Account</h3>
+</ion-item>
+<ion-text class="ion-padding-start" size="small">
+Sign up to get start
+</ion-text>
+
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <ion-grid class="ion-padding-start ion-padding-end">
+      <ion-row
+        class="ion-justify-content-center"
+      >
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('realEstate')">
+              <ion-icon slot="start" [name]="dropdowns['realEstate'].icon"></ion-icon>
+               <ion-label>{{userForm.get('realEstate')?.value || dropdowns['realEstate'].label}}</ion-label>
+          </ion-item>
+          <div *ngIf="activeDropdown === 'realEstate'" class="dropdown">
+            <div *ngFor="let option of dropdowns['realEstate'].options" (click)="selectOption('realEstate',option)">{{option}}</div>
+          </div>
+           <ion-text color="danger" *ngIf="userForm.get('realEstate')?.touched && userForm.get('realEstate')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['realEstate'].label }} is required</p>
+  </ion-text>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input type="text" formControlName="name" placeholder="Name">
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="userForm.get('name')?.touched">
+            <p class="ion-padding-start">Name is required</p>
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="tel"
+              formControlName="phone"
+              placeholder="Phone Number"
+              inputmode="numeric"
+              maxlength="10"
+              (ionInput)="onlyDigits($event)"
+            >
+              <ion-icon slot="start" name="call-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="userForm.get('phone')?.touched && userForm.get('phone')?.invalid"
+          >
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('phone')?.errors?.['required']"
+            >
+              Phone number is required
+            </p>
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('phone')?.errors?.['pattern']"
+            >
+              Enter a valid 10-digit phone number
+            </p>
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="Email Id"
+            >
+              <ion-icon slot="start" name="mail-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-text
+            color="danger"
+            *ngIf="userForm.get('email')?.touched && userForm.get('email')?.invalid"
+          >
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('email')?.errors?.['required']"
+            >
+              Email is required
+            </p>
+            <p
+              class="ion-padding-start"
+              *ngIf="userForm.get('email')?.errors?.['email']"
+            >
+              Enter a valid email address
+            </p>
+          </ion-text>
+        </ion-col>
+
+        <ion-col size="12">
+          <ion-item lines="none" class="border-box">
+            <ion-input
+              type="text"
+              formControlName="address"
+              placeholder="Address"
+              class="form-control"
+            >
+              <ion-icon slot="start" name="location-outline"></ion-icon>
+            </ion-input>
+          </ion-item>
+          <ion-text color="danger" *ngIf="userForm.get('address')?.touched">
+            <p class="ion-padding-start">Address is required</p>
+          </ion-text>
+        </ion-col>
+
+         <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('country')">
+              <ion-icon slot="start" [name]="dropdowns['country'].icon"></ion-icon>
+               <ion-label>{{userForm.get('country')?.value || dropdowns['country'].label}}</ion-label>
+          </ion-item>
+          <div *ngIf="activeDropdown === 'country'" class="dropdown">
+            <div *ngFor="let option of dropdowns['country'].options" (click)="selectOption('country',option)">{{option}}</div>
+          </div>
+           <ion-text color="danger" *ngIf="userForm.get('country')?.touched && userForm.get('country')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['country'].label }} is required</p>
+  </ion-text>
+        </ion-col>
+
+         <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('state')">
+              <ion-icon slot="start" [name]="dropdowns['state'].icon"></ion-icon>
+               <ion-label>{{userForm.get('state')?.value || dropdowns['state'].label}}</ion-label>
+          </ion-item>
+          <div *ngIf="activeDropdown === 'state'" class="dropdown">
+            <div *ngFor="let option of dropdowns['state'].options" (click)="selectOption('state',option)">{{option}}</div>
+          </div>
+           <ion-text color="danger" *ngIf="userForm.get('state')?.touched && userForm.get('state')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['state'].label }} is required</p>
+  </ion-text>
+        </ion-col>
+
+         <ion-col size="12">
+          <ion-item lines="none" class="border-box" (click)="toggleDropdown('city')">
+              <ion-icon slot="start" [name]="dropdowns['city'].icon"></ion-icon>
+               <ion-label>{{userForm.get('city')?.value || dropdowns['city'].label}}</ion-label>
+          </ion-item>
+          <div *ngIf="activeDropdown === 'city'" class="dropdown">
+            <div *ngFor="let option of dropdowns['city'].options" (click)="selectOption('city',option)">{{option}}</div>
+          </div>
+           <ion-text color="danger" *ngIf="userForm.get('city')?.touched && userForm.get('city')?.invalid">
+    <p class="ion-padding-start">{{ dropdowns['city'].label }} is required</p>
+  </ion-text>    
+        </ion-col> 
+        <ion-col class="d-flex ion-align-items-center">
+          <ion-checkbox></ion-checkbox>
+          <ion-text class="ion-padding-start">I agree the <span color="primary">Terms & Conditions</span></ion-text>
+        </ion-col>
+         <ion-col size="12" expand="block">
+          <ion-button
+            expand="block"
+            type="submit"
+            [disabled]="userForm.invalid">
+            Sign Up
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+  <ion-footer class="ion-no-border">
+    <p class="ion-text-center justify-content-center ">
+      Already have an account? <span color="text-primary">Login</span>
+    </p>
+  </ion-footer>
+</ion-content>
